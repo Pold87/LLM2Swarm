@@ -1,0 +1,142 @@
+<?xml version="1.0" ?>
+<argos-configuration>
+
+  <!-- ************************* -->
+  <!-- * General configuration * -->
+  <!-- ************************* -->
+  <framework>
+    <system threads="1" method="balance_quantity" />
+    <experiment length="${LENGTH}"
+      ticks_per_second="${TPS}"/>
+  </framework>
+
+  <!-- *************** -->
+  <!-- * Controllers * -->
+  <!-- *************** -->
+  <controllers>
+
+   
+    <python_controller id="collab" library="${ARGOSFOLDER}/build/libpy_controller_interface.so">
+      <!-- Normal actuator/sensor configuration follows -->
+      <actuators>
+        <epuck_rgb_leds implementation="default" medium="leds" />
+        <epuck_wheels implementation="default" noise_std_dev="0"/>
+        <epuck_range_and_bearing implementation="medium" range="${RABRANGE}"/>
+      </actuators>
+      <sensors>
+        <positioning implementation="default" />
+        <epuck_ground implementation="rot_z_only" />
+        <epuck_proximity implementation="default" show_rays="false" />
+        <epuck_range_and_bearing implementation="medium" medium="rab" show_rays="true"/>
+        <differential_steering implementation="default"/>
+      </sensors>
+      <!-- No required configuration -->
+      
+      <!-- Optionally, you can pass a script as a controller parameter: -->
+      <params script="${CON1}"
+      timeRate="1" />
+    </python_controller>
+
+    <python_controller id="greedy" library="${ARGOSFOLDER}/build/libpy_controller_interface.so">
+      <!-- Normal actuator/sensor configuration follows -->
+      <actuators>
+        <epuck_rgb_leds implementation="default" medium="leds" />
+        <epuck_wheels implementation="default" />
+        <epuck_range_and_bearing implementation="medium" range="${RABRANGE}"/>
+      </actuators>
+      <sensors>
+        <positioning implementation="default" />
+        <epuck_proximity implementation="default" show_rays="false" />
+        <epuck_ground implementation="rot_z_only" />
+        <epuck_range_and_bearing implementation="medium" medium="rab" show_rays="false"/>
+      </sensors>
+      <!-- No required configuration -->
+      
+      <!-- Optionally, you can pass a script as a controller parameter: -->
+      <params script="${CON2}"
+      timeRate="1" />
+    </python_controller>
+
+
+
+  </controllers>
+    <loop_functions library="${ARGOSFOLDER}/build/libpy_loop_function_interface.so"
+                  label="py_loop_function">
+    <params script="${EXPERIMENTFOLDER}/loop_functions/loop_function.py"/>
+  </loop_functions>
+
+
+  <!-- *********************** -->
+  <!-- * Arena configuration * -->
+  <!-- *********************** -->
+  <arena size="${ARENADIM}, ${ARENADIM}, 1.5" center="0,0,0">
+
+ <floor id="f" source="image" path="${EXPERIMENTFOLDER}/experiments/floors/white.png" />
+
+    <box id="wall_north" size="${ARENADIM},0.06,0.1" movable="false">
+      <body position="0,${ARENADIMH},0" orientation="0,0,0" />
+    </box>
+    <box id="wall_south" size="${ARENADIM},0.06,0.1" movable="false">
+      <body position="0,-0.85,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_east" size="0.06,${REDUCEDL},0.1" movable="false">
+      <body position="${ARENADIMH},${MOVEWALL},0" orientation="0,0,0" />
+    </box>
+    <box id="wall_west" size="0.06,${REDUCEDL},0.1" movable="false">
+      <body position="-${ARENADIMH},${MOVEWALL},0" orientation="0,0,0" />
+    </box>
+
+    <distribute>
+      <position method="uniform" min="-${STARTDIM},-${STARTDIM},0" max="${STARTDIM},${STARTDIM},0" /> 
+      <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" /> 
+      <entity quantity="${NUMROBOTS}" max_trials="15"> 
+        <e-puck id="bc" >
+          <controller config="collab" />
+        </e-puck>
+      </entity> 
+    </distribute>
+
+  </arena>
+
+  <!-- ******************* -->
+  <!-- * Physics engines * -->
+  <!-- ******************* -->
+  <physics_engines>
+    <dynamics2d id="dyn2d" />
+  </physics_engines>
+
+  <!-- ********* -->
+  <!-- * Media * -->
+  <!-- ********* -->
+  <media>
+    <range_and_bearing id="rab" index="grid" grid_size="1,1,1" />
+    <led id="leds"/>
+  </media>
+
+  <!-- ****************** -->
+  <!-- * Visualization * -->
+  <!-- ****************** -->
+  <visualization>
+
+    <!-- ************************************************************************ -->
+    <!-- * To activate the Lua editor, just use the 'lua_editor' flag attribute * -->
+    <!-- ************************************************************************ -->
+  <!-- <qt-opengl autoplay="true"> -->
+    <qt-opengl autoplay="true">
+<!--       <user_functions library="${ARGOSFOLDER}/build/libpy_qtuser_function_interface.so"
+                      label="py_qtuser_function" >
+      <params script="${EXPERIMENTFOLDER}/loop_functions/qtuser_function.py"/>
+      </user_functions> -->
+      
+    <camera>
+      <placements>
+        <placement index="0" position="0,0,8" up="1,0,0" look_at="0,0,0" lens_focal_length="50" />
+        <placement index="1" position="0,0,1.5" up="1,0,0" look_at="0,0,0" lens_focal_length="20" />
+        <placement index="2" position="-10.0732,8.01142,10.9277" look_at="-9.48792,7.5567,10.2564" up="0.530115,-0.411842,0.741191" lens_focal_length="86.8" />
+      </placements>
+    </camera>
+    </qt-opengl>
+
+  </visualization>
+
+</argos-configuration>

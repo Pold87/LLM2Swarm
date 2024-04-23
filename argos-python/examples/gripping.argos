@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<argos-configuration>
+
+  <!-- ************************* -->
+  <!-- * General configuration * -->
+  <!-- ************************* -->
+  <framework>
+    <system threads="0" />
+    <experiment length="20"
+                ticks_per_second="10"
+                random_seed="124" />
+  </framework>
+
+  <!-- *************** -->
+  <!-- * Controllers * -->
+  <!-- *************** -->
+  <controllers>
+
+    <python_controller id="python" library="/mnt/c/Users/albyr/Documents/argos-python/libpy_controller_interface.so">
+      <actuators>
+        <differential_steering implementation="default" />
+        <footbot_gripper       implementation="default" />
+        <footbot_turret  implementation="default" />  
+      </actuators>
+      <sensors>
+        <footbot_turret_encoder  implementation="default" /> 
+      </sensors> 
+      <params script="/mnt/c/Users/albyr/Documents/argos-python/examples/gripping_python.py" />/>
+    </python_controller>
+
+  </controllers>
+
+  <!-- *********************** -->
+  <!-- * Arena configuration * -->
+  <!-- *********************** -->
+  <arena size="2,2,1" center="0,0,0.5">
+
+    <foot-bot id="f">
+      <body position="0,0,0" orientation="0,0,0" />
+      <controller config="python" />
+    </foot-bot>
+
+    <!-- To use the cylinder as a grippable object, it is enough to
+         set its 'movable' attribute to 'true', and define its
+         mass (in kg).
+    -->
+    <cylinder id="c" height="0.2" radius="0.1" mass="0.1" movable="true">
+      <body position="0.5,0,0" orientation="0,0,0" />
+    </cylinder>
+
+  </arena>
+
+  <!-- ******************* -->
+  <!-- * Physics engines * -->
+  <!-- ******************* -->
+  <physics_engines>
+    <dynamics2d id="dyn2d" />
+  </physics_engines>
+
+  <!-- ********* -->
+  <!-- * Media * -->
+  <!-- ********* -->
+  <media />
+
+  <!-- ****************** -->
+  <!-- * Visualization * -->
+  <!-- ****************** -->
+  <visualization>
+    <qt-opengl>
+      <camera>
+        <placement idx="0"
+                   position="0.251795,1.03178,0.515305"
+                   look_at="0.233654,0.0876767,0.186165"
+                   lens_focal_length="20" />
+      </camera>
+    </qt-opengl>
+  </visualization>
+
+</argos-configuration>

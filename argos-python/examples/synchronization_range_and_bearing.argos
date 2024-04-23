@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<argos-configuration>
+
+  <!-- ************************* -->
+  <!-- * General configuration * -->
+  <!-- ************************* -->
+  <framework>
+    <experiment length="0" ticks_per_second="10" />
+  </framework>
+
+  <!-- *************** -->
+  <!-- * Controllers * -->
+  <!-- *************** -->
+  <controllers>
+    <python_controller id="fsc" library="/mnt/c/Users/albyr/Documents/argos-python/libpy_controller_interface.so">
+      <actuators>
+        <leds implementation="default" medium="leds" />
+        <range_and_bearing implementation="default" />
+      </actuators>
+      <sensors>
+        <range_and_bearing implementation="medium" medium="rab" />
+      </sensors>
+      <params script="/mnt/c/Users/albyr/Documents/argos-python/examples/synchronization_range_and_bearing.py"/>
+    </python_controller>
+  </controllers>
+
+  <!-- *********************** -->
+  <!-- * Arena configuration * -->
+  <!-- *********************** -->
+  <arena size="4, 4, 1" center="0,0,0.5">
+    <distribute>
+      <position method="grid" center="0 ,0 ,0" distances="1,1,0" layout="4,4,1"/>
+      <orientation method="uniform" min="0,0,0" max="0,0,0"/>
+      <entity quantity="16" max_trials="100"> 
+        <foot-bot id="fb">
+          <controller config="fsc" />
+        </foot-bot>
+      </entity> 
+    </distribute> 
+  </arena>
+
+  <!-- ******************* -->
+  <!-- * Physics engines * -->
+  <!-- ******************* -->
+  <physics_engines>
+    <dynamics2d id="dyn2d" />
+  </physics_engines>
+
+  <!-- ********* -->
+  <!-- * Media * -->
+  <!-- ********* -->
+  <media>
+    <range_and_bearing id="rab" index="grid" grid_size="1,1,1" />
+    <led id="leds" index="grid" grid_size="1,1,1" />
+  </media>
+
+  <!-- ****************** -->
+  <!-- * Visualization * -->
+  <!-- ****************** -->
+  <visualization>
+
+    <qt-opengl>
+      <camera>
+        <placement idx="0" position="-0.00569879,-0.14,4.44743" look_at="-0.00569879,-0.14,6.44743" lens_focal_length="20" />
+        <placement idx="1" position="-2,0,2" look_at="0,0,0" lens_focal_length="20" />
+        <placement idx="2" position="0.884183,0.359128,0.490269" look_at="0.924486,-0.486744,-0.0415919" lens_focal_length="20" />
+      </camera>
+    </qt-opengl>
+
+  </visualization>
+
+</argos-configuration>

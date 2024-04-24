@@ -20,10 +20,12 @@ extern "C" PyObject* INIT_MODULE_QTUSER_FUNCTION();
 
 BOOST_PYTHON_MODULE(libpy_loop_function_interface) {
     // Expose the CPyLoopFunction class
-    //class_<CPyLoopFunction>("CPyLoopFunction")
-        // Expose the AddEPuckEntityFromPython function
-      //  .def("add_epuck_entity", &CPyLoopFunction::AddEPuckEntityFromPython)
-    //;
+    class_<CPyLoopFunction>("CPyLoopFunction")
+        // Expose the AddRobotArena function
+        .def("AddRobotArena", &CPyLoopFunction::AddRobotArena)
+        // Expose other functions as needed
+
+    ;
 
 }
 
@@ -83,39 +85,42 @@ void CPyLoopFunction::Init(TConfigurationNode& t_node) {
   
       //CRandom::CRNG* pcRNG = CRandom::CreateRNG("argos");
     
+  /*  
     
-    
-        CEPuckEntity* pcEPuck2 = nullptr;
-        
-            // Iterate over all e-puck entities
-   
- //CSpace::TMapPerType& m_cEpuck = GetSpace().GetEntitiesByType("epuck");
-  for(CSpace::TMapPerType::iterator it = m_cEpuck.begin(); it != m_cEpuck.end(); ++it)
-  {
+   CEPuckEntity* pcEPuck2 = nullptr;
+int numRobotsToMove = 6; // Change this value as needed
 
-    CEPuckEntity& cEpuck = *any_cast<CEPuckEntity*>(it->second);
-    if (cEpuck.GetId() == "bc1" or cEpuck.GetId() == "bc0" or cEpuck.GetId() == "bc2" or cEpuck.GetId() == "bc3" or cEpuck.GetId() == "bc4" or cEpuck.GetId() == "bc5" or cEpuck.GetId() == "bc5" or cEpuck.GetId() == "bc0" or cEpuck.GetId() == "bc2") {
-      pos_tick+=0.1;
-            // Return the e-puck entity with the specified ID
-            pcEPuck2= &cEpuck;
-            
-
-            //break;
-        }
- 
-                         // If the foot-bot with ID 2 exists, move it to the new position
-        if (pcEPuck2) {
+// Iterate over all e-puck entities
+for(auto& entry : m_cEpuck)
+{
+    const std::string& id = entry.first;
+    for (int i = 0; i < numRobotsToMove; ++i) {
+        if (id == "bc" + std::to_string(i)) {
+            pos_tick += 0.1;
+            pcEPuck2 = any_cast<CEPuckEntity*>(entry.second); // Store the entity pointer
             // Define the new position
-            CVector3 newPosition(0.9-pos_tick, -0.93, 0.0); // Adjust the values as needed
+            CVector3 newPosition(0.9 - pos_tick, -0.93, 0.0); // Adjust the values as needed
+            // Move the e-puck entity to the new position
+            MoveEntity(pcEPuck2->GetEmbodiedEntity(), newPosition, CQuaternion());
+            break; // Exit the loop once a matching robot is found
+        }
+    }
+}    
+   */
+   
+                   // If the foot-bot with ID 2 exists, move it to the new position
+      //  if (pcEPuck2) {
+            // Define the new position
+        //    CVector3 newPosition(0.9-pos_tick, -0.93, 0.0); // Adjust the values as needed
 
             // Move the foot-bot to the new position
-            MoveEntity(pcEPuck2->GetEmbodiedEntity(), newPosition, CQuaternion());
-                    CEPuckEntity* pcEPuck2 = nullptr;
-        }
+          //  MoveEntity(pcEPuck2->GetEmbodiedEntity(), newPosition, CQuaternion());
+              //      CEPuckEntity* pcEPuck2 = nullptr;
+        //}
   
 
 
-  } 
+//  } 
   
 
   
@@ -196,6 +201,7 @@ void CPyLoopFunction::Destroy() {
 }
 
 void CPyLoopFunction::PreStep() {
+   // std::cout << "comes to presetep in cpp"<< std::endl;
 
   // Launch Python pre_step function
   try {
@@ -209,44 +215,11 @@ void CPyLoopFunction::PreStep() {
 void CPyLoopFunction::PostStep() {
   // Launch Python post_step function
   
-  if (GetSpace().GetSimulationClock()==99){
-
-   float pos_tick=0.0;
- CEPuckEntity* pcEPuck2 = nullptr;
-        
-            // Iterate over all e-puck entities
-   
- CSpace::TMapPerType& m_cEpuck = GetSpace().GetEntitiesByType("epuck");
-  for(CSpace::TMapPerType::iterator it = m_cEpuck.begin(); it != m_cEpuck.end(); ++it)
-  {
-
-    CEPuckEntity& cEpuck = *any_cast<CEPuckEntity*>(it->second);
-    if (cEpuck.GetId() == "bc1" or cEpuck.GetId() == "bc0" or cEpuck.GetId() == "bc2" or cEpuck.GetId() == "bc3" or cEpuck.GetId() == "bc1" or cEpuck.GetId() == "bc2" or cEpuck.GetId() == "bc5" or cEpuck.GetId() == "bc4" or cEpuck.GetId() == "bc2") {
-      pos_tick+=0.1;
-            // Return the e-puck entity with the specified ID
-            pcEPuck2= &cEpuck;
-            
-
-            //break;
-        }
- 
-                         // If the foot-bot with ID 2 exists, move it to the new position
-        if (pcEPuck2) {
-            // Define the new position
-            CVector3 newPosition(0.5, -0.0-pos_tick, 0.0); // Adjust the values as needed
-
-            // Move the foot-bot to the new position
-            MoveEntity(pcEPuck2->GetEmbodiedEntity(), newPosition, CQuaternion());
-                    CEPuckEntity* pcEPuck2 = nullptr;
-        }
-  
-
-
-  } 
+ // if (GetSpace().GetSimulationClock()==99){
 
 
         
-  }
+  //}
 
   
   
@@ -257,6 +230,7 @@ void CPyLoopFunction::PostStep() {
     PyErr_Print();
   }
 }
+
 
 bool CPyLoopFunction::IsExperimentFinished() {
 
@@ -307,6 +281,41 @@ CColor CPyLoopFunction::GetFloorColor() {
   }
 
 }
+
+void CPyLoopFunction::AddRobotArena(float x, float y , int num) {
+  // Launch Python post_experiment function
+      std::cout << "comes to add robot in cpp"<< std::endl;
+     float pos_tick=0.0;
+ CEPuckEntity* pcEPuck2 = nullptr;
+        
+            // Iterate over all e-puck entities
+   
+ CSpace::TMapPerType& m_cEpuck = GetSpace().GetEntitiesByType("epuck");
+       //   CEPuckEntity* pcEPuck2 = nullptr;
+//int numRobotsToMove = 6; // Change this value as needed
+
+// Iterate over all e-puck entities
+for(auto& entry : m_cEpuck)
+{
+    const std::string& id = entry.first;
+    //for (int i = 0; i < numRobotsToMove; ++i) {
+        if (id == "bc" + std::to_string(num)) {
+            pos_tick += 0.1;
+            pcEPuck2 = any_cast<CEPuckEntity*>(entry.second); // Store the entity pointer
+            // Define the new position
+           // CVector3 newPosition(0.9 - pos_tick, -0.93, 0.0); // Adjust the values as needed
+            CVector3 newPosition(x, -y, 0.0); // Adjust the values as needed
+            // Move the e-puck entity to the new position
+            MoveEntity(pcEPuck2->GetEmbodiedEntity(), newPosition, CQuaternion());
+            break; // Exit the loop once a matching robot is found
+        }
+    //}
+}   
+  
+
+}
+
+
 
 void CPyLoopFunction::PostExperiment() {
   // Launch Python post_experiment function

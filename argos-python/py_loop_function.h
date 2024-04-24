@@ -32,6 +32,8 @@ class CPyLoopFunction : public CLoopFunctions {
   virtual void PreStep();
 
   virtual void PostStep();
+  
+  virtual void AddRobotArena(float x, float y, int num);
 
   virtual bool IsExperimentFinished();
 

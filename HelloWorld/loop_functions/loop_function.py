@@ -23,7 +23,7 @@ random.seed(lp['generic']['seed'])
 
 log_folder = lp['environ']['EXPERIMENTFOLDER'] + '/logs/0/'
 os.makedirs(os.path.dirname(log_folder), exist_ok=True)   
-
+loop_function = libpy_loop_function_interface.CPyLoopFunction()
 
 # /* Global Variables */
 #######################################################################
@@ -52,12 +52,15 @@ global allrobots
 def init():
 
     # Init robot parameters
+    addspacebetweenrobots = 0
     for robot in allrobots:
-
+        addspacebetweenrobots +=0.1 #INITIALIZE robots IN DIFF PLACES-TO BE FIXED
         robot.id = int(robot.variables.get_attribute("id"))
-        #if robot.id <2:
-            #robot.setPosition([0, 0])
-            #robot.pos =[-0.32692599296569824, 0.21142299473285675, 0.0]
+        #print("IN INIT FUNCTION",robot.id)
+        #SPECIFY THE ROBOT IDS TO BE OUTSIDE THE ARENA AND INACTIVE
+        if(robot.id == 1 or robot.id ==2 or robot.id == 3 or robot.id == 4 or robot.id ==5 or robot.id ==6):
+            loop_function.AddRobotArena(0.9-addspacebetweenrobots,0.93, robot.id-1)
+
         other['countsim'].reset()
         #print(robot.position.get_position())
 
@@ -69,9 +72,23 @@ def pre_step():
         startTime = 0
 
 def post_step():
+    #print("py prestep")
     global startFlag, clocks, accums
     other['countsim'].step()
-    #if(other['countsim'].count> 50 and other['countsim'].count<52):
+    if(other['countsim'].count== 50):
+        #MOVE ROBOTS BACK TO ARENA AT CERTAIN TIMESTEP
+        loop_function.AddRobotArena(0.5,0.0, 0)
+        loop_function.AddRobotArena(0.5,0.1, 1)
+        loop_function.AddRobotArena(0.5,0.2, 2)
+        loop_function.AddRobotArena(0.5,0.3, 3)
+        loop_function.AddRobotArena(0.5,0.4, 4)
+        loop_function.AddRobotArena(0.5,0.5, 5)
+        loop_function.AddRobotArena(0.5,0.6, 6)
+        #try:
+
+        #except Exception as e:
+            #print("Error:", e)
+
         #new_rob()
         #loop_function = libpy_loop_function_interface.CPyLoopFunction()
         #loop_function.add_epuck_entity((0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0))
@@ -101,7 +118,9 @@ def destroy():
 
 def post_experiment():
     print("Finished from Python!")
-
+    
+def add_robot():
+    print("Moving bots")
 
 
 

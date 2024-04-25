@@ -24,6 +24,8 @@ BOOST_PYTHON_MODULE(libpy_loop_function_interface) {
         // Expose the AddRobotArena function
         .def("AddRobotArena", &CPyLoopFunction::AddRobotArena)
         // Expose other functions as needed
+         .def("AddRobotEntity", &CPyLoopFunction::AddRobotEntity)
+         .def("AddNewRobot", &CPyLoopFunction::AddNewRobot)
 
     ;
 
@@ -146,31 +148,49 @@ for(auto& entry : m_cEpuck)
   }
 
 }
-/*
 
-void CPyLoopFunction::AddEPuckEntity(const CVector3& position, const CQuaternion& orientation) {
+void CPyLoopFunction::AddNewRobot(const boost::python::tuple& position, const boost::python::tuple& orientation) {
+    // Extract position and orientation values from the Python tuples
+    double posX = boost::python::extract<double>(position[0]);
+    double posY = boost::python::extract<double>(position[1]);
+    double posZ = boost::python::extract<double>(position[2]);
 
-     m_nextRobotID=m_nextRobotID+50;
-         std::cout << "comes to add entity c++" << std::endl;
-    std::string controllerID = "controller_" + std::to_string(m_nextRobotID);
+    double quatX = boost::python::extract<double>(orientation[0]);
+    double quatY = boost::python::extract<double>(orientation[1]);
+    double quatZ = boost::python::extract<double>(orientation[2]);
+    double quatW = boost::python::extract<double>(orientation[3]);
 
-        // Create an e-puck entity with consecutive IDs
+    // Create a CVector3 and CQuaternion objects from the extracted values
+    argos::CVector3 pos(posX, posY, posZ);
+    argos::CQuaternion quat(quatX, quatY, quatZ, quatW);
+
+    // Call the function to add a new robot entity with the converted values
+    AddRobotEntity(pos, quat);
+}
+
+
+
+void CPyLoopFunction::AddRobotEntity(const CVector3& position, const CQuaternion& orientation) {
+    // Create a unique ID for the new robot entity
+    std::string controllerID = "bc" + std::to_string(m_nextRobotID);
+
+    // Create a new e-puck entity with consecutive IDs
     CEPuckEntity* pcEPuck = new CEPuckEntity(
-        "epuck_" + std::to_string(m_nextRobotID), // Generate unique ID
-        std::to_string(m_nextRobotID), // Empty string for the controller ID (assuming it's not needed)
+        "bc" + std::to_string(m_nextRobotID), // Generate a unique ID for the robot
+        controllerID, // Use the generated controller ID
         position,
         orientation
     );
-       //CPyController& cController =  dynamic_cast<CPyController&>(pcEPuck->GetControllableEntity().GetController());
-           //cController.Load("");
 
-    //allRobots.append(cController.getActusensors());
- 
-  
-  
+    // Add the new robot entity to the simulation
+    AddEntity(*pcEPuck);
+
+    // Increment the ID counter for the next robot
+    m_nextRobotID++;
 }
 
-*/
+
+
 boost::python::list CPyLoopFunction::GetAllRobots() const {
     // Ensure that m_loop_namesp["allrobots"] returns a boost::python::list object
     boost::python::list allRobots;
@@ -245,25 +265,6 @@ bool CPyLoopFunction::IsExperimentFinished() {
 
 }
 
-
-void CPyLoopFunction::AddEPuckEntityFromPython(const boost::python::tuple& position, const boost::python::tuple& orientation) {
-    // Extract position and orientation values from the Python tuples
-    double posX = boost::python::extract<double>(position[0]);
-    double posY = boost::python::extract<double>(position[1]);
-    double posZ = boost::python::extract<double>(position[2]);
-
-    double quatX = boost::python::extract<double>(orientation[0]);
-    double quatY = boost::python::extract<double>(orientation[1]);
-    double quatZ = boost::python::extract<double>(orientation[2]);
-    double quatW = boost::python::extract<double>(orientation[3]);
-
-    // Create a CVector3 and CQuaternion objects from the extracted values
-    CVector3 pos(posX, posY, posZ);
-    CQuaternion quat(quatX, quatY, quatZ, quatW);
-
-    // Call the AddEPuckEntity method with the extracted position and orientation
-    //AddEPuckEntity(pos, quat);
-}
 
 
 

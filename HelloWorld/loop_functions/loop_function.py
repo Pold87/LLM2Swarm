@@ -8,6 +8,7 @@ import logging
 import libpy_loop_function_interface
 from hexbytes import HexBytes
 
+
 sys.path += [os.environ['EXPERIMENTFOLDER']+'/controllers', \
              os.environ['EXPERIMENTFOLDER']+'/loop_functions', \
              os.environ['EXPERIMENTFOLDER']]
@@ -84,7 +85,11 @@ def post_step():
         loop_function.AddRobotArena(0.5,0.4, 4)
         loop_function.AddRobotArena(0.5,0.5, 5)
         loop_function.AddRobotArena(0.5,0.6, 6)
-        #try:
+        #ADD NEW ROBOT
+        position = (0.0, 0.0, 0.0)
+        orientation = (0.0, 0.0, 0.0, 1.0)
+        # Call the function to add a new robot entity at timestep 50
+        loop_function.AddNewRobot(position, orientation)
 
         #except Exception as e:
             #print("Error:", e)

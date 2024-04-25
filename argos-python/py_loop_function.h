@@ -23,7 +23,7 @@ class CPyLoopFunction : public CLoopFunctions {
   virtual void Init(TConfigurationNode& t_node);
   
   //void AddEPuckEntity(const CVector3& position, const CQuaternion& orientation);
-  void AddEPuckEntityFromPython(const boost::python::tuple& position, const boost::python::tuple& orientation);
+//  void AddEPuckEntityFromPython(const boost::python::tuple& position, const boost::python::tuple& orientation);
   CEPuckEntity* GetEPUCKWithID(UInt32 id);
   virtual void Reset();
 
@@ -32,7 +32,8 @@ class CPyLoopFunction : public CLoopFunctions {
   virtual void PreStep();
 
   virtual void PostStep();
-  
+  void AddRobotEntity(const CVector3& position, const CQuaternion& orientation);
+  void AddNewRobot(const boost::python::tuple& position, const boost::python::tuple& orientation);
   virtual void AddRobotArena(float x, float y, int num);
 
   virtual bool IsExperimentFinished();

@@ -17,6 +17,8 @@ extern "C" PyObject* INIT_MODULE_CONTROLLER();
 extern "C" PyObject* INIT_MODULE_QTUSER_FUNCTION();
 
 //boost::python::list allRobots;
+int m_nextRobotID = 0;  // Initialize it to 0 or any other suitable value
+
 
 BOOST_PYTHON_MODULE(libpy_loop_function_interface) {
     // Expose the CPyLoopFunction class
@@ -31,7 +33,7 @@ BOOST_PYTHON_MODULE(libpy_loop_function_interface) {
 
 }
 
-CPyLoopFunction::CPyLoopFunction() : m_nextRobotID(0) {
+CPyLoopFunction::CPyLoopFunction() {
   // init python
 
   // TODO: Remove from loop function and only call in controller
@@ -82,9 +84,10 @@ void CPyLoopFunction::Init(TConfigurationNode& t_node) {
     CPyController& cController =  dynamic_cast<CPyController&>(cEpuck.GetControllableEntity().GetController());
 
     allRobots.append(cController.getActusensors());
+    m_nextRobotID++;
   }
   m_loop_namesp["allrobots"]  = allRobots;
-  
+  std::cout << "No of rob: " << m_nextRobotID;
       //CRandom::CRNG* pcRNG = CRandom::CreateRNG("argos");
     
   /*  
@@ -166,13 +169,16 @@ void CPyLoopFunction::AddNewRobot(const boost::python::tuple& position, const bo
 
     // Call the function to add a new robot entity with the converted values
     AddRobotEntity(pos, quat);
+         //std::cout << "Acomes to fix pos with robots: " << m_nextRobotID;
 }
 
 
 
 void CPyLoopFunction::AddRobotEntity(const CVector3& position, const CQuaternion& orientation) {
+     std::cout << "AGAIN:  of rob: " << m_nextRobotID;
+     //m_nextRobotID=9;
     // Create a unique ID for the new robot entity
-    std::string controllerID = "bc" + std::to_string(m_nextRobotID);
+    std::string controllerID = "collab"; //+ std::to_string(m_nextRobotID);
 
     // Create a new e-puck entity with consecutive IDs
     CEPuckEntity* pcEPuck = new CEPuckEntity(

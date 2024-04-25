@@ -161,7 +161,7 @@ def controlstep():
         ##########################
         #### FIRST STEP ##########
         ##########################
-        if(int(me.id)<7 and checkt<51): # SPECIFY TIME TO START ROBOTS AND THEIR IDS	
+        if(int(me.id)<3 and checkt<51): # SPECIFY TIME TO START ROBOTS AND THEIR IDS	
             ##print("COMES HERE TO NOT JOIN", checkt)
             startFlag=False
             #if(notdonemod==False):

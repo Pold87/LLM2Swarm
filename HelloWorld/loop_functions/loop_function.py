@@ -59,7 +59,8 @@ def init():
         robot.id = int(robot.variables.get_attribute("id"))
         #print("IN INIT FUNCTION",robot.id)
         #SPECIFY THE ROBOT IDS TO BE OUTSIDE THE ARENA AND INACTIVE
-        if(robot.id == 1 or robot.id ==2 or robot.id == 3 or robot.id == 4 or robot.id ==5 or robot.id ==6):
+        #if(robot.id == 1 or robot.id ==2 or robot.id == 3 or robot.id == 4 or robot.id ==5 or robot.id ==6):
+        if(robot.id == 1 or robot.id ==2):
             loop_function.AddRobotArena(0.9-addspacebetweenrobots,0.93, robot.id-1)
 
         other['countsim'].reset()
@@ -80,23 +81,22 @@ def post_step():
         #MOVE ROBOTS BACK TO ARENA AT CERTAIN TIMESTEP
         loop_function.AddRobotArena(0.5,0.0, 0)
         loop_function.AddRobotArena(0.5,0.1, 1)
-        loop_function.AddRobotArena(0.5,0.2, 2)
-        loop_function.AddRobotArena(0.5,0.3, 3)
-        loop_function.AddRobotArena(0.5,0.4, 4)
-        loop_function.AddRobotArena(0.5,0.5, 5)
-        loop_function.AddRobotArena(0.5,0.6, 6)
-        #ADD NEW ROBOT
+        #loop_function.AddRobotArena(0.5,0.2, 2)
+        #loop_function.AddRobotArena(0.5,0.3, 3)
+        #loop_function.AddRobotArena(0.5,0.4, 4)
+        #loop_function.AddRobotArena(0.5,0.5, 5)
+        #loop_function.AddRobotArena(0.5,0.6, 6)
+        
+        ##ADD NEW ROBOT##
         position = (0.0, 0.0, 0.0)
         orientation = (0.0, 0.0, 0.0, 1.0)
-        # Call the function to add a new robot entity at timestep 50
+        loop_function.AddNewRobot(position, orientation)
+        
+        ##ADD ANOTHER ROBOT##
+        position = (0.92, 0.0, 0.0)
+        orientation = (0.0, 0.0, 0.0, 1.0)
         loop_function.AddNewRobot(position, orientation)
 
-        #except Exception as e:
-            #print("Error:", e)
-
-        #new_rob()
-        #loop_function = libpy_loop_function_interface.CPyLoopFunction()
-        #loop_function.add_epuck_entity((0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0))
     
     #print(other['countsim'].count)
     #for robot in allrobots:
@@ -104,8 +104,6 @@ def post_step():
         #print(robot.id)
     #if not startFlag:
         #startFlag = False
-
-# Function to add an e-puck entity to the simulation
 
 
     
@@ -123,9 +121,7 @@ def destroy():
 
 def post_experiment():
     print("Finished from Python!")
-    
-def add_robot():
-    print("Moving bots")
+
 
 
 

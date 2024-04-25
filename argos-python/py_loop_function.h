@@ -45,7 +45,7 @@ class CPyLoopFunction : public CLoopFunctions {
 
  private:
 
-    size_t m_nextRobotID;
+    //size_t m_nextRobotID;
     boost::python::object m_loop_main;
     boost::python::object m_loop_namesp;
     boost::python::object m_loop_script;

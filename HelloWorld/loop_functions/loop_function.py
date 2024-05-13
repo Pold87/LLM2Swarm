@@ -86,17 +86,16 @@ def post_step():
         #loop_function.AddRobotArena(0.5,0.4, 4)
         #loop_function.AddRobotArena(0.5,0.5, 5)
         #loop_function.AddRobotArena(0.5,0.6, 6)
-        
         ##ADD NEW ROBOT##
-        position = (0.0, 0.0, 0.0)
-        orientation = (0.0, 0.0, 0.0, 1.0)
-        loop_function.AddNewRobot(position, orientation)
+        #position = (0.0, 0.0, 0.0)
+        #orientation = (0.0, 0.0, 0.0, 1.0)
+        #loop_function.AddNewRobot(position, orientation)
         
         ##ADD ANOTHER ROBOT##
-        position = (0.92, 0.0, 0.0)
-        orientation = (0.0, 0.0, 0.0, 1.0)
-        loop_function.AddNewRobot(position, orientation)
-
+        #position = (0.92, 0.0, 0.0)
+        #orientation = (0.0, 0.0, 0.0, 1.0)
+        #loop_function.AddNewRobot(position, orientation)
+        ##loop_function.RemoveRobotEntity(6)
     
     #print(other['countsim'].count)
     #for robot in allrobots:

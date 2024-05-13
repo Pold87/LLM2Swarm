@@ -14,7 +14,7 @@ sys.path += [os.environ['MAINFOLDER'], \
             ]
 
 from controllers.movement import RandomWalk, Navigate, Odometry, OdoCompass, GPS
-from controllers.groundsensor import ResourceVirtualSensor, Resource
+from controllers.groundsensor import ResourceVirtualSensor, Resource, GroundSensor
 from controllers.erandb import ERANDB
 from controllers.rgbleds import RGBLEDs
 from controllers.aux import *
@@ -46,6 +46,14 @@ txList, tripList, submodules = [], [], []
 global clocks, counters, logs, txs
 clocks, counters, logs, txs = dict(), dict(), dict(), dict()
 
+
+global estimate, totalWhite, totalBlack, byzantine
+
+estimate =0
+totalWhite =0
+totalBlack=0
+
+byzantine = 0
 # /* Logging Levels for Console and File */
 #######################################################################
 import logging
@@ -57,7 +65,9 @@ logtofile = False
 
 clocks['peering'] = Timer(5)
 clocks['sensing'] = Timer(2)
-clocks['block']   = Timer(150)
+clocks['block']   = Timer(120)
+clocks['newround'] = Timer(45)
+clocks['voting'] = Timer(30)
 
 global geth_peer_count
 
@@ -69,10 +79,12 @@ GENESIS = Block(0, 0000, [], [gen_enode(i+1) for i in range(int(lp['environ']['N
 ####################################################################################################################################################################################
 
 def init():
-    global clocks,counters, logs, submodules, me, rw, nav, odo, gps, rb, w3, fsm, rs, erb, rgb,odo2
+    global clocks,counters, logs, submodules, me, rw, nav, odo, gps, rb, w3, fsm, rs, erb, rgb,odo2,gs
     robotID = str(int(robot.variables.get_id()[2:])+1)
     robotIP = '127.0.0.1'
     robot.variables.set_attribute("id", str(robotID))
+    robot.variables.set_attribute("byzantine_style", str(0))
+    robot.variables.set_attribute("consensus_reached",str("false"))
     robot.variables.set_attribute("scresources", "[]")
     robot.variables.set_attribute("foraging", "")
     robot.variables.set_attribute("state", "")
@@ -139,8 +151,12 @@ def init():
     # /* Init Finite-State-Machine */
     fsm = FiniteStateMachine(robot, start = States.IDLE)
 
+    # /* Init Ground sensor */
+    robot.log.info('Initialising Ground sensor...')
+    gs = GroundSensor(robot)
+    
     # List of submodules --> iterate .start() to start all
-    submodules = [erb]
+    submodules = [erb,gs]
 
 #########################################################################################################################
 #### CONTROL STEP #######################################################################################################
@@ -150,9 +166,11 @@ pos = [0,0]
 global last
 last = 0
 counter = 0
+global checkt
 
 def controlstep():
-    global counter,last, pos, clocks, counters, startFlag, startTime,notdonemod,odo2
+    global counter,last, pos, clocks, counters, startFlag, startTime,notdonemod,odo2,checkt, byzantine
+    global estimate, totalWhite, totalBlack
     #startFlag = False 
     for clock in clocks.values():
          clock.time.step()
@@ -161,6 +179,7 @@ def controlstep():
         ##########################
         #### FIRST STEP ##########
         ##########################
+        #SPECIFY THE ROBOTS TO START AT TIME AFTER THEY HAVE MOVED
         if(int(me.id)<3 and checkt<51): # SPECIFY TIME TO START ROBOTS AND THEIR IDS	
             ##print("COMES HERE TO NOT JOIN", checkt)
             startFlag=False
@@ -195,6 +214,15 @@ def controlstep():
            #     clock.reset()
             w3.start_tcp()
             w3.start_mining()
+            #w3.sc.registerRobot()
+            # Startup transactions
+            #SPECIFY THE ROBOTS THAT ARE BYZANTINE
+            if int(me.id) ==2 or int(me.id) == 2 or int(me.id) == 2 or int(me.id) == 5 or int(me.id) == 6 or int(me.id) == 3:
+                byzantine = 1
+            print("--//-- Registering robot --//--")
+            txdata = {'function': 'registerRobot', 'inputs': []}
+            tx = Transaction(sender = me.id, data = txdata)
+            w3.send_transaction(tx)
 
     else:
 
@@ -203,6 +231,7 @@ def controlstep():
         ###########################
 
         def peering():
+            global estimate, totalWhite, totalBlack, checkt, byzantine
 
             # Get the current peers from erb
             erb_enodes = {w3.gen_enode(peer.id) for peer in erb.peers}
@@ -211,11 +240,12 @@ def controlstep():
             for enode in erb_enodes-set(w3.peers):
                 try:
                     w3.add_peer(enode)
-                    
+
+            
                     #Say Hello
-                    txdata = {'function': 'sayHello','inputs':[]}
-                    tx = Transaction(sender=me.id, data=txdata)
-                    w3.send_transaction(tx)
+                    #txdata = {'function': 'sendEstimate','inputs':[str(estimate)]}
+                    #tx = Transaction(sender=me.id, data=txdata)
+                    #w3.send_transaction(tx)
                 except Exception as e:
                     raise e
                 
@@ -230,8 +260,85 @@ def controlstep():
             rgb.setLED(rgb.all, rgb.presets.get(len(w3.peers), 3*['red']))
 
         # Perform submodules step
-        for module in [erb, rs, rw]:
+        for module in [erb, rs, rw, gs]:
             module.step()
+            
+        #TODO implement byzantine estimate
+        #get estimate
+        
+        if byzantine ==1:# IF ROBOT IS BYZANTINE, THEY SEND WRONG ESTIMATE
+            #print("Byzantine: ", me.id) 
+            estimate = 0
+        else:#Get value from the ground
+            newValues = gs.getNew()
+            for value in newValues:
+                if value != 0:
+                    totalWhite +=1
+                else:
+                    totalBlack+=1
+            estimate = (0.5+totalWhite)/(totalBlack+totalWhite+1)
+        myBlocksUBI = [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384]
+        
+        if clocks['newround'].query():#check after every interval timesteps
+            #balance = w3.sc.getBalance(me.id)
+            robbalance = w3.sc.getRobBalance(me.id)  #the balance of robots
+            block    = w3.get_block('latest') #to get latest block heigh of robots
+            receivedUBI= w3.sc.receivedUBI(me.id) #the total ubi it has received
+            robotCount = w3.sc.getRobotCount() #how manybots
+            newRound = w3.sc.isNewRound() #new round?
+            doIhavePayouts = w3.sc.doIhavePayouts(me.id) #does the robot have any payouts
+            getTotPayout = w3.sc.getTotPayout(me.id) #what is total payouts done
+            #shouldIaskforUBI = w3.sc.doIhavePayouts(me.id)
+            payout = w3.sc.getPayout(me.id)
+            for i in range(len(myBlocksUBI)): #in those specific blocks, ask for ubi
+            	if block.height == myBlocksUBI[i]:
+            	    txdata1 = {'function': 'askForUBI', 'inputs': []}
+            	    tx1 = Transaction(sender = me.id, data = txdata1)
+            	    w3.send_transaction(tx1)
+            balance = w3.sc.getBalance(me.id)
+            print("Robot: ",me.id,"Payout: ", doIhavePayouts)
+            
+            
+            if(doIhavePayouts):# if robot has payouts then get them
+                txdata1 = {'function': 'askForPayout', 'inputs': []}
+                tx1 = Transaction(sender = me.id, data = txdata1)
+                w3.send_transaction(tx1)
+
+
+            
+            if(w3.sc.isNewRound() == True and robbalance > 0): #every new round update mean
+                txdata = {'function': 'updateMean', 'inputs': []}
+                tx = Transaction(sender = me.id, data = txdata)
+                w3.send_transaction(tx) 
+            print("Robot: ",me.id,"Time: " , checkt, "totPayout: ", getTotPayout, "robBalance: ",robbalance,
+            "Tot UBI rec: ", receivedUBI, "Block height: ", block.height, "Robot count: ", robotCount,
+            "New round: ", newRound)
+
+            converged = w3.sc.isConverged()
+            if converged: #check if converged
+                mean = w3.sc.getMean()
+                print("converged", mean)
+                robot.variables.set_attribute("consensus_reached",str("true"))
+            
+            #if ubi != 0 and 
+        if clocks['voting'].query():#after specific timetspes try to vote
+            robbalance = w3.sc.getRobBalance(me.id)
+    #        #if(me.id == '4'):
+            if robbalance > 39:
+                #print("before: ", balance)
+                txdata = {'function': 'send_vote', 'inputs': [estimate]}
+                tx = Transaction(sender = me.id, data = txdata)
+                w3.send_transaction(tx)
+                #print("after: ", balance)
+          #  balance = w3.sc.getBalance(me.id)
+            #if(me.id == '4'):
+
+            
+            
+            
+
+
+
 
         # Perform clock steps
         for clock in clocks.values():
@@ -243,10 +350,12 @@ def controlstep():
 
         w3.step()
 
+
         
-        if (counter % 100) == 0:
-            print("Robot",me.id,"helloCounter is ", w3.sc.getHelloCounter())
-        counter +=1
+        #if (counter % 100) == 0:
+            
+        #    print("Robot",me.id,"estimate is ", w3.sc.getEstimate())
+        #counter +=1
 
         
         # Update blockchain state on the robot C++ object

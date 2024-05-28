@@ -37,7 +37,7 @@ def init():
         #print("IN INIT FUNCTION",robot.id)
         #SPECIFY THE ROBOT IDS TO BE OUTSIDE THE ARENA AND INACTIVE
         #if(robot.id == 1 or robot.id ==2 or robot.id == 3 or robot.id == 4 or robot.id ==5 or robot.id ==6):
-        i#f(robot.id == 1 or robot.id ==2):
+        #if(robot.id == 1 or robot.id ==2):
          #   loop_function_interface.AddRobotArena(0.8,0.93,0)
         #    loop_function_interface.AddRobotArena(0.9-addspacebetweenrobots,0.93, int(robot.id)-1)
     #"""

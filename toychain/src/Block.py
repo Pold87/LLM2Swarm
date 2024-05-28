@@ -226,6 +226,19 @@ class State(StateMixin):
         except:
             return 0
 
+    def amIregistered(self, id): #check if a robot has payouts
+        try:
+            if (id not in self.robot or not self.robot[id]["isRegistered"]):
+                return False
+            else:
+                return True
+        except:
+            return False
+    def getVoterCounter(self, id): #return all payouts done
+        try:
+            self.robot[id]["myVoteCounter"]
+        except:
+            return 0
 
     def registerRobot(self): #register a robot and initilaize all the variables that we need in a dict
         #print("Registered: ",self.msg.sender)
@@ -287,24 +300,27 @@ class State(StateMixin):
             self.robot[self.msg.sender]["payout"] = 0 #reset payout to 0 until next mean
         #return payout
 
-    def send_vote(self, estimate): #transaction to this function when  send estimate 
-        if self.robot[self.msg.sender]["robBalance"] > 39: # if robots balance more that ticket price
-            self.voteCount += 1
-            if self.roundCount not in self.round: #save vote
-                self.round[self.roundCount] = []
-            self.round[self.roundCount].append({
-            "robot_address": self.msg.sender,
-            "vote": round(estimate,3)
-            })
-            self.robot[self.msg.sender]["robBalance"] -= 40 # deduct tokens
-            #print("round: ", self.robotCount, len(self.round[self.roundCount]))
-            
-            #if al robots voted , then new round
-            if len(self.round[self.roundCount]) == self.robotCount and self.robotCount > 4: 
-                self.roundCount += 1
-                self.newRound = True
+    def send_vote(self, estimate): #transaction to this function when  send estimate
+        if self.msg.sender not in self.robot or not self.robot[self.msg.sender]["isRegistered"]:
+            print("update Mean error: not registered")
+        else:
+            if self.robot[self.msg.sender]["robBalance"] > 39: # if robots balance more that ticket price
+                self.voteCount += 1
+                if self.roundCount not in self.round: #save vote
+                    self.round[self.roundCount] = []
+                self.round[self.roundCount].append({
+                "robot_address": self.msg.sender,
+                "vote": round(estimate,3)
+                })
+                self.robot[self.msg.sender]["robBalance"] -= 40 # deduct tokens
+                #print("round: ", self.robotCount, len(self.round[self.roundCount]))
                 
-            self.robot[self.msg.sender]["myVoteCounter"] += 1 #incrementvotes casted by robots
+                #if al robots voted , then new round
+                if len(self.round[self.roundCount]) == self.robotCount and self.robotCount > 4: 
+                    self.roundCount += 1
+                    self.newRound = True
+                    
+                self.robot[self.msg.sender]["myVoteCounter"] += 1 #incrementvotes casted by robots
 
         #else:
             #print("Robot must pay the ticket price")
@@ -360,5 +376,3 @@ class State(StateMixin):
                 self.newRound = False
                 #print(self.robotsToPay)
                 self.robotsToPay = []
-
-

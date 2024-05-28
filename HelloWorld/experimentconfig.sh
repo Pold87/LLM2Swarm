@@ -27,13 +27,13 @@ export SWARMNAME=ethereum
 export CONTAINERBASE=${SWARMNAME}_eth
 
 # [ARGOS]
-export NUMROBOTS=8
+export NUMROBOTS=24
 export CON1="${EXPERIMENTFOLDER}/controllers/main.py"
 
 
 export RABRANGE="0.8"
 export WHEELNOISE="0"
-export TPS=10
+export TPS=15
 export DENSITY="1"
 
 
@@ -48,12 +48,15 @@ export MOVEWALL="0.1"
 # [GETH]
 export BLOCKPERIOD=2
 
+export NUMBYZANTINE=0
+export BYZANTINESTYLE=1
+
 # [SC]
 export MAXWORKERS=15
 export LIMITASSIGN=2
 
 export DEMAND_A=0
-export DEMAND_B=1000
+export DEMAND_B=800
 export REGENRATE=20
 export FUELCOST=100
 export QUOTA_temp=$(echo " scale=4 ; (75/$REGENRATE*$BLOCKPERIOD+0.05)/1" | bc)
@@ -63,9 +66,9 @@ export EPSILON=15
 export WINSIZE=5
 
 # [OTHER]
-export SEED=1500
+export SEED=1300
 export TIMELIMIT=100
-export LENGTH=1000
+export LENGTH=1700
 export SLEEPTIME=5
 export REPS=1
 export NOTES="debug logs"

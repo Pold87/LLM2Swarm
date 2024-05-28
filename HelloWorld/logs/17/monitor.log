@@ -1,0 +1,57 @@
+[17 INFO root] Initialising Python Geth Console...
+[17 INFO root] Initialising RandB board...
+[17 INFO root] Initialising resource sensor...
+[17 INFO root] Initialising random-walk...
+[17 INFO root] Initialising navigation...
+[17 INFO root] Initialising Odo...
+[17 INFO root] Initialising odometry...
+[17 INFO root] Initialising gps...
+[17 INFO root] Initialising Ground sensor...
+[17 INFO root] --//-- Starting Experiment --//--
+[17 DEBUG w3] Node 17 adding peer at enode://6@127.0.0.1:1239
+[17 DEBUG w3] Node 17 adding peer at enode://12@127.0.0.1:1245
+[17 DEBUG w3] Node 17 adding peer at enode://10@127.0.0.1:1243
+[17 DEBUG w3] Node 17 adding peer at enode://5@127.0.0.1:1238
+[17 DEBUG w3] Node 17 adding peer at enode://8@127.0.0.1:1241
+[17 DEBUG w3] Node 17 adding peer at enode://13@127.0.0.1:1246
+[17 DEBUG w3] Node 17 adding peer at enode://16@127.0.0.1:1249
+[17 DEBUG w3] Node 17 removing peer at enode://6@127.0.0.1:1239
+[17 DEBUG w3] Node 17 removing peer at enode://13@127.0.0.1:1246
+[17 DEBUG w3] Node 17 adding peer at enode://18@127.0.0.1:1251
+[17 DEBUG w3] Node 17 adding peer at enode://24@127.0.0.1:1257
+[17 DEBUG w3] Node 17 adding peer at enode://11@127.0.0.1:1244
+[17 DEBUG w3] Node 17 adding peer at enode://23@127.0.0.1:1256
+[17 DEBUG w3] Node 17 adding peer at enode://13@127.0.0.1:1246
+[17 DEBUG w3] Node 17 removing peer at enode://24@127.0.0.1:1257
+[17 DEBUG w3] Node 17 removing peer at enode://11@127.0.0.1:1244
+[17 DEBUG w3] Node 17 adding peer at enode://24@127.0.0.1:1257
+[17 DEBUG w3] Node 17 adding peer at enode://20@127.0.0.1:1253
+[17 DEBUG w3] Node 17 adding peer at enode://6@127.0.0.1:1239
+[17 DEBUG w3] Node 17 removing peer at enode://12@127.0.0.1:1245
+[17 DEBUG w3] Node 17 adding peer at enode://9@127.0.0.1:1242
+[17 DEBUG w3] Node 17 removing peer at enode://18@127.0.0.1:1251
+[17 DEBUG w3] Node 17 removing peer at enode://24@127.0.0.1:1257
+[17 DEBUG w3] Node 17 removing peer at enode://13@127.0.0.1:1246
+[17 DEBUG w3] Node 17 adding peer at enode://24@127.0.0.1:1257
+[17 DEBUG w3] Node 17 adding peer at enode://19@127.0.0.1:1252
+[17 DEBUG w3] Node 17 removing peer at enode://16@127.0.0.1:1249
+[17 DEBUG w3] Node 17 removing peer at enode://9@127.0.0.1:1242
+[17 DEBUG w3] Node 17 adding peer at enode://16@127.0.0.1:1249
+[17 INFO poa] Block produced by Node 17: 
+[17 INFO poa] ## H: 1, D: 1, TD: 1, P: enode://17@127.0.0.1:1250, BH: f9e57, TS:80, #T:218, SH:fe769##
+[17 INFO poa] {'n': 218, 'balances': {'17': 0, '0': 0, '12': 0, '6': 0, '13': 0, '10': 0, '16': 0, '8': 0, '9': 0, '20': 0, '14': 0, '24': 0, '7': 0, '23': 0, '19': 0, '18': 0, '5': 0, '11': 0, '15': 0, '21': 0, '22': 0}, 'mean': 0, 'threshold': 0, 'ticketPrice': 40, 'tau': 0, 'consensusReached': False, 'startBlock': 0, 'valueUBI': 20, 'totalUBI': {}, 'publicPayoutUBI': 0, 'publicLength': 15, 'roundCount': 0, 'voteCount': 0, 'voteOkCount': 0, 'robotCount': 20, 'lastUpdate': 0, 'newRound': False, 'blocksUBI': [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384], 'W_n': 0, 'robotsToPay': [], 'robot': {'17': {'robotAddress': '17', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '12': {'robotAddress': '12', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '6': {'robotAddress': '6', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '13': {'robotAddress': '13', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '10': {'robotAddress': '10', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '16': {'robotAddress': '16', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '8': {'robotAddress': '8', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '9': {'robotAddress': '9', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '20': {'robotAddress': '20', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '14': {'robotAddress': '14', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '24': {'robotAddress': '24', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '7': {'robotAddress': '7', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '23': {'robotAddress': '23', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '19': {'robotAddress': '19', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '18': {'robotAddress': '18', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '5': {'robotAddress': '5', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '11': {'robotAddress': '11', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '15': {'robotAddress': '15', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '21': {'robotAddress': '21', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}, '22': {'robotAddress': '22', 'isRegistered': True, 'payout': 0, 'totalPayout': 0, 'lastUBI': 1, 'totalUBI': 20, 'myVoteCounter': 0, 'robBalance': 20}}, 'round': {}} 
+
+[17 DEBUG w3] Node 17 adding peer at enode://18@127.0.0.1:1251
+[17 DEBUG w3] Node 17 removing peer at enode://10@127.0.0.1:1243
+[17 DEBUG w3] Node 17 removing peer at enode://6@127.0.0.1:1239
+[17 DEBUG w3] Node 17 adding peer at enode://9@127.0.0.1:1242
+[17 DEBUG w3] Node 17 removing peer at enode://16@127.0.0.1:1249
+[17 DEBUG w3] Node 17 adding peer at enode://15@127.0.0.1:1248
+[17 DEBUG w3] Node 17 removing peer at enode://8@127.0.0.1:1241
+[17 DEBUG w3] Node 17 removing peer at enode://15@127.0.0.1:1248
+[17 DEBUG w3] Node 17 adding peer at enode://8@127.0.0.1:1241
+[17 DEBUG w3] Node 17 removing peer at enode://19@127.0.0.1:1252
+[17 DEBUG w3] Node 17 adding peer at enode://15@127.0.0.1:1248
+[17 DEBUG w3] Node 17 adding peer at enode://19@127.0.0.1:1252
+[17 DEBUG w3] Node 17 removing peer at enode://24@127.0.0.1:1257
+[17 DEBUG w3] Node 17 removing peer at enode://23@127.0.0.1:1256

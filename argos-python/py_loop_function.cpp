@@ -3,6 +3,9 @@
 using namespace argos;
 using namespace boost::python;
 
+
+
+
 #define INIT_MODULE_LOOP_FUNCTION PyInit_libpy_loop_function_interface
 extern "C" PyObject* INIT_MODULE_LOOP_FUNCTION();
 
@@ -20,18 +23,7 @@ extern "C" PyObject* INIT_MODULE_QTUSER_FUNCTION();
 int m_nextRobotID = 0;  // Initialize it to 0 or any other suitable value
 
 
-BOOST_PYTHON_MODULE(libpy_loop_function_interface) {
-    // Expose the CPyLoopFunction class
-    class_<CPyLoopFunction>("CPyLoopFunction")
-        // Expose the AddRobotArena function
-        .def("AddRobotArena", &CPyLoopFunction::AddRobotArena)
-        // Expose other functions as needed
-         .def("AddRobotEntity", &CPyLoopFunction::AddRobotEntity)
-         .def("AddNewRobot", &CPyLoopFunction::AddNewRobot)
 
-    ;
-
-}
 
 CPyLoopFunction::CPyLoopFunction() {
   // init python
@@ -50,7 +42,6 @@ CPyLoopFunction::CPyLoopFunction() {
   m_loop_main = import("__main__");
   m_loop_namesp = m_loop_main.attr("__dict__");
 }
-
 
 void CPyLoopFunction::Init(TConfigurationNode& t_node) {
    float pos_tick=0.0;
@@ -151,6 +142,9 @@ for(auto& entry : m_cEpuck)
   }
 
 }
+
+
+
 
 void CPyLoopFunction::AddNewRobot(const boost::python::tuple& position, const boost::python::tuple& orientation) {
     // Extract position and orientation values from the Python tuples
@@ -290,6 +284,7 @@ CColor CPyLoopFunction::GetFloorColor() {
 }
 
 void CPyLoopFunction::AddRobotArena(float x, float y , int num) {
+  try{
   // Launch Python post_experiment function
       std::cout << "comes to add robot in cpp"<< std::endl;
      float pos_tick=0.0;
@@ -302,24 +297,26 @@ void CPyLoopFunction::AddRobotArena(float x, float y , int num) {
 //int numRobotsToMove = 6; // Change this value as needed
 
 // Iterate over all e-puck entities
-for(auto& entry : m_cEpuck)
-{
-    const std::string& id = entry.first;
-    //for (int i = 0; i < numRobotsToMove; ++i) {
-        if (id == "bc" + std::to_string(num)) {
-            pos_tick += 0.1;
-            pcEPuck2 = any_cast<CEPuckEntity*>(entry.second); // Store the entity pointer
-            // Define the new position
-           // CVector3 newPosition(0.9 - pos_tick, -0.93, 0.0); // Adjust the values as needed
-            CVector3 newPosition(x, -y, 0.0); // Adjust the values as needed
-            // Move the e-puck entity to the new position
-            MoveEntity(pcEPuck2->GetEmbodiedEntity(), newPosition, CQuaternion());
-            break; // Exit the loop once a matching robot is found
-        }
-    //}
-}   
+    for(auto& entry : m_cEpuck)
+    {
+        const std::string& id = entry.first;
+        //for (int i = 0; i < numRobotsToMove; ++i) {
+            if (id == "bc" + std::to_string(num)) {
+                pos_tick += 0.1;
+                pcEPuck2 = any_cast<CEPuckEntity*>(entry.second); // Store the entity pointer
+                // Define the new position
+               // CVector3 newPosition(0.9 - pos_tick, -0.93, 0.0); // Adjust the values as needed
+                CVector3 newPosition(x, -y, 0.0); // Adjust the values as needed
+                // Move the e-puck entity to the new position
+                MoveEntity(pcEPuck2->GetEmbodiedEntity(), newPosition, CQuaternion());
+                break; // Exit the loop once a matching robot is found
+            }
+        //}
+    }   
   
-
+} catch (const std::exception& e) {
+        std::cerr << "Error in AddRobotArena: " << e.what() << std::endl;
+    }
 }
 
 
@@ -334,5 +331,17 @@ void CPyLoopFunction::PostExperiment() {
   }
 }
 
+BOOST_PYTHON_MODULE(libpy_loop_function_interface) {
+    // Expose the CPyLoopFunction class
+    class_<CPyLoopFunction>("CPyLoopFunction")
+        // Expose the AddRobotArena function
+        .def("AddRobotArena", &CPyLoopFunction::AddRobotArena)
+        // Expose other functions as needed
+         .def("AddRobotEntity", &CPyLoopFunction::AddRobotEntity)
+         .def("AddNewRobot", &CPyLoopFunction::AddNewRobot)
+
+    ;
+
+}
 
 REGISTER_LOOP_FUNCTIONS(CPyLoopFunction, "py_loop_function")

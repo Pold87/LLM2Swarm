@@ -9,6 +9,7 @@ from hexbytes import HexBytes
 
 from controllers.aux import Vector2D, Logger, Timer, Accumulator, mydict, identifiersExtract, Counter
 from controllers.groundsensor import Resource
+from loop_functions.loop_params import params as lp
 
 from controllers.control_params import params as cp
 #from loop_params import params as lp

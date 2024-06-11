@@ -31,25 +31,34 @@ export NUMROBOTS=24
 export CON1="${EXPERIMENTFOLDER}/controllers/main.py"
 
 
-export RABRANGE="0.8"
+export RABRANGE="0.13"
 export WHEELNOISE="0"
-export TPS=15
+export TPS=10
 export DENSITY="1"
 
+#export ARENADIM="4.3"
+#export ARENADIMH="2.1"
+#export STARTDIM="1.4"
 
 export ARENADIM="2"
 export ARENADIMH="1"
 export STARTDIM="0.75"
 
 #NEW PARAM FOR WALLS
+#export REDUCEDL="4.1"
+#export MOVEWALL="0.1"
+#export MOVESOUTH="-1.98"
+
 export REDUCEDL="1.85"
 export MOVEWALL="0.1"
+export MOVESOUTH="-0.85"
+
 
 # [GETH]
 export BLOCKPERIOD=2
 
 export NUMBYZANTINE=0
-export BYZANTINESTYLE=1
+export BYZANTINESWARMSTYLE=1
 
 # [SC]
 export MAXWORKERS=15
@@ -66,13 +75,9 @@ export EPSILON=15
 export WINSIZE=5
 
 # [OTHER]
-export SEED=1300
+export SEED=122
 export TIMELIMIT=100
-export LENGTH=1700
+export LENGTH=5000
 export SLEEPTIME=5
 export REPS=1
 export NOTES="debug logs"
-
-
-
-

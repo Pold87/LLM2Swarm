@@ -71,13 +71,13 @@
   <!-- *********************** -->
   <arena size="${ARENADIM}, ${ARENADIM}, 1.5" center="0,0,0">
 
- <floor id="f" source="image" path="${EXPERIMENTFOLDER}/experiments/floors/20perside_25percentwhite.png" />
+ <floor id="f" source="image" path="${EXPERIMENTFOLDER}/experiments/floors/38.png" />
 
     <box id="wall_north" size="${ARENADIM},0.06,0.1" movable="false">
       <body position="0,${ARENADIMH},0" orientation="0,0,0" />
     </box>
     <box id="wall_south" size="${ARENADIM},0.06,0.1" movable="false">
-      <body position="0,-0.85,0" orientation="0,0,0" />
+      <body position="0,${MOVESOUTH},0" orientation="0,0,0" />
     </box>
     <box id="wall_east" size="0.06,${REDUCEDL},0.1" movable="false">
       <body position="${ARENADIMH},${MOVEWALL},0" orientation="0,0,0" />

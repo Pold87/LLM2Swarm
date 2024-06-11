@@ -97,7 +97,7 @@ def init():
 
     # /* Initialize Console Logging*/
     #######################################################################
-    log_folder = experimentFolder + '/logs/' + robotID + '/'
+    log_folder = experimentFolder + '/new_log4_24rob_0byz/' + robotID + '/'
 
     # Monitor logs (recorded to file)
     name =  'monitor.log'
@@ -335,9 +335,16 @@ def controlstep():
             "Tot UBI rec: ", receivedUBI, "Block height: ", block.height, "Robot count: ", robotCount,
             "New round: ", newRound)
 
+            mean = w3.sc.getMean()
             converged = w3.sc.isConverged()
+
+            logging = "Robot: "+ str(me.id) +" Time: " + str(checkt)+ " totPayout: "+ str(getTotPayout) +" robBalance: "+ str(robbalance) + " Tot UBI rec: "+ str(receivedUBI)+  " Block height: "+ str(block.height)+ " Robot count: "+ str(robotCount)+ " New round: "+ str(newRound)+" converged: "+str(converged)+" mean: "+ str(mean)+ " converged: "+str(converged)+"\n"
+            print(logging)
+            with open(log_folder+str(me.id), 'a') as f:
+               f.write((str(logging)))
+
+
             if converged: #check if converged
-                mean = w3.sc.getMean()
                 print("converged", mean)
                 robot.variables.set_attribute("consensus_reached",str("true"))
             

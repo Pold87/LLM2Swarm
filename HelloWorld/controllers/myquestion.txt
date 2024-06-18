@@ -1,0 +1,6 @@
+I want to create Rasa chatbot. Please create a generic Rasa chatbot for multiple choice questions using the following files:
+
+domain.yaml
+stories.yaml
+rules.yaml
+actions.py

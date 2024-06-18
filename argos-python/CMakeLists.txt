@@ -14,7 +14,7 @@ link_directories(${PYTHON_LIBRARIES})
 # add_definitions(${LUA_CONST})
 
 # find_package(Boost 1.61.0 COMPONENTS python3)
-find_package(Boost COMPONENTS python38)
+find_package(Boost COMPONENTS python3)
 
 
 include_directories (${Boost_INCLUDE_DIRS})

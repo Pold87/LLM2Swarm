@@ -1,6 +1,6 @@
 # [PATHS]
-export HOMEFOLDER="$HOME/"
-export MAINFOLDER="$HOMEFOLDER/toychain-argos"
+export HOMEFOLDER="$HOME/software"
+export MAINFOLDER="$HOMEFOLDER/chatgpt-swarm"
 export DOCKERFOLDER="$MAINFOLDER/argos-blockchain-sm"
 export ARGOSFOLDER="$MAINFOLDER/argos-python"
 export EXPERIMENTFOLDER="$MAINFOLDER/HelloWorld"
@@ -27,7 +27,7 @@ export SWARMNAME=ethereum
 export CONTAINERBASE=${SWARMNAME}_eth
 
 # [ARGOS]
-export NUMROBOTS=24
+export NUMROBOTS=5
 export CON1="${EXPERIMENTFOLDER}/controllers/main.py"
 
 
@@ -57,7 +57,7 @@ export MOVESOUTH="-0.85"
 # [GETH]
 export BLOCKPERIOD=2
 
-export NUMBYZANTINE=0
+export NUMBYZANTINE=1
 export BYZANTINESWARMSTYLE=1
 
 # [SC]

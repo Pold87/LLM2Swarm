@@ -12,13 +12,11 @@ import os
 from math import sqrt
 from random import uniform
 import os
-arena_size = os.environ["ARENADIM"]
-print(arena_size)
 
 np.random.seed(seed=1)
 
-percentage_white = 0.25
-tiles_per_side_list = [22, 31, 38]
+percentage_white = 0.45
+tiles_per_side_list = [31]
 #tiles_per_side_list = [10]
 
 def create_shuffled_matrix(tiles_per_side):
@@ -113,6 +111,6 @@ def main_market():
     create_market_resources(0.2,5,[0.02,0.1])
 
 if __name__ == "__main__":
-    # main_shuffled_matrix()
-    main_market()
+    main_shuffled_matrix()
+    #main_market()
 

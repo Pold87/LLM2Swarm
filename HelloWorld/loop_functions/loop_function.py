@@ -81,7 +81,14 @@ def post_step():
     """
 
 def is_experiment_finished():
-    pass
+
+    consensus_counter = 0
+
+    for robot in allrobots:
+        if robot.variables.get_attribute("consensus_reached") == "true":
+            consensus_counter += 1
+
+    return consensus_counter / 5 > 0.5
 
 def reset():
     pass

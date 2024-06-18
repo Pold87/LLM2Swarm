@@ -35,6 +35,17 @@ from toychain.src.Transaction import Transaction
 #######################################################################
 global robot
 
+import subprocess
+
+#from together import Together
+
+
+#global client
+
+#client = Together(api_key="7777f6e34f04364aa9a5db2e82c57064f262d6416523d029b725ee16cfd11030")
+
+
+
 global startFlag
 global notdonemod
 notdonemod=False
@@ -94,6 +105,8 @@ def init():
     robot.variables.set_attribute("block", "0")
     robot.variables.set_attribute("hash", str(hash("genesis")))
     robot.variables.set_attribute("state_hash", str(hash("genesis")))
+
+    print("Hello")
 
     # /* Initialize Console Logging*/
     #######################################################################
@@ -159,6 +172,16 @@ def init():
     # List of submodules --> iterate .start() to start all
     submodules = [erb,gs]
 
+
+    llm_output = 'controllers/' + str(robotID) + '.txt'
+    if os.path.exists(llm_output):
+            os.remove(llm_output)
+
+    start_output = "This is the first negotiation round, so there are no previous rounds."
+    with open(llm_output, 'w') as file:
+        file.write(start_output)
+
+
 #########################################################################################################################
 #### CONTROL STEP #######################################################################################################
 #########################################################################################################################
@@ -169,299 +192,141 @@ last = 0
 counter = 0
 global checkt
 
+global myround
+myround = 0
+
 def controlstep():
     global counter,last, pos, clocks, counters, startFlag, startTime,notdonemod,odo2,checkt, byzantine, byzantine_style, log_folder
-    global estimate, totalWhite, totalBlack
+    global estimate, totalWhite, totalBlack, robotID
+    global myround
+
+    robotID = str(int(robot.variables.get_id()[2:])+1)
+
     #startFlag = False 
     for clock in clocks.values():
          clock.time.step()
          checkt = clock.time.time_counter
-    if not startFlag:
-        ##########################
-        #### FIRST STEP ##########
-        ##########################
-        #SPECIFY THE ROBOTS TO START AT TIME AFTER THEY HAVE MOVED
-        if(int(me.id)<0 and checkt<151): # SPECIFY TIME TO START ROBOTS AND THEIR IDS	
-            ##print("COMES HERE TO NOT JOIN", checkt)
-            startFlag=False
-            #if(notdonemod==False):
-            #for module in submodules:
-                    #try:
-                    #    module.start()
-                    #except:
-                     #   robot.log.critical('Error Starting Module: %s', module)
-                      #  sys.exit()
-                #notdonemod=True
-            #else:
-                # Perform submodules step
-                #for module in [erb, rs,rw]:
-                    #module.step()
+
+
+    startTime = 0
+    robot.log.info('--//-- Starting Experiment --//--')
+    for module in submodules:
+        try:
+            module.start()
+        except:
+            robot.log.critical('Error Starting Module: %s', module)
+            sys.exit()
+    for log in logs.values():
+        log.start()
+
+    for clock in clocks.values():
+        clock.reset()
+
+    byzantine_style = int(robot.variables.get_attribute("byzantine_style"))
+
+    for module in [erb, rs, rw, gs,odo]:
+        module.step()
+            
+    newValues = gs.getNew()
+    for value in newValues:
+        if value != 0:
+            totalWhite +=1
         else:
+            totalBlack+=1
+    estimate = (0.5+totalWhite)/(totalBlack+totalWhite+1)
+   
+    if ((counter + 1) % 50) == 0: 
+
+        myround += 1
 
 
-            startFlag=True
-            startTime = 0
-            robot.log.info('--//-- Starting Experiment --//--')
-            for module in submodules:
-                try:
-                    module.start()
-                except:
-                    robot.log.critical('Error Starting Module: %s', module)
-                    sys.exit()
-            for log in logs.values():
-                log.start()
-            #print(odo2.getPosition())
-            for clock in clocks.values():
-                clock.reset()
+        # Read previous outputs:
 
-            #w3.sc.registerRobot()
-            # Startup transactions
-            #SPECIFY THE ROBOTS THAT ARE BYZANTINE
-            #if int(me.id) ==2 or int(me.id) == 2 or int(me.id) == 2 or int(me.id) == 5 or int(me.id) == 6 or int(me.id) == 3:
-            #    byzantine = 1
-            byzantine_style = int(robot.variables.get_attribute("byzantine_style"))
-            print("--//-- Registering robot --//--")
-            txdata = {'function': 'registerRobot', 'inputs': []}
-            tx = Transaction(sender = me.id, data = txdata)
-            w3.send_transaction(tx)
+        aggregated_content = ""
+        for i in [1,2,3,4,5]:
+            with open('controllers/' + str(i) + '.txt', 'r') as file:
+                llm_output = file.read()
 
-            w3.start_tcp()
-            w3.start_mining()
+                aggregated_content += f"Robot {i}\n\n{llm_output}\n\n"
 
-    else:
 
-        ###########################
-        ######## ROUTINES #########
-        ###########################
+        # Define the placeholders and their replacements
+        placeholders = {
+            '{robotID}': str(robotID),
+            '{totalWhite}': str(totalWhite),
+            '{totalBlack}': str(totalBlack),
+            '{estimate}': str(estimate),
+            '{results}': aggregated_content,
+            '{round}': str(myround)}
 
-        def peering():
-            global estimate, totalWhite, totalBlack, checkt, byzantine, byzantine_style, log_folder
+        print(totalWhite, totalBlack, estimate)
 
-            # Get the current peers from erb
-            erb_enodes = {w3.gen_enode(peer.id) for peer in erb.peers}
 
-            # Add peers on the toychain
-            for enode in erb_enodes-set(w3.peers):
-                try:
-                    w3.add_peer(enode)
+        # Read the file contents
+        with open('controllers/nonbyzmsg.txt', 'r') as file:
+            nonbyzmsg = file.read()
+        
+        # Replace the placeholders
+        for placeholder, replacement in placeholders.items():
+            nonbyzmsg = nonbyzmsg.replace(placeholder, replacement)
 
-            
-                    #Say Hello
-                    #txdata = {'function': 'sendEstimate','inputs':[str(estimate)]}
-                    #tx = Transaction(sender=me.id, data=txdata)
-                    #w3.send_transaction(tx)
-                except Exception as e:
-                    raise e
-                
-            # Remove peers from the toychain
-            for enode in set(w3.peers)-erb_enodes:
-                try:
-                    w3.remove_peer(enode)
-                except Exception as e:
-                    raise e
 
-            # Turn on LEDs according to geth peer count
-            rgb.setLED(rgb.all, rgb.presets.get(len(w3.peers), 3*['red']))
+        # Read the file contents
+        with open('controllers/byzmsg.txt', 'r') as file:
+            byzmsg = file.read()
+        
+        # Replace the placeholders
+        for placeholder, replacement in placeholders.items():
+            byzmsg = byzmsg.replace(placeholder, replacement)
 
-        # Perform submodules step
-        for module in [erb, rs, rw, gs,odo]:
-            module.step()
-            
-        #get estimate
-        #print(byzantine_style)
+
         if byzantine_style == 1:
-            estimate = 0
-        elif byzantine_style == 2:
-            estimate = 1        
-        elif byzantine_style == 3:
-            # 50% chance white, 50% change black
-            p = random.uniform(0, 1)
-            if p < 0.5:
-                estimate = 0
-            else:
-                estimate = 1
-        elif byzantine_style == 4:
-            estimate = random.uniform(0, 1)        
-        
-        else:#Get value from the ground
-            newValues = gs.getNew()
-            for value in newValues:
-                if value != 0:
-                    totalWhite +=1
-                else:
-                    totalBlack+=1
-            estimate = (0.5+totalWhite)/(totalBlack+totalWhite+1)
-        myBlocksUBI = [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384]
-         
-        if clocks['newround'].query():#check after every interval timesteps
-            #balance = w3.sc.getBalance(me.id)
-            robbalance = w3.sc.getRobBalance(me.id)  #the balance of robots
-            block    = w3.get_block('latest') #to get latest block heigh of robots
-            receivedUBI= w3.sc.receivedUBI(me.id) #the total ubi it has received
-            robotCount = w3.sc.getRobotCount() #how manybots
-            newRound = w3.sc.isNewRound() #new round?
-            doIhavePayouts = w3.sc.doIhavePayouts(me.id) #does the robot have any payouts
-            getTotPayout = w3.sc.getTotPayout(me.id) #what is total payouts done
-            #shouldIaskforUBI = w3.sc.doIhavePayouts(me.id)
-            payout = w3.sc.getPayout(me.id)
-            #for i in range(len(myBlocksUBI)): #in those specific blocks, ask for ubi
-            #    if block.height == myBlocksUBI[i]:
-            registered = w3.sc.amIregistered(me.id) #does the robot have any payouts
-            if(registered == False):
-                print("--//-- Registering robot --//--")
-                txdata = {'function': 'registerRobot', 'inputs': []}
-                tx = Transaction(sender = me.id, data = txdata)
-                w3.send_transaction(tx)
-            #get ubi
-            txdata1 = {'function': 'askForUBI', 'inputs': []}
-            tx1 = Transaction(sender = me.id, data = txdata1)
-            w3.send_transaction(tx1)
-            balance = w3.sc.getBalance(me.id)
-            print("Robot: ",me.id,"Payout: ", doIhavePayouts)
-            
-            
-            if(doIhavePayouts):# if robot has payouts then get them
-                txdata1 = {'function': 'askForPayout', 'inputs': []}
-                tx1 = Transaction(sender = me.id, data = txdata1)
-                w3.send_transaction(tx1)
+            mycontent = byzmsg
+        else:
+            mycontent = nonbyzmsg
+
+        with open('controllers/' + str(robotID) + '_query.txt', 'w') as file:
+            file.write(mycontent)
+
+        mycommand = "python3 controllers/together_chatgpt.py " + robotID 
+        response = os.popen(mycommand).read()
+
+        print("My Byzantine style is ", byzantine_style)
+        print(response)
 
 
-            
-            if(w3.sc.isNewRound() == True and robbalance > 0): #every new round update mean
-                txdata = {'function': 'updateMean', 'inputs': []}
-                tx = Transaction(sender = me.id, data = txdata)
-                w3.send_transaction(tx) 
-            print("Robot: ",me.id,"Time: " , checkt, "totPayout: ", getTotPayout, "robBalance: ",robbalance,
-            "Tot UBI rec: ", receivedUBI, "Block height: ", block.height, "Robot count: ", robotCount,
-            "New round: ", newRound)
-
-            mean = w3.sc.getMean()
-            converged = w3.sc.isConverged()
-
-            logging = "Robot: "+ str(me.id) +" Time: " + str(checkt)+ " totPayout: "+ str(getTotPayout) +" robBalance: "+ str(robbalance) + " Tot UBI rec: "+ str(receivedUBI)+  " Block height: "+ str(block.height)+ " Robot count: "+ str(robotCount)+ " New round: "+ str(newRound)+" converged: "+str(converged)+" mean: "+ str(mean)+ " converged: "+str(converged)+"\n"
-            print(logging)
-            with open(log_folder+str(me.id), 'a') as f:
-               f.write((str(logging)))
-
-
-            if converged: #check if converged
-                print("converged", mean)
-                robot.variables.set_attribute("consensus_reached",str("true"))
-            
-            #if ubi != 0 and 
-        if clocks['voting'].query():#after specific timetspes try to vote
-            robbalance = w3.sc.getRobBalance(me.id)
-    #        #if(me.id == '4'):
-            if robbalance > 39:
-                #print("before: ", balance)
-                txdata = {'function': 'send_vote', 'inputs': [estimate]}
-                tx = Transaction(sender = me.id, data = txdata)
-                w3.send_transaction(tx)
-                #print("after: ", balance)
-          #  balance = w3.sc.getBalance(me.id)
-            #if(me.id == '4'):
-
-            
-            
-            
+        # Check if last line is STOP
+        lines = response.splitlines()
+    
+        # Get the last line and strip any surrounding whitespace
+        last_line = lines[-1].strip()
+    
+        # Check if the last line is "STOP"
+        if last_line == "STOP":
+            robot.variables.set_attribute("consensus_reached", str("true"))
 
 
 
-
-        # Perform clock steps
-        for clock in clocks.values():
-            #print(clock.time.time_counter)
-            clock.time.step()
-
-        if clocks['peering'].query():
-            peering()
-
-        w3.step()
+        with open("controllers/" + robotID + ".txt", 'w') as file:
+            file.write(response)
 
 
-        
-        #if (counter % 100) == 0:
-            
-        #    print("Robot",me.id,"estimate is ", w3.sc.getEstimate())
-        #counter +=1
+    # Perform clock steps
+    for clock in clocks.values():
+        #print(clock.time.time_counter)
+        clock.time.step()
 
-        
-        # Update blockchain state on the robot C++ object
-        robot.variables.set_attribute("block", str(w3.get_block('last').height))
-        robot.variables.set_attribute("block_hash", str(w3.get_block('last').hash))
-        robot.variables.set_attribute("state_hash", str(w3.get_block('last').state.state_hash))
+    if clocks['peering'].query():
+        peering()
 
-
+    counter += 1
 
 def reset():
     pass
 
 def destroy():
-    if startFlag:
-        w3.stop_mining()
-        txs = w3.get_all_transactions()
-        if len(txs) != len(set([tx.id for tx in txs])):
-            print(f'REPEATED TRANSACTIONS ON CHAIN: #{len(txs)-len(set([tx.id for tx in txs]))}')
-
-        for key, value in w3.sc.state.items():
-            print(f"{key}: {value}")
-
-        name   = 'sc.csv'
-        header = ['TIMESTAMP', 'BLOCK', 'HASH', 'PHASH', 'BALANCE', 'TX_COUNT'] 
-        logs['sc'] = Logger(f"{experimentFolder}/logs/{me.id}/{name}", header, ID = me.id)
-
-        
-        name   = 'block.csv'
-        header = ['TELAPSED','TIMESTAMP','BLOCK', 'HASH', 'PHASH', 'DIFF', 'TDIFF', 'SIZE','TXS', 'UNC', 'PENDING', 'QUEUED']
-        logs['block'] = Logger(f"{experimentFolder}/logs/{me.id}/{name}", header, ID = me.id)
-
-
-        # Log each block over the operation of the swarm
-        blockchain = w3.chain
-        for block in blockchain:
-            logs['block'].log(
-                [w3.custom_timer.time()-block.timestamp, 
-                block.timestamp, 
-                block.height, 
-                block.hash, 
-                block.parent_hash, 
-                block.difficulty,
-                block.total_difficulty, 
-                sys.getsizeof(block) / 1024, 
-                len(block.data), 
-                0
-                ])
-            
-            logs['sc'].log(
-                [block.timestamp, 
-                block.height, 
-                block.hash, 
-                block.parent_hash, 
-                block.state.balances.get(me.id,0),
-                block.state.n
-                ])
-
-        
-    print('Killed robot '+ me.id)
+    pass
 
 #########################################################################################################################
 #########################################################################################################################
 #########################################################################################################################
-
-
-def getEnodes():
-    return [peer['enode'] for peer in w3.geth.admin.peers()]
-
-def getEnodeById(__id, gethEnodes = None):
-    if not gethEnodes:
-        gethEnodes = getEnodes() 
-
-    for enode in gethEnodes:
-        if readEnode(enode, output = 'id') == __id:
-            return enode
-
-def getIds(__enodes = None):
-    if __enodes:
-        return [enode.split('@',2)[1].split(':',2)[0].split('.')[-1] for enode in __enodes]
-    else:
-        return [enode.split('@',2)[1].split(':',2)[0].split('.')[-1] for enode in getEnodes()]

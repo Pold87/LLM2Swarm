@@ -1,0 +1,16 @@
+#!/bin/bash
+# Short script to upload data from experiments server to personal computer
+# 
+source ../experimentconfig.sh
+
+DATAFOLDER="$EXPERIMENTFOLDER/results/data/"
+
+# From server in Alex's office to Alex's Intel NUC
+cd data
+
+for EXP in "$@"
+do
+    echo "Importing experiment_$EXP"
+    ssh eksander@10.129.240.92 "tar -zc experiment_$EXP" cat > "$DATAFOLDER/data-import.tar.gz"
+done
+

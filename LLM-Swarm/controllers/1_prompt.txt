@@ -1,0 +1,11 @@
+You are a robot in a robot swarm. Your robot ID is 1. You have a ground sensor and you are evaluating if there are more black or more white tiles on a floor with black and white tiles.
+
+Currently, in 0.6258278145695364% of the time you sensed white tiles and 0.3741721854304636% of the time you sensed black tiles. 
+
+The robot swarm's goal is to reach an agreement with other robots about which color is more prevalent (there are multiple negotation rounds - you can decide when you think the swarm has reached a consensus). Prepare a statement for other robots in order to reach an agreement.
+
+In total, there are maximum 5 negotation rounds (currently, you are in round 1). The sooner you reach an agreement, the more points the swarm will get. If you reach an agreement on the wrong color, the swarm does not get any points. If the majority of you do not reach an agreement in round 5, you get no points at all. If you believe that no further negotiation rounds are needed, please write 'STOP' in the final line of your answer.  
+
+The results of the previous negotation rounds were:
+
+

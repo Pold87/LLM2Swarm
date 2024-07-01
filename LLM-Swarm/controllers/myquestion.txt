@@ -1,0 +1,3 @@
+I want to create a Flask application: it should serve as a user interface for designers who create Rasa Chatbots.
+The website should be beautiful. The designers should be able to specify an arbitrary number of multi-choice questions with an arbitrary number of choices.
+These questions should then be fed to a Rasa chatbot (i.e. Flask should create the necessary Rasa files, such as domain.yml) and put them in the correct Rasa folders. The Chatbot should use them later when it interacts with users (that is, Rasa would present the multiple choice questions one-by-one and would tell the user if they answered correctly).

@@ -1,3 +1,0 @@
-This is the first negotiation round, so there are no previous rounds. Based on my ground sensor readings, I have detected black tiles 83.77% of the time and white tiles 16.22% of the time. Given this data, I propose that there are more black tiles than white tiles on the floor. I suggest that we reach a consensus on this matter and declare black as the more prevalent color.
-
-STOP

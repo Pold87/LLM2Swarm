@@ -15,9 +15,8 @@ import os
 
 np.random.seed(seed=1)
 
-percentage_white = 0.45
-tiles_per_side_list = [31]
-#tiles_per_side_list = [10]
+percentage_white = 0.5
+tiles_per_side_list = [3]
 
 def create_shuffled_matrix(tiles_per_side):
 

@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Program",
+            "type": "node",  // Change this to your appropriate debugger type, e.g., python
+            "request": "launch",
+            "program": "${workspaceFolder}/path/to/your/main/program.js",  // Change this to your program entry point
+            "preLaunchTask": "Run starter script"
+        }
+    ]
+}

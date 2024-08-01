@@ -13,7 +13,8 @@ sys.path += [os.environ['MAINFOLDER'], \
              os.environ['EXPERIMENTFOLDER']
             ]
 
-from controllers.movement import RandomWalk, Navigate, Odometry, OdoCompass, GPS
+#from controllers.movement_clean import RandomWalk, Flocking
+from controllers.movement import RandomWalk, GPS
 from controllers.groundsensor import ResourceVirtualSensor, Resource, GroundSensor
 from controllers.erandb import ERANDB
 from controllers.rgbleds import RGBLEDs
@@ -53,9 +54,9 @@ clocks, counters, logs, txs = dict(), dict(), dict(), dict()
 global estimate, totalWhite, totalBlack, byzantine, byzantine_style, log_folder
 TPS = int(lp['environ']['TPS'])
 
-estimate =0
-totalWhite =0
-totalBlack=0
+estimate = []
+totalWhite = 0
+totalBlack= 0
 
 byzantine = 0
 # /* Logging Levels for Console and File */
@@ -80,7 +81,7 @@ GENESIS = Block(0, 0000, [], [gen_enode(i+1) for i in range(int(lp['environ']['N
 
 
 def init():
-    global clocks,counters, logs, submodules, me, rw, nav, odo, gps, rb, w3, fsm, rs, erb, rgb,odo2,gs, byzantine_style, log_folder
+    global clocks,counters, logs, submodules, me, rw, nav, gps, rb, w3, fsm, rs, erb, rgb, gs, byzantine_style, log_folder, estimate
     robotID = str(int(robot.variables.get_id()[2:])+1)
     robotIP = '127.0.0.1'
     robot.variables.set_attribute("id", str(robotID))
@@ -131,20 +132,22 @@ def init():
     robot.log.info('Initialising random-walk...')
     rw = RandomWalk(robot, cp['scout_speed'])
 
-    # /* Init Navigation, __navigate process */
-    robot.log.info('Initialising navigation...')
-    nav = Navigate(robot, cp['recruit_speed'])
-    
-    # /* Init odometry sensor */
-    robot.log.info('Initialising Odo...')
-    odo2 = Odometry(robot)
-    
-    # /* Init odometry sensor */
-    robot.log.info('Initialising odometry...')
-    odo = OdoCompass(robot)
+    #rw = Flocking(robot, cp['scout_speed'])
 
-    # /* Init GPS sensor */
-    robot.log.info('Initialising gps...')
+    # # /* Init Navigation, __navigate process */
+    # robot.log.info('Initialising navigation...')
+    # nav = Navigate(robot, cp['recruit_speed'])
+    
+    # # /* Init odometry sensor */
+    # robot.log.info('Initialising Odo...')
+    # odo2 = Odometry(robot)
+    
+    # # /* Init odometry sensor */
+    # robot.log.info('Initialising odometry...')
+    # odo = OdoCompass(robot)
+
+    # # /* Init GPS sensor */
+    # robot.log.info('Initialising gps...')
     gps = GPS(robot)
 
     # /* Init LEDs */
@@ -172,6 +175,8 @@ def init():
     with open(llm_output, 'w') as file:
         file.write(start_output)
 
+    estimate = []
+        
 
         
 global pos
@@ -213,18 +218,19 @@ def controlstep():
 
     byzantine_style = int(robot.variables.get_attribute("byzantine_style"))
 
-    for module in [erb, rs, rw, gs,odo]:
+    for module in [erb, rs, rw, gs]:
         module.step()
             
     newValues = gs.getNew()
-    for value in newValues:
-        if value != 0:
-            totalWhite +=1
-        else:
-            totalBlack+=1
-    estimate = (0.5+totalWhite)/(totalBlack+totalWhite+1)
-   
-    if ((counter + 1) % 200) == 0: 
+    #average = 0
+    #for value in newValues:
+    #    average += value
+    #average = average / 3
+    # Only append the center sensor
+    current_position = gps.getPosition()
+    estimate.append((newValues[1], current_position[0], current_position[1]))
+        
+    if ((counter + 1) % 500) == 0: 
 
         myround += 1
 
@@ -239,16 +245,15 @@ def controlstep():
                     with open(filepath, 'r') as file:
                         llm_output = file.read()
 
-                        aggregated_content += f"Robot {i}\n\n{llm_output}\n\n"
+                        # aggregated_content += f"Robot {i}\n\n{llm_output}\n\n"
+                        #aggregated_content += "Robot " + str(i) + "\n\n" + llm_output + "\n\n"
+                        aggregated_content += ""
 
 
         # Define the placeholders and their replacements
         placeholders = {
             '{robotID}': str(robotID),
-            '{totalWhite}': str(totalWhite),
-            '{totalBlack}': str(totalBlack),
-            '{estimateWhite}': str(100 * estimate),
-            '{estimateBlack}': str(100 * (1 - estimate)),
+            '{estimate}': ', '.join(str(x) for x in estimate),
             '{results}': aggregated_content,
             '{round}': str(myround)}
 
@@ -258,7 +263,7 @@ def controlstep():
         if byzantine_style == 1: # Read the template for Byzantines
             mypath = 'controllers/byzmsg.txt'
         else: # Read the template for non-Byzantines
-            mypath = 'controllers/nonbyzmsg.txt'
+            mypath = 'controllers/mapmsg.txt'
 
 
         # Read the file contents
@@ -275,36 +280,34 @@ def controlstep():
             os.makedirs(os.path.dirname(myprompt), exist_ok=True)
             file.write(msg)
 
-        # Send the command to the LLM (using together.ai) and retrieve the response
-        mycommand = "python3 controllers/together_chatgpt.py " + robotID         
+        # Send the command to the LLM and retrieve the response
+        mycommand = "python3 controllers/openai-api.py " + robotID         
         response = os.popen(mycommand).read()
 
-        print("My Byzantine style is ", byzantine_style)
+        # print("My Byzantine style is ", byzantine_style)
         robot.variables.set_attribute("response", response)
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect(('localhost', 5000))
-            myid = int(robotID) - 1
+
+        # Display the response using tkinter (can give errors like:
+        # "Error: invalid literal for int() with base 10: 'twelfth'"
+        # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        #     s.connect(('localhost', 5000))
+        #     myid = int(robotID) - 1
             
-            message = f"{myid} {response}\n"
-            s.sendall(message.encode())
+        #     message = str(myid) + " " + str(response) + "\n"
+        #     #message = f"{myid} {response}\n"
+
+        #     s.sendall(message.encode())
 
             
         print(response)
-
-        # Check if last line is 'STOP'
-        lines = response.splitlines()
-    
-        ## Get the last line and strip any surrounding whitespace
-        last_line = lines[-1].strip()
-    
-        if last_line == "STOP":
-            robot.variables.set_attribute("consensus_reached", str("true"))
 
         # Save the LLM response of this robot in a file
         filepath = "controllers/outputs/" + str(myround) + "/" + robotID + ".txt" 
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
         with open(filepath, 'a') as file:
             file.write(response)
+
+        estimate = []
 
 
     # Perform clock steps

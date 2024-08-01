@@ -63,9 +63,10 @@ fi
 done
 
 for opt in "$@"; do
-if [[ $opt == "--start" || $opt == "-s" ]]; then
+    if [[ $opt == "--start" || $opt == "-s" ]]; then
+#    python3 GUI_new.py &
     argos3 -c $ARGOSFILE
-fi
+    fi
 
 if [[ $opt == "--start-novis" || $opt == "-sz" ]]; then
     argos3 -z -c $ARGOSFILE

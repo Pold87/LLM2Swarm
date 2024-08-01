@@ -213,15 +213,15 @@ void CQTOpenGLUserFunctionsWrapper::DrawCylinder(const boost::python::list c_pos
 
 
 // NOT WORKING DrawText; CORE DUMP
-void CQTOpenGLUserFunctionsWrapper::DrawText(const boost::python::list c_position,
+void CQTOpenGLUserFunctionsWrapper::DrawText(const boost::python::list c_position_list,
                                              const std::string str_text,
                                              const std::string str_color_name) {
 
 
     m_pcCQTOpenGLUserFunctions->DrawText(
-        CVector3(boost::python::extract<Real>(boost::python::object(c_position[0])), 
-                 boost::python::extract<Real>(boost::python::object(c_position[1])), 
-                 boost::python::extract<Real>(boost::python::object(c_position[2]))),   
+        CVector3(boost::python::extract<Real>(boost::python::object(c_position_list[0])), 
+                 boost::python::extract<Real>(boost::python::object(c_position_list[1])), 
+                 boost::python::extract<Real>(boost::python::object(c_position_list[2]))),   
         str_text,   
         ActusensorsWrapper::CColorWrapper(str_color_name).m_cColor); 
 }

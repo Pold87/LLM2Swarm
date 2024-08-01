@@ -66,24 +66,25 @@
   </loop_functions>
 
 
+
   <!-- *********************** -->
   <!-- * Arena configuration * -->
   <!-- *********************** -->
   <arena size="${ARENADIM}, ${ARENADIM}, 1.5" center="0,0,0">
 
- <floor id="f" source="image" path="${EXPERIMENTFOLDER}/experiments/floors/31.png" />
+ <floor id="f" source="image" path="${EXPERIMENTFOLDER}/experiments/floors/3.png" />
 
     <box id="wall_north" size="${ARENADIM},0.06,0.1" movable="false">
       <body position="0,${ARENADIMH},0" orientation="0,0,0" />
     </box>
     <box id="wall_south" size="${ARENADIM},0.06,0.1" movable="false">
-      <body position="0,${MOVESOUTH},0" orientation="0,0,0" />
+      <body position="0,-${ARENADIMH},0" orientation="0,0,0" />
     </box>
-    <box id="wall_east" size="0.06,${REDUCEDL},0.1" movable="false">
-      <body position="${ARENADIMH},${MOVEWALL},0" orientation="0,0,0" />
+    <box id="wall_east" size="0.06,${ARENADIM},0.1" movable="false">
+      <body position="${ARENADIMH},0,0" orientation="0,0,0" />
     </box>
-    <box id="wall_west" size="0.06,${REDUCEDL},0.1" movable="false">
-      <body position="-${ARENADIMH},${MOVEWALL},0" orientation="0,0,0" />
+    <box id="wall_west" size="0.06,${ARENADIM},0.1" movable="false">
+      <body position="-${ARENADIMH},0,0" orientation="0,0,0" />
     </box>
 
     <distribute>
@@ -123,10 +124,10 @@
     <!-- ************************************************************************ -->
   <!-- <qt-opengl autoplay="true"> -->
     <qt-opengl autoplay="true">
-<!--       <user_functions library="${ARGOSFOLDER}/build/libpy_qtuser_function_interface.so"
+      <user_functions library="${ARGOSFOLDER}/build/libpy_qtuser_function_interface.so"
                       label="py_qtuser_function" >
       <params script="${EXPERIMENTFOLDER}/loop_functions/qtuser_function.py"/>
-      </user_functions> -->
+      </user_functions>
       
     <camera>
       <placements>

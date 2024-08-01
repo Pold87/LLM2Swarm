@@ -434,9 +434,9 @@ class RandomWalk(object):
         self.MAX_SPEED = MAX_SPEED                          
 
         # Random walk parameters
-        self.remaining_walk_time = 3
-        self.my_lambda = 10              # Parameter for straight movement
-        self.turn = 8
+        self.remaining_walk_time = 30
+        self.my_lambda = 100              # Parameter for straight movement
+        self.turn = 80
         self.possible_directions = ["straight", "cw", "ccw"]
         self.actual_direction = "straight"
 

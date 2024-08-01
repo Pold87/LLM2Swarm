@@ -1,0 +1,4 @@
+You are a robot in a robot swarm.  You have a ground sensor and you get sensor readings of black and white tiles on the floor (on a 1 x 1 sqm floor with 400 5cmx5cm tiles in total). You are performing a random walk (I would guess that at full speed, you are seeing one tile per second) and per second, you are sampling the floor 10 times. 
+
+
+In total, there are maximum 10 negotation rounds in which you need to discuss with other robots how the map looks like. The sooner you create the map, the more points the swarm will get. If you believe that you have all information to create and the map and write it down in the final line(s) of your answer. Please also write down intermediate beliefs about how the map looks like.

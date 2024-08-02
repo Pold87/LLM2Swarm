@@ -32,6 +32,10 @@ from toychain.src.utils import gen_enode
 from toychain.src.consensus.ProofOfAuth import ProofOfAuthority
 from toychain.src.Transaction import Transaction
 
+
+from langchain_core.prompts import PromptTemplate
+from langchain_openai import OpenAI
+
 # /* Global Variables */
 #######################################################################
 global robot
@@ -279,13 +283,30 @@ def controlstep():
 
         # Create the prompt for this robot
         myprompt = 'controllers/' + str(robotID) + '_prompt.txt'
-        with open(myprompt, 'w') as file:
-            os.makedirs(os.path.dirname(myprompt), exist_ok=True)
-            file.write(msg)
+        # with open(myprompt, 'w') as file:
+        #     os.makedirs(os.path.dirname(myprompt), exist_ok=True)
+        #     file.write(msg)
 
-        # Send the command to the LLM and retrieve the response
-        mycommand = "python3 controllers/openai-api.py " + robotID         
-        response = os.popen(mycommand).read()
+        # # Send the command to the LLM and retrieve the response
+        # mycommand = "python3 controllers/openai-api.py " + robotID         
+        # response = os.popen(mycommand).read()
+
+
+        
+
+        template = """Question: {question}
+
+        Answer: Let's think step by step."""
+
+        prompt = PromptTemplate.from_template(template)
+
+        llm = OpenAI()
+
+        llm_chain = prompt | llm
+
+        question = "What NFL team won the Super Bowl in the year Justin Beiber was born?"
+
+        response = llm_chain.invoke(question)
 
         # print("My Byzantine style is ", byzantine_style)
         robot.variables.set_attribute("response", response)

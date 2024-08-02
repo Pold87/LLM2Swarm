@@ -228,7 +228,10 @@ def controlstep():
     #average = average / 3
     # Only append the center sensor
     current_position = gps.getPosition()
-    estimate.append((newValues[1], current_position[0], current_position[1]))
+
+    # Read ground sensor one time per second
+    if ((counter + 1) % 10) == 0: 
+        estimate.append((newValues[1], current_position[0], current_position[1]))
         
     if ((counter + 1) % 500) == 0: 
 

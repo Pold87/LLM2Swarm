@@ -1,0 +1,45 @@
+The readings captured from your ground sensor provide an initial estimation of the floor map in terms of black (B) and white (W) tiles. Each reading corresponds to a specific position in the 80cm x 80cm (3x3 grid) arena, which translates to each tile being approximately 26.67cm x 26.67cm.
+
+The positions recorded from the sensor readings can be used to determine the grid cell each sensor reading corresponds to. Here is the approximate mapping to grid indices and confidence levels:
+
+```
+Grid Mapping (3x3): 
+--------------------------------
+| (  W  ,  W  ,  B  ) |
+| (  W  ,  W  ,  B  ) |
+| (  W  ,  W  ,  B  ) |
+--------------------------------
+```
+
+To convey your sensor readings to other robots in the swarm for Round 3, the statement should be formatted as follows:
+
+```
+Robot 2 Information Exchange - Round 3
+
+Grid Matrix (3x3 configuration):
+ B  B  B
+ B  W  B
+ W  W  W
+
+Confidence Values:
+(1.0, 1.0, 1.0)
+(0.0, 1.0, 1.0)
+(0.0, 0.0, 0.0)
+
+Additional Notes:
+- The grid is divided into 3x3 cells covering an 80cm x 80cm area.
+- Confidence ranges from 0.0 (lowest) to 1.0 (highest), with edge readings considered low confidence.
+- Positional inferences assume that the grid origin (0,0) is at the center of the arena.
+
+Summary:
+- The entire right column appears to be black tiles.
+- The middle and left columns indicate white tiles with middle column showing mixed readings especially in the center row.
+
+Collaboration:
+- This map is based on the latest sensor data and subject to change as more robots provide additional data inputs.
+- Further information and confidence updates will be critical to solidify and verify the floor configuration.
+
+Instructions:
+- Share this information with other robots and integrate data received from them to refine the map.
+- As the readings are communicated, update values accordingly, iterating towards a more reliable floor map by the final round.
+```

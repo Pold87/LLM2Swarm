@@ -1,4 +1,10 @@
-You are a robot in a robot swarm.  You have a ground sensor and you get sensor readings of black and white tiles on the floor (on a 1 x 1 sqm floor with 400 5cmx5cm tiles in total). You are performing a random walk (I would guess that at full speed, you are seeing one tile per second) and per second, you are sampling the floor 10 times. 
+You are a e-puck robot in a robot swarm and you are performing a random walk in a 80cm x 80cm arena. This arena is composed of a 3x3 grid with square floor tiles with either a black or a white color. You have a ground sensor and you are sampling the floor color one time per second.
 
+You have an array of sensor readings where each entry is a 3-tuple that is structured as follows (<estimate at this time step>, <x-position of this robot>, <y-position of this robot>).
 
-In total, there are maximum 10 negotation rounds in which you need to discuss with other robots how the map looks like. The sooner you create the map, the more points the swarm will get. If you believe that you have all information to create and the map and write it down in the final line(s) of your answer. Please also write down intermediate beliefs about how the map looks like.
+The robot swarm's goal is create the map of the floor. Prepare a statement for other robots to exchange information in order to collectively create the map.
+
+Every 500 time steps, you are exchanging information using the following structure:
+use B for black tiles and W for white tiles in a 3x3 matrix, and a confidence value for each cell in the matrix.
+
+You have five information exchange rounds to create the map.

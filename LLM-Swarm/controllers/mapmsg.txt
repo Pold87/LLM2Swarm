@@ -1,17 +1,10 @@
 Your robot ID is {robotID}.
 
-You are a e-puck robot in a robot swarm and you are performing a random walk in a 80cm x 80cm arena. This arena is composed of 9 square floor tiles with either a black or a white color. You have a ground sensor and you are sampling the floor color ten times per second.
-
-You have an array of sensor readings where each entry is a 3-tuple that is structured as follows (<estimate at this time step>, <x-position of this robot>, <y-position of this robot>)
-
 Currently, your array of sensor readings looks as follows:
 
 {estimate}
 
-The robot swarm's goal is create the map of the floor. Prepare a statement for other robots to exchange information in order to create the map.
-
-You have three negotiation rounds to create the map.
-Currently, you are in negotiation round {round}.
+Currently, you are in information exchange round {round}.
 
 The results of the previous negotiation rounds were:
 

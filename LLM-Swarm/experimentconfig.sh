@@ -26,8 +26,8 @@ export SWARMNAME=ethereum
 export CONTAINERBASE=${SWARMNAME}_eth
 
 # [ARGOS]
-export NUMROBOTS=5
-export CON1="${EXPERIMENTFOLDER}/controllers/main_map.py"
+export NUMROBOTS=3
+export CON1="${EXPERIMENTFOLDER}/controllers/main_ood.py"
 
 
 export RABRANGE="0.3"

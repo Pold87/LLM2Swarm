@@ -135,9 +135,9 @@ def init():
     
     # /* Init Random-Walk, __walking process */
     robot.log.info('Initialising random-walk...')
-    rw = RandomWalk(robot, cp['scout_speed'])
+    #rw = RandomWalk(robot, cp['scout_speed'])
 
-    #rw = CustomMovement(robot, cp['scout_speed'])
+    rw = CustomMovement(robot, cp['scout_speed'])
 
     # # /* Init Navigation, __navigate process */
     # robot.log.info('Initialising navigation...')

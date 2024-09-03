@@ -13,8 +13,7 @@ sys.path += [os.environ['MAINFOLDER'], \
              os.environ['EXPERIMENTFOLDER']
             ]
 
-#from controllers.movement_clean import RandomWalk
-from controllers.movement_generated import CustomMovement
+from controllers.movement import RandomWalk
 from controllers.movement import GPS
 from controllers.groundsensor import ResourceVirtualSensor, Resource, GroundSensor
 from controllers.erandb import ERANDB
@@ -197,7 +196,7 @@ myround = 0
 def controlstep():
     global counter, last, pos, clocks, counters, startFlag, startTime, notdonemod, odo2, checkt, byzantine, byzantine_style, log_folder
     global estimate, totalWhite, totalBlack, robotID
-    global myround
+    global myround, rw
 
     robotID = str(int(robot.variables.get_id()[2:])+1)
 
@@ -236,8 +235,9 @@ def controlstep():
 
     # Read ground sensor one time per second
     if ((counter + 1) % 10) == 0: 
-        estimate.append((newValues[1], current_position[0], current_position[1]))
-        
+        estimate.append((newValues[1], round(current_position[0], 2), round(current_position[1], 2)))
+
+
     if ((counter + 1) % 500) == 0: 
 
         myround += 1
@@ -258,20 +258,22 @@ def controlstep():
                         aggregated_content += ""
 
 
+        # Convert 1.0 to "crops", 0.0 to "weeds", and anything else to "injured person"
+        converted_estimate = [
+            ("crops" if entry[0] == 1.0 else "weeds" if entry[0] == 0.0 else "injured person", entry[1], entry[2])
+            for entry in estimate]
+
         # Define the placeholders and their replacements
         placeholders = {
             '{robotID}': str(robotID),
-            '{estimate}': ', '.join(str(x) for x in estimate),
+            '{estimate}': ', '.join(str(x) for x in converted_estimate),
             '{results}': aggregated_content,
             '{round}': str(myround)}
 
-        print(totalWhite, totalBlack, estimate)
+        print(totalWhite, totalBlack, converted_estimate)
 
 
-        if byzantine_style == 1: # Read the template for Byzantines
-            mypath = 'controllers/byzmsg.txt'
-        else: # Read the template for non-Byzantines
-            mypath = 'controllers/mapmsg.txt'
+        mypath = 'controllers/oodmsg.txt'
 
 
         # Read the file contents
@@ -292,38 +294,10 @@ def controlstep():
         mycommand = "python3 controllers/openai-api.py " + robotID         
         response = os.popen(mycommand).read()
 
-
-        
-
-        # template = """Question: {question}
-
-        # Answer: Let's think step by step."""
-
-        # prompt = PromptTemplate.from_template(template)
-
-        # llm = OpenAI()
-
-        # llm_chain = prompt | llm
-
-        # question = "What NFL team won the Super Bowl in the year Justin Beiber was born?"
-
-        # response = llm_chain.invoke(question)
-
-        # print("My Byzantine style is ", byzantine_style)
+        #response = ""
         robot.variables.set_attribute("response", response)
 
-        # Display the response using tkinter (can give errors like:
-        # "Error: invalid literal for int() with base 10: 'twelfth'"
-        # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        #     s.connect(('localhost', 5000))
-        #     myid = int(robotID) - 1
-            
-        #     message = str(myid) + " " + str(response) + "\n"
-        #     #message = f"{myid} {response}\n"
-
-        #     s.sendall(message.encode())
-
-            
+        
         print(response)
 
         # Save the LLM response of this robot in a file

@@ -1,10 +1,10 @@
 Your robot ID is {robotID}.
 
-Currently, your array of sensor readings looks as follows:
+Your current sensor readings are:
 
 {estimate}
 
-Currently, you are in information exchange round {round}.
+You are in information exchange round {round}.
 
 The results of the previous negotiation rounds were:
 

@@ -33,7 +33,7 @@
       <!-- No required configuration -->
       
       <!-- Optionally, you can pass a script as a controller parameter: -->
-      <params script="/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/main_map.py"
+      <params script="/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/main_ood.py"
       timeRate="1" />
     </python_controller>
 
@@ -72,7 +72,7 @@
   <!-- *********************** -->
   <arena size="0.8, 0.8, 1.5" center="0,0,0">
 
- <floor id="f" source="image" path="/home/volker/software/chatgpt-swarm/LLM-Swarm/experiments/floors/3.png" />
+ <floor id="f" source="image" path="/home/volker/software/chatgpt-swarm/LLM-Swarm/experiments/floors/3_person.png" />
 
     <box id="wall_north" size="0.8,0.06,0.1" movable="false">
       <body position="0,0.4,0" orientation="0,0,0" />
@@ -90,7 +90,7 @@
     <distribute>
       <position method="uniform" min="-0.35,-0.35,0" max="0.35,0.35,0" /> 
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" /> 
-      <entity quantity="5" max_trials="15"> 
+      <entity quantity="3" max_trials="15"> 
         <e-puck id="bc" >
           <controller config="collab" />
         </e-puck>

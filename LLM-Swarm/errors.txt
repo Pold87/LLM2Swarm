@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [1;31m[FATAL] Error initializing controllers
 [FATAL] Can't load library "/home/vstrobel/software/chatgpt-swarm/argos-python/build/libpy_controller_interface.so" after trying the following: 
 
@@ -8,3 +9,52 @@
   /home/vstrobel/software/chatgpt-swarm/argos-python/build/libpy_controller_interface.so.so: /home/vstrobel/software/chatgpt-swarm/argos-python/build/libpy_controller_interface.so.so: cannot open shared object file: No such file or directory
 [0m
 [0m
+=======
+Traceback (most recent call last):
+  File "/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/main_generated.py", line 17, in <module>
+    from controllers.movement_generated import CustomMovement
+ImportError: cannot import name 'CustomMovement' from 'controllers.movement_generated' (/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/movement_generated.py)
+AttributeError: module '__main__' has no attribute 'init'
+Traceback (most recent call last):
+  File "/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/main_generated.py", line 17, in <module>
+    from controllers.movement_generated import CustomMovement
+ImportError: cannot import name 'CustomMovement' from 'controllers.movement_generated' (/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/movement_generated.py)
+AttributeError: module '__main__' has no attribute 'init'
+AttributeError: module '__main__' has no attribute 'destroy'
+Traceback (most recent call last):
+  File "/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/main_generated.py", line 17, in <module>
+    from controllers.movement_generated import CustomMovement
+ImportError: cannot import name 'CustomMovement' from 'controllers.movement_generated' (/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/movement_generated.py)
+AttributeError: module '__main__' has no attribute 'init'
+Traceback (most recent call last):
+  File "/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/main_generated.py", line 17, in <module>
+    from controllers.movement_generated import CustomMovement
+ImportError: cannot import name 'CustomMovement' from 'controllers.movement_generated' (/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/movement_generated.py)
+AttributeError: module '__main__' has no attribute 'init'
+AttributeError: module '__main__' has no attribute 'destroy'
+Traceback (most recent call last):
+  File "/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/main_generated.py", line 17, in <module>
+    from controllers.movement_generated import CustomMovement
+ImportError: cannot import name 'CustomMovement' from 'controllers.movement_generated' (/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/movement_generated.py)
+AttributeError: module '__main__' has no attribute 'init'
+Traceback (most recent call last):
+  File "/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/main_generated.py", line 17, in <module>
+    from controllers.movement_generated import CustomMovement
+ImportError: cannot import name 'CustomMovement' from 'controllers.movement_generated' (/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/movement_generated.py)
+AttributeError: module '__main__' has no attribute 'init'
+AttributeError: module '__main__' has no attribute 'destroy'
+Traceback (most recent call last):
+  File "/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/main_generated.py", line 17, in <module>
+    from controllers.movement_generated import CustomMovement
+ImportError: cannot import name 'CustomMovement' from 'controllers.movement_generated' (/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/movement_generated.py)
+AttributeError: module '__main__' has no attribute 'init'
+Traceback (most recent call last):
+  File "/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/main_generated.py", line 17, in <module>
+    from controllers.movement_generated import CustomMovement
+ImportError: cannot import name 'CustomMovement' from 'controllers.movement_generated' (/home/volker/software/chatgpt-swarm/LLM-Swarm/controllers/movement_generated.py)
+AttributeError: module '__main__' has no attribute 'init'
+Traceback (most recent call last):
+  File "/home/volker/software/chatgpt-swarm/LLM-Swarm/loop_functions/loop_function.py", line 37, in init
+    robot.id = int(robot.variables.get_attribute("id"))
+ValueError: invalid literal for int() with base 10: ''
+>>>>>>> af4d4cdcd08ab804615ea418757c9748f914c116

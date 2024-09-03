@@ -1,0 +1,11 @@
+Your robot ID is {robotID}.
+
+So far, your array of weeds and crops looks as follows:
+
+{estimate}
+
+You are in information exchange round {round}.
+
+The results of the previous discussion rounds were:
+
+{results}

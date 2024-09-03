@@ -22,9 +22,11 @@ def main():
 
     response = client.chat.completions.create(
         model="gpt-4o",
+        temperature=0.35,
         messages=[
             {"role": "system", "content": systemcontent},
-            {"role": "user", "content": usercontent}
+            {"role": "user", "content": usercontent},
+
         ]
     )
     

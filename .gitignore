@@ -2,3 +2,6 @@
 *.pyc
 *.csv
 *~
+.vscode
+LLM-Swarm/errors.txt
+LLM-Swarm/controllers/prompts/

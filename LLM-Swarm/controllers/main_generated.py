@@ -169,10 +169,11 @@ def init():
     submodules = [erb,gs]
 
 
-    llm_output = 'controllers/outputs/' + str(myround) + "/" + str(robotID) + '.txt'
-    if os.path.exists('controllers/outputs/'):
-            shutil.rmtree('controllers/outputs/')
-            os.makedirs('controllers/outputs/')
+    # Initialize output directory
+    output_base = os.path.join('controllers', 'outputs')
+    llm_output = os.path.join(output_base, str(myround), str(robotID) + '.txt')
+    if os.path.exists(output_base):
+        shutil.rmtree(output_base)
 
     start_output = "This is the first negotiation round, so there are no previous rounds."
     print("writing to ", llm_output)

@@ -4,29 +4,25 @@ import subprocess
 from openai import OpenAI
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python script.py '<usercontent>'")
+    if len(sys.argv) != 3:
+        print("Usage: python openai-api.py <systemcontentpath> <usercontentpath>")
         sys.exit(1)
 
-    robotID = sys.argv[1]
-
-    with open('controllers/'+ str(robotID) + '_prompt.txt', 'r') as file:
-        usercontent = file.read()
-
-    with open('controllers/system_content.txt', 'r') as file:
+    with open(sys.argv[1], 'r') as file:
         systemcontent = file.read()
 
-        
+    with open(sys.argv[2], 'r') as file:
+        usercontent = file.read()
+
     # Initialize Together client
     client = OpenAI()
 
     response = client.chat.completions.create(
         model="gpt-4o",
-        temperature=0.35,
+        temperature=0.55,
         messages=[
             {"role": "system", "content": systemcontent},
-            {"role": "user", "content": usercontent},
-
+            {"role": "user", "content": usercontent}
         ]
     )
     

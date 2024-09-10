@@ -373,10 +373,10 @@ class Navigate(object):
 
 
     def stop(self):
-        robot.epuck_wheels.set_speed(0,0)
+        self.robot.epuck_wheels.set_speed(0,0)
 
     def set_wheels(self, right, left):
-        robot.epuck_wheels.set_speed(right,left)
+        self.robot.epuck_wheels.set_speed(right,left)
 
     def get_distance_to(self, to):
 

@@ -44,8 +44,10 @@ global clocks, counters, logs, txs
 clocks, counters, logs, txs = dict(), dict(), dict(), dict()
 
 
-global estimate, totalWhite, totalBlack, byzantine, byzantine_style, log_folder
+global estimate, totalWhite, totalBlack, byzantine, byzantine_style, log_folder, target
 TPS = int(lp['environ']['TPS'])
+
+target = [0.83, -1.05]
 
 estimate = []
 totalWhite = 0
@@ -69,7 +71,7 @@ clocks['voting'] = Timer(30)
 
 
 def init():
-    global clocks,counters, logs, submodules, me, rw, nav, gps, rb, w3, fsm, rs, erb, rgb, gs, byzantine_style, log_folder, estimate
+    global clocks,counters, logs, submodules, me, rw, nav, gps, rb, w3, fsm, rs, erb, rgb, gs, byzantine_style, log_folder, estimate, target
     robotID = str(int(robot.variables.get_id()[2:])+1)
     robot.variables.set_attribute("id", str(robotID))
     robot.variables.set_attribute("byzantine_style", str(0))
@@ -127,7 +129,8 @@ def init():
     rgb = RGBLEDs(robot)
 
     # /* Init Finite-State-Machine */
-    fsm = FiniteStateMachine(robot, start = States.IDLE)
+    # fsm = FiniteStateMachine(robot, start = States.RANDOMWALK)
+    fsm = FiniteStateMachine(robot, start = States.NAVIGATE)
 
     # /* Init Ground sensor */
     robot.log.info('Initialising Ground sensor...')
@@ -182,8 +185,10 @@ def extract_info(response_for_human):
 
     return activity, coordinates
 
+
+
 def controlstep():
-    global counter, last, pos, clocks, counters, startFlag, startTime, odo2, checkt, byzantine, byzantine_style, log_folder
+    global counter, last, pos, clocks, counters, startFlag, startTime, odo2, checkt, byzantine, byzantine_style, log_folder, target
     global estimate, totalWhite, totalBlack, robotID
     global myround, rw
 
@@ -211,8 +216,28 @@ def controlstep():
 
     byzantine_style = int(robot.variables.get_attribute("byzantine_style"))
 
-    for module in [erb, rs, rw, gs]:
+
+    for module in [erb, rs, gs]:
         module.step()
+
+    # State machine for movement
+    if fsm.query(States.IDLE):
+        nav.stop()
+
+    elif fsm.query(States.RANDOMWALK):
+        rw.step()
+
+    elif fsm.query(States.NAVIGATE):
+        # Navigate to the target
+        
+        print("distance", nav.get_distance_to(target))
+        if nav.get_distance_to(target) < 0.2:           
+            nav.avoid(move = True)
+            fsm.setState(States.IDLE)
+
+        else:
+            nav.navigate_with_obstacle_avoidance(target)
+
             
     newValues = gs.getNew()
     #average = 0
@@ -225,6 +250,9 @@ def controlstep():
     # Read ground sensor one time per second
     sensor_rate = 10
 
+
+    if ((counter + 1) % 1000) == 0: 
+        print(estimate)
 
     if ((counter + 1) % sensor_rate) == 0: 
         estimate.append((newValues[1], round(current_position[0], 2), round(current_position[1], 2)))
@@ -357,15 +385,15 @@ def controlstep():
 
 
         # Check if the human prompt contained an INSTRUCTION
-        activity, coordinates = extract_info(response_for_human)
+        activity, target = extract_info(response_for_human)
 
         print(activity)
-        print(coordinates)
+        print(target)
 
         if activity == "TARGETED NAVIGATION":
             print("STOPPING RANDOM WALK STARTING TARGETED NAVIGATION")
             rw.stop()
-            nav.navigate(coordinates)
+            fsm.setState(States.NAVIGATE)
 
 
     # Perform clock steps

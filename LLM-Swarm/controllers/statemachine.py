@@ -19,15 +19,10 @@ class Recruit(Enum):
     DROP   = 9
 
 class States(Enum):
-    IDLE   = 1
-    PLAN   = 2
-    ASSIGN = 3
-    FORAGE = 4
-    DROP   = 5 
-    JOIN   = 6
-    LEAVE  = 7
-    HOMING = 8
-    TRANSACT = 9
+    IDLE = 1
+    RANDOMWALK = 2
+    NAVIGATE = 3
+    
 
 stateList = list(Idle)+list(Scout)+list(Recruit)
 

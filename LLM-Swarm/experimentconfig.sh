@@ -14,7 +14,7 @@ export SWARMNAME=ethereum
 export CONTAINERBASE=${SWARMNAME}_eth
 
 # [ARGOS]
-export FLOOR="3.png"
+export FLOOR="3_person.png"
 export NUMROBOTS=3
 export CON1="${EXPERIMENTFOLDER}/controllers/main.py"
 
@@ -36,7 +36,7 @@ export BYZANTINESWARMSTYLE=1
 export SYSTEMMESSAGETEMPLATE='system_content.txt'
 export USERMESSAGETEMPLATE='oodmsg.txt'
 export DISCUSSIONPERIOD='inf'
-export HUMANINTERACTIONPERIOD='100'
+export HUMANINTERACTIONPERIOD='inf'
 
 # For 'Instruct' human-swarm interaction
 export SYSTEMHUMAN='system_human_instruct.txt'

@@ -1,0 +1,7 @@
+Your robot ID is {robotID}.
+
+You are in information exchange round {round}.
+
+The results of the previous discussion rounds were:
+
+{results}

@@ -145,7 +145,7 @@ def init():
     prompts_base = os.path.join('controllers', 'prompts')
     if os.path.exists(prompts_base):
         shutil.rmtree(prompts_base)        
-    os.makedirs(os.path.dirname(prompts_base), exist_ok=True)
+    os.makedirs(prompts_base, exist_ok=True)
 
     start_output = "This is the first negotiation round, so there are no previous rounds."
     print("writing to ", llm_output)

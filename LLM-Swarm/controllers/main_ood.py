@@ -13,7 +13,7 @@ sys.path += [os.environ['MAINFOLDER'], \
              os.environ['EXPERIMENTFOLDER']
             ]
 
-from controllers.movement import RandomWalk
+from controllers.movement import RandomWalk, Navigate
 from controllers.movement import GPS
 from controllers.groundsensor import ResourceVirtualSensor, Resource, GroundSensor
 from controllers.erandb import ERANDB
@@ -42,6 +42,7 @@ global robot
 
 import subprocess
 import shutil
+import re
 
 global startFlag
 global notdonemod
@@ -140,7 +141,7 @@ def init():
 
     # # /* Init Navigation, __navigate process */
     # robot.log.info('Initialising navigation...')
-    # nav = Navigate(robot, cp['recruit_speed'])
+    nav = Navigate(robot, cp['scout_speed'])
     
     # # /* Init odometry sensor */
     # robot.log.info('Initialising Odo...')
@@ -193,6 +194,21 @@ global checkt
 global myround
 myround = 0
 
+
+def extract_info(response_for_human):
+    # Extract the activity after "ACTIVITY:"
+    activity_match = re.search(r'ACTIVITY:\s*([A-Z\s]+)\n', response_for_human)
+    activity = activity_match.group(1).strip() if activity_match else None
+
+    # Extract the coordinates after "TARGET:"
+    target_match = re.search(r'TARGET:\s*\(([\d\.\-]+),\s*([\d\.\-]+)\)', response_for_human)
+    if target_match:
+        coordinates = (float(target_match.group(1)), float(target_match.group(2)))
+    else:
+        coordinates = None
+
+    return activity, coordinates
+
 def controlstep():
     global counter, last, pos, clocks, counters, startFlag, startTime, notdonemod, odo2, checkt, byzantine, byzantine_style, log_folder
     global estimate, totalWhite, totalBlack, robotID
@@ -238,7 +254,7 @@ def controlstep():
         estimate.append((newValues[1], round(current_position[0], 2), round(current_position[1], 2)))
 
 
-    if ((counter + 1) % 500) == 0: 
+    if ((counter + 1) % 1000) == 0: 
 
         myround += 1
 
@@ -254,14 +270,20 @@ def controlstep():
                         llm_output = file.read()
 
                         # aggregated_content += f"Robot {i}\n\n{llm_output}\n\n"
-                        #aggregated_content += "Robot " + str(i) + "\n\n" + llm_output + "\n\n"
-                        aggregated_content += ""
+                        aggregated_content += "### Robot " + str(i) + "###\n\n" + llm_output + "\n\n ### End information Robot " + str(i) + '\n\n'
+                        #aggregated_content += ""
 
 
         # Convert 1.0 to "crops", 0.0 to "weeds", and anything else to "injured person"
-        converted_estimate = [
-            ("crops" if entry[0] == 1.0 else "weeds" if entry[0] == 0.0 else "injured person", entry[1], entry[2])
-            for entry in estimate]
+        if byzantine_style == 0:
+            converted_estimate = [
+                ("crops" if entry[0] == 1.0 else "weeds" if entry[0] == 0.0 else "injured person", entry[1], entry[2])
+                for entry in estimate]
+        else: 
+            converted_estimate = [
+                ("weeds", entry[1], entry[2])
+                for entry in estimate]
+
 
         # Define the placeholders and their replacements
         placeholders = {
@@ -291,22 +313,76 @@ def controlstep():
             file.write(msg)
 
         # Send the command to the LLM and retrieve the response
-        mycommand = "python3 controllers/openai-api.py " + robotID         
-        response = os.popen(mycommand).read()
+        #mycommand = "python3 controllers/openai-api.py " + robotID         
+        #response = os.popen(mycommand).read()
 
         #response = ""
-        robot.variables.set_attribute("response", response)
+        #robot.variables.set_attribute("response", response)
 
         
-        print(response)
+        #print(response)
 
-        # Save the LLM response of this robot in a file
-        filepath = "controllers/outputs/" + str(myround) + "/" + robotID + ".txt" 
-        os.makedirs(os.path.dirname(filepath), exist_ok=True)
-        with open(filepath, 'a') as file:
-            file.write(response)
+        # # Save the LLM response of this robot in a file
+        # filepath = "controllers/outputs/" + str(myround) + "/" + robotID + ".txt" 
+        # os.makedirs(os.path.dirname(filepath), exist_ok=True)
+        # with open(filepath, 'a') as file:
+        #     file.write(response)
 
-        estimate = []
+        # estimate = []
+
+
+        # Human-swarm interaction
+        if ((counter + 1) % 1000) == 0:
+
+            # mypath = 'controllers/human_instruct_template.txt'
+
+            # with open('controllers/system_content.txt', 'r') as file:
+            #     task = file.read()            
+
+            # # Define the placeholders and their replacements
+            # placeholders = {
+            #     '{robotID}': str(robotID),
+            #     '{results}': aggregated_content,
+            #     '{round}': str(myround),
+            #     '{task}': task
+            #     }
+
+
+            # # Read the file contents
+            # with open(mypath, 'r') as file:
+            #     msg = file.read()
+            
+            # # Replace the placeholders in the prompt template
+            # for placeholder, replacement in placeholders.items():
+            #     msg = msg.replace(placeholder, replacement)
+
+            # # Create the prompt for this robot
+            # myprompt = 'controllers/' + str(robotID) + '_prompt_for_human.txt'
+            # with open(myprompt, 'w') as file:
+            #     os.makedirs(os.path.dirname(myprompt), exist_ok=True)
+            #     file.write(msg)
+
+            # Send the command to the LLM and retrieve the response
+            mycommand = "python3 controllers/openai-api-human.py " + robotID         
+            response_for_human = os.popen(mycommand).read()
+            
+            print(response_for_human)
+
+            activity, coordinates = extract_info(response_for_human)
+
+            print(activity)
+            print(coordinates)
+
+            if activity == "TARGETED NAVIGATION":
+                print("STOPPING RANDOM WALK STARTING TARGETED NAVIGATION")
+                rw.stop()
+                nav.navigate(coordinates)
+
+            # # Save the LLM response of this robot in a file
+            # filepath = "controllers/outputs/" + str(myround) + "/" + robotID + "for_human.txt" 
+            # os.makedirs(os.path.dirname(filepath), exist_ok=True)
+            # with open(filepath, 'a') as file:
+            #     file.write(response)
 
 
     # Perform clock steps

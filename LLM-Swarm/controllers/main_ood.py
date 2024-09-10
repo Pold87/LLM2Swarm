@@ -272,7 +272,7 @@ def controlstep():
         #print(totalWhite, totalBlack, converted_estimate)
 
         template_base = os.path.join('controllers', 'prompt_templates')
-        my_system_prompt = os.path.join(lp['environ']['SYSTEMMESSAGETEMPLATE'])
+        my_system_prompt = os.path.join(template_base, lp['environ']['SYSTEMMESSAGETEMPLATE'])
 
         user_message_template = os.path.join(template_base, lp['environ']['USERMESSAGETEMPLATE'])
 

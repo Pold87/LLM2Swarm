@@ -13,7 +13,8 @@ sys.path += [os.environ['MAINFOLDER'], \
              os.environ['EXPERIMENTFOLDER']
             ]
 
-from controllers.movement import RandomWalk, Navigate, Odometry, OdoCompass, GPS
+from controllers.movement import RandomWalk, Navigate
+from controllers.movement import GPS
 from controllers.groundsensor import ResourceVirtualSensor, Resource, GroundSensor
 from controllers.erandb import ERANDB
 from controllers.rgbleds import RGBLEDs
@@ -24,12 +25,6 @@ from controllers.statemachine import *
 from controllers.control_params import params as cp
 from loop_functions.loop_params import params as lp
 
-from toychain.src.Node import Node
-from toychain.src.Block import Block, State
-from toychain.src.utils import gen_enode
-
-from toychain.src.consensus.ProofOfAuth import ProofOfAuthority
-from toychain.src.Transaction import Transaction
 
 # /* Global Variables */
 #######################################################################
@@ -37,10 +32,9 @@ global robot
 
 import subprocess
 import shutil
+import re
 
 global startFlag
-global notdonemod
-notdonemod=False
 startFlag = False
 
 global txList, tripList, submodules
@@ -53,11 +47,10 @@ clocks, counters, logs, txs = dict(), dict(), dict(), dict()
 global estimate, totalWhite, totalBlack, byzantine, byzantine_style, log_folder
 TPS = int(lp['environ']['TPS'])
 
-estimate =0
-totalWhite =0
-totalBlack=0
+estimate = []
+totalWhite = 0
+totalBlack= 0
 
-byzantine = 0
 # /* Logging Levels for Console and File */
 #######################################################################
 import logging
@@ -73,28 +66,16 @@ clocks['ubi'] = Timer(100)
 clocks['block']   = Timer(120)
 clocks['newround'] = Timer(20)
 clocks['voting'] = Timer(30)
-global geth_peer_count
-
-GENESIS = Block(0, 0000, [], [gen_enode(i+1) for i in range(int(lp['environ']['NUMROBOTS']))], 0, 0, 0, nonce = 1, state = State())
-
 
 
 def init():
-    global clocks,counters, logs, submodules, me, rw, nav, odo, gps, rb, w3, fsm, rs, erb, rgb,odo2,gs, byzantine_style, log_folder
+    global clocks,counters, logs, submodules, me, rw, nav, gps, rb, w3, fsm, rs, erb, rgb, gs, byzantine_style, log_folder, estimate
     robotID = str(int(robot.variables.get_id()[2:])+1)
-    robotIP = '127.0.0.1'
     robot.variables.set_attribute("id", str(robotID))
     robot.variables.set_attribute("byzantine_style", str(0))
     robot.variables.set_attribute("consensus_reached",str("false"))
-    robot.variables.set_attribute("scresources", "[]")
-    robot.variables.set_attribute("foraging", "")
-    robot.variables.set_attribute("state", "")
-    robot.variables.set_attribute("quantity", "0")
-    robot.variables.set_attribute("block", "")
-    robot.variables.set_attribute("block", "0")
-    robot.variables.set_attribute("hash", str(hash("genesis")))
-    robot.variables.set_attribute("state_hash", str(hash("genesis")))
     robot.variables.set_attribute("response", "")
+    robot.variables.set_attribute("aggregated_content", "")
 
     # /* Initialize Console Logging*/
     #######################################################################
@@ -104,20 +85,13 @@ def init():
     name =  'monitor.log'
     os.makedirs(os.path.dirname(log_folder+name), exist_ok=True) 
     logging.basicConfig(filename=log_folder+name, filemode='w+', format='[{} %(levelname)s %(name)s] %(message)s'.format(robotID))
-    logging.getLogger('sc').setLevel(10)
-    logging.getLogger('w3').setLevel(10)
-    logging.getLogger('poa').setLevel(10)
+   
     robot.log = logging.getLogger()
     robot.log.setLevel(0)
 
     # /* Initialize submodules */
     #######################################################################
-    # # /* Init web3.py */
-    robot.log.info('Initialising Python Geth Console...')
-    w3 = Node(robotID, robotIP, 1233 + int(robotID), ProofOfAuthority(GENESIS))
 
-    # /* Init an instance of peer for this Pi-Puck */
-    me = Peer(robotID, robotIP, w3.enode, w3.key)
 
     # /* Init E-RANDB __listening process and transmit function
     robot.log.info('Initialising RandB board...')
@@ -131,20 +105,22 @@ def init():
     robot.log.info('Initialising random-walk...')
     rw = RandomWalk(robot, cp['scout_speed'])
 
-    # /* Init Navigation, __navigate process */
-    robot.log.info('Initialising navigation...')
-    nav = Navigate(robot, cp['recruit_speed'])
-    
-    # /* Init odometry sensor */
-    robot.log.info('Initialising Odo...')
-    odo2 = Odometry(robot)
-    
-    # /* Init odometry sensor */
-    robot.log.info('Initialising odometry...')
-    odo = OdoCompass(robot)
+    #rw = CustomMovement(robot, cp['scout_speed'])
 
-    # /* Init GPS sensor */
-    robot.log.info('Initialising gps...')
+    # # /* Init Navigation, __navigate process */
+    # robot.log.info('Initialising navigation...')
+    nav = Navigate(robot, cp['scout_speed'])
+    
+    # # /* Init odometry sensor */
+    # robot.log.info('Initialising Odo...')
+    # odo2 = Odometry(robot)
+    
+    # # /* Init odometry sensor */
+    # robot.log.info('Initialising odometry...')
+    # odo = OdoCompass(robot)
+
+    # # /* Init GPS sensor */
+    # robot.log.info('Initialising gps...')
     gps = GPS(robot)
 
     # /* Init LEDs */
@@ -160,11 +136,17 @@ def init():
     # List of submodules --> iterate .start() to start all
     submodules = [erb,gs]
 
+    # Initialize output directory
+    output_base = os.path.join('controllers', 'outputs')
+    llm_output = os.path.join(output_base, str(myround), str(robotID) + '.txt')
+    if os.path.exists(output_base):
+        shutil.rmtree(output_base)
 
-    llm_output = 'controllers/outputs/' + str(myround) + "/" + str(robotID) + '.txt'
-    if os.path.exists('controllers/outputs/'):
-            shutil.rmtree('controllers/outputs/')
-            os.makedirs('controllers/outputs/')
+    # Initialize prompt directory
+    prompts_base = os.path.join('controllers', 'prompts')
+    if os.path.exists(prompts_base):
+        shutil.rmtree(prompts_base)        
+    os.makedirs(prompts_base, exist_ok=True)
 
     start_output = "This is the first negotiation round, so there are no previous rounds."
     print("writing to ", llm_output)
@@ -172,8 +154,9 @@ def init():
     with open(llm_output, 'w') as file:
         file.write(start_output)
 
-
+    estimate = []
         
+
 global pos
 pos = [0,0]
 global last
@@ -184,10 +167,25 @@ global checkt
 global myround
 myround = 0
 
+# Extract intent for human-swarm interaction
+def extract_info(response_for_human):
+    # Extract the activity after "ACTIVITY:"
+    activity_match = re.search(r'ACTIVITY:\s*([A-Z\s]+)\n', response_for_human)
+    activity = activity_match.group(1).strip() if activity_match else None
+
+    # Extract the coordinates after "TARGET:"
+    target_match = re.search(r'TARGET:\s*\(([\d\.\-]+),\s*([\d\.\-]+)\)', response_for_human)
+    if target_match:
+        coordinates = (float(target_match.group(1)), float(target_match.group(2)))
+    else:
+        coordinates = None
+
+    return activity, coordinates
+
 def controlstep():
-    global counter, last, pos, clocks, counters, startFlag, startTime, notdonemod, odo2, checkt, byzantine, byzantine_style, log_folder
+    global counter, last, pos, clocks, counters, startFlag, startTime, odo2, checkt, byzantine, byzantine_style, log_folder
     global estimate, totalWhite, totalBlack, robotID
-    global myround
+    global myround, rw
 
     robotID = str(int(robot.variables.get_id()[2:])+1)
 
@@ -213,56 +211,76 @@ def controlstep():
 
     byzantine_style = int(robot.variables.get_attribute("byzantine_style"))
 
-    for module in [erb, rs, rw, gs,odo]:
+    for module in [erb, rs, rw, gs]:
         module.step()
             
     newValues = gs.getNew()
-    for value in newValues:
-        if value != 0:
-            totalWhite +=1
-        else:
-            totalBlack+=1
-    estimate = (0.5+totalWhite)/(totalBlack+totalWhite+1)
-   
-    if ((counter + 1) % 200) == 0: 
+    #average = 0
+    #for value in newValues:
+    #    average += value
+    #average = average / 3
+    # Only append the center sensor
+    current_position = gps.getPosition()
+
+    # Read ground sensor one time per second
+    sensor_rate = 10
+
+
+    if ((counter + 1) % sensor_rate) == 0: 
+        estimate.append((newValues[1], round(current_position[0], 2), round(current_position[1], 2)))
+
+
+    # Robot-to-robot interaction
+    discussion_period = float(lp['environ']['DISCUSSIONPERIOD'])
+    if ((counter + 1) % discussion_period) == 0: 
 
         myround += 1
 
-        # Read previous outputs (if it is not the first round)
+        # Read previous outputs (if it is not the first discussion round)
         
         aggregated_content = ""
 
         if myround > 1:
             for m in range(myround - 1):
-                for i in range(1,4): # TODO Change to number of robots
+                for i in range(1, int(lp['environ']['NUMROBOTS'])): 
                     filepath = 'controllers/outputs/' + str(myround - 1) + "/" + str(i) + '.txt'
                     with open(filepath, 'r') as file:
                         llm_output = file.read()
 
-                        aggregated_content += f"Robot {i}\n\n{llm_output}\n\n"
+                        # aggregated_content += f"Robot {i}\n\n{llm_output}\n\n"
+                        aggregated_content += "### Robot " + str(i) + "###\n\n" + llm_output + "\n\n ### End information Robot " + str(i) + '\n\n'
+                        #aggregated_content += ""
+
+        robot.variables.set_attribute("aggregated_content", aggregated_content)
+
+
+        # Convert 1.0 to "crops", 0.0 to "weeds", and anything else to "injured person"
+        if byzantine_style == 0:
+            converted_estimate = [
+                ("crops" if entry[0] == 1.0 else "weeds" if entry[0] == 0.0 else "injured person", entry[1], entry[2])
+                for entry in estimate]
+        else: 
+            converted_estimate = [
+                ("weeds", entry[1], entry[2])
+                for entry in estimate]
 
 
         # Define the placeholders and their replacements
         placeholders = {
             '{robotID}': str(robotID),
-            '{totalWhite}': str(totalWhite),
-            '{totalBlack}': str(totalBlack),
-            '{estimateWhite}': str(100 * estimate),
-            '{estimateBlack}': str(100 * (1 - estimate)),
+            '{estimate}': ', '.join(str(x) for x in converted_estimate),
             '{results}': aggregated_content,
             '{round}': str(myround)}
 
-        print(totalWhite, totalBlack, estimate)
+        #print(totalWhite, totalBlack, converted_estimate)
 
+        template_base = os.path.join('controllers', 'prompt_templates')
+        my_system_prompt = os.path.join(template_base, lp['environ']['SYSTEMMESSAGETEMPLATE'])
 
-        if byzantine_style == 1: # Read the template for Byzantines
-            mypath = 'controllers/byzmsg.txt'
-        else: # Read the template for non-Byzantines
-            mypath = 'controllers/nonbyzmsg.txt'
-
+        user_message_template = os.path.join(template_base, lp['environ']['USERMESSAGETEMPLATE'])
 
         # Read the file contents
-        with open(mypath, 'r') as file:
+        with open(user_message_template, 'r') as file:
             msg = file.read()
         
         # Replace the placeholders in the prompt template
@@ -270,41 +288,84 @@ def controlstep():
             msg = msg.replace(placeholder, replacement)
 
         # Create the prompt for this robot
-        myprompt = 'controllers/' + str(robotID) + '_prompt.txt'
-        with open(myprompt, 'w') as file:
-            os.makedirs(os.path.dirname(myprompt), exist_ok=True)
+        my_user_prompt = os.path.join('controllers', 'prompts', str(robotID) + '_prompt.txt')
+        with open(my_user_prompt, 'w') as file:
+            os.makedirs(os.path.dirname(my_user_prompt), exist_ok=True)
             file.write(msg)
 
-        # Send the command to the LLM (using together.ai) and retrieve the response
-        mycommand = "python3 controllers/together_chatgpt.py " + robotID         
-        response = os.popen(mycommand).read()
-
-        print("My Byzantine style is ", byzantine_style)
+        # Send the command to the LLM, retrieve the response, and store it
+        my_command = "python3 controllers/openai-api.py " + my_system_prompt + " " + my_user_prompt     # TODO: Use the complete file path here instead of numbers
+        response = os.popen(my_command).read()
         robot.variables.set_attribute("response", response)
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect(('localhost', 5000))
-            myid = int(robotID) - 1
-            
-            message = f"{myid} {response}\n"
-            s.sendall(message.encode())
 
-            
         print(response)
 
-        # Check if last line is 'STOP'
-        lines = response.splitlines()
-    
-        ## Get the last line and strip any surrounding whitespace
-        last_line = lines[-1].strip()
-    
-        if last_line == "STOP":
-            robot.variables.set_attribute("consensus_reached", str("true"))
-
         # Save the LLM response of this robot in a file
-        filepath = "controllers/outputs/" + str(myround) + "/" + robotID + ".txt" 
+        filepath = os.path.join("controllers", "outputs", str(myround) + "/" + robotID + ".txt") 
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
         with open(filepath, 'a') as file:
             file.write(response)
+
+        estimate = []
+
+
+    # Human-swarm interaction
+    human_interaction_period = float(lp['environ']['HUMANINTERACTIONPERIOD'])
+    if ((counter + 1) % human_interaction_period) == 0:
+
+        human_system_prompt = os.path.join('controllers', 'prompt_templates', lp['environ']['SYSTEMHUMAN'])
+        human_user_prompt_template = os.path.join('controllers', 'prompt_templates', lp['environ']['USERHUMAN'])
+
+        # Read the system message for robot-robot interaction (in order to inform the human what the robots' task is)
+        with open(os.path.join('controllers', 'prompt_templates', lp['environ']['SYSTEMMESSAGETEMPLATE']), 'r') as file:
+            task = file.read()            
+
+        # Define the placeholders and their replacements
+        placeholders = {
+            '{robotID}': str(robotID),
+            '{results}': robot.variables.get_attribute("aggregated_content"),
+            '{round}': str(myround),
+            '{task}': task
+            }
+
+
+        # Read the file contents
+        with open(human_user_prompt_template, 'r') as file:
+            msg = file.read()
+        
+        # Replace the placeholders in the prompt template
+        for placeholder, replacement in placeholders.items():
+            msg = msg.replace(placeholder, replacement)
+
+        # Create the prompt for this robot
+        human_user_prompt = os.path.join('controllers', 'prompts',  str(robotID) + '_prompt_for_human.txt')
+        with open(human_user_prompt, 'w') as file:
+            os.makedirs(os.path.dirname(human_user_prompt), exist_ok=True)
+            file.write(msg)
+
+        # Send the command to the LLM and retrieve the response
+        mycommand = "python3 controllers/openai-api.py " + human_system_prompt + " " + human_user_prompt
+        response_for_human = os.popen(mycommand).read()
+        
+        print(response_for_human)
+
+        # Save the LLM response of this robot in a file
+        filepath = os.path.join("controllers","outputs", str(myround) + "/" + robotID + "for_human.txt")
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
+        with open(filepath, 'a') as file:
+            file.write(response_for_human)
+
+
+        # Check if the human prompt contained an INSTRUCTION
+        activity, coordinates = extract_info(response_for_human)
+
+        print(activity)
+        print(coordinates)
+
+        if activity == "TARGETED NAVIGATION":
+            print("STOPPING RANDOM WALK STARTING TARGETED NAVIGATION")
+            rw.stop()
+            nav.navigate(coordinates)
 
 
     # Perform clock steps

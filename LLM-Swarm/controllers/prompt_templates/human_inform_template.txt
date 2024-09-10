@@ -1,5 +1,11 @@
 Your robot ID is {robotID}.
 
+Your task is:
+%% BEGIN TASK %%%
+{task}
+
+%%% END TASK %%%
+
 You are in information exchange round {round}.
 
 The results of the previous discussion rounds were:

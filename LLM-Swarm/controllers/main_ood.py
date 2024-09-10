@@ -223,7 +223,7 @@ def controlstep():
         estimate.append((newValues[1], round(current_position[0], 2), round(current_position[1], 2)))
 
 
-    # Robot-to-robot interaction: Enable the LLM 
+    # Robot-to-robot interaction
     discussion_period = float(lp['environ']['DISCUSSIONPERIOD'])
     if ((counter + 1) % discussion_period) == 0: 
 
@@ -267,7 +267,7 @@ def controlstep():
 
         template_base = os.path.join('controllers', 'prompt_templates')
         my_system_prompt = os.path.join(lp['environ']['SYSTEMMESSAGETEMPLATE'])
-        
+
         user_message_template = os.path.join(template_base, lp['environ']['USERMESSAGETEMPLATE'])
 
         # Read the file contents
@@ -300,60 +300,61 @@ def controlstep():
         estimate = []
 
 
-        # Human-swarm interaction
+    # Human-swarm interaction
+    human_interaction_period = float(lp['environ']['HUMANINTERACTIONPERIOD'])
+    if ((counter + 1) % human_interaction_period) == 0:
 
-        human_interaction_period = float(lp['environ']['HUMANINTERACTIONPERIOD'])
-        if ((counter + 1) % human_interaction_period) == 0:
+        human_system_prompt = os.path.join('controllers', 'prompt_templates', lp['environ']['SYSTEMHUMAN'])
+        human_user_prompt_template = os.path.join('controllers', 'prompt_templates', lp['environ']['USERHUMAN'])
 
-            mypath = 'controllers/human_instruct_template.txt'
+        # Read the system message for robot-robot interaction (in order to inform the human what the robots' task is)
+        with open(os.path.join('controllers', 'prompt_templates', lp['environ']['SYSTEMMESSAGETEMPLATE']), 'r') as file:
+            task = file.read()            
 
-            with open('controllers/system_content.txt', 'r') as file:
-                task = file.read()            
-
-            # Define the placeholders and their replacements
-            placeholders = {
-                '{robotID}': str(robotID),
-                '{results}': aggregated_content,
-                '{round}': str(myround),
-                '{task}': task
-                }
+        # Define the placeholders and their replacements
+        placeholders = {
+            '{robotID}': str(robotID),
+            '{results}': aggregated_content,
+            '{round}': str(myround),
+            '{task}': task
+            }
 
 
-            # # Read the file contents
-            # with open(mypath, 'r') as file:
-            #     msg = file.read()
-            
-            # # Replace the placeholders in the prompt template
-            # for placeholder, replacement in placeholders.items():
-            #     msg = msg.replace(placeholder, replacement)
+        # Read the file contents
+        with open(human_user_prompt_template, 'r') as file:
+            msg = file.read()
+        
+        # Replace the placeholders in the prompt template
+        for placeholder, replacement in placeholders.items():
+            msg = msg.replace(placeholder, replacement)
 
-            # # Create the prompt for this robot
-            # myprompt = 'controllers/' + str(robotID) + '_prompt_for_human.txt'
-            # with open(myprompt, 'w') as file:
-            #     os.makedirs(os.path.dirname(myprompt), exist_ok=True)
-            #     file.write(msg)
+        # Create the prompt for this robot
+        human_user_prompt = os.path.join('controllers', 'prompts',  str(robotID) + '_prompt_for_human.txt')
+        with open(human_user_prompt, 'w') as file:
+            os.makedirs(os.path.dirname(human_prompt), exist_ok=True)
+            file.write(msg)
 
-            # Send the command to the LLM and retrieve the response
-            mycommand = "python3 controllers/openai-api-human.py " + robotID         
-            response_for_human = os.popen(mycommand).read()
-            
-            print(response_for_human)
+        # Send the command to the LLM and retrieve the response
+        mycommand = "python3 controllers/openai-api.py " + human_system_prompt + " " + human_user_prompt
+        response_for_human = os.popen(mycommand).read()
+        
+        print(response_for_human)
 
-            activity, coordinates = extract_info(response_for_human)
+        activity, coordinates = extract_info(response_for_human)
 
-            print(activity)
-            print(coordinates)
+        print(activity)
+        print(coordinates)
 
-            if activity == "TARGETED NAVIGATION":
-                print("STOPPING RANDOM WALK STARTING TARGETED NAVIGATION")
-                rw.stop()
-                nav.navigate(coordinates)
+        if activity == "TARGETED NAVIGATION":
+            print("STOPPING RANDOM WALK STARTING TARGETED NAVIGATION")
+            rw.stop()
+            nav.navigate(coordinates)
 
-            # # Save the LLM response of this robot in a file
-            # filepath = "controllers/outputs/" + str(myround) + "/" + robotID + "for_human.txt" 
-            # os.makedirs(os.path.dirname(filepath), exist_ok=True)
-            # with open(filepath, 'a') as file:
-            #     file.write(response)
+        # Save the LLM response of this robot in a file
+        filepath = os.path.join("controllers","outputs", str(myround) + "/" + robotID + "for_human.txt")
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
+        with open(filepath, 'a') as file:
+            file.write(response)
 
 
     # Perform clock steps

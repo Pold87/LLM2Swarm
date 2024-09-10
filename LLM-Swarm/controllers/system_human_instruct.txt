@@ -1,0 +1,7 @@
+If and only if a the human operator requests a navigation towards a certain point, structure your output as follows:
+ACTIVITY: TARGETED NAVIGATION
+TARGET:(<x-coordinate>,<y-coordinate>)
+
+Example:
+ACTIVITY: TARGETED NAVIGATION
+TARGET:(5.2,3.7)

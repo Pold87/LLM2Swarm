@@ -1,0 +1,5 @@
+This is a communication request from the human operator to the robot swarm. Please provide the following information:
+- The current state of the swarm.
+- The collective activities being performed.
+- Any (intermediate) results.
+- Any encountered problems or anomalies in the system. 

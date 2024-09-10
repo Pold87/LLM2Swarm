@@ -1,6 +1,6 @@
 # LLM-enhanced robot swarms
 
-### [LLM-enhanced Robot Swarms that Responsively Communicate, Plan, and Collaborate](https://arxiv.org/pdf/2004.03355.pdf)
+### [LLM-enhanced Robot Swarms that Responsively Communicate, Plan, and Collaborate](TODO)
 [Volker Strobel](https://iridia.ulb.ac.be/~vstrobel/), [Marco Dorigo](https://iridia.ulb.ac.be/~mdorigo/), [Mario Fritz](https://cispa.saarland/group/fritz/)<br>
 [NeurIPS 2024 - Workshop on Open-World Agents (OWA-2024)](https://sites.google.com/view/open-world-agents/home)
 

@@ -9,9 +9,22 @@ sys.path += [os.environ['MAINFOLDER'], \
             ]
 
 
-from toychain.src.utils import CustomTimer
 
 logger = logging.getLogger(__name__)
+
+
+class CustomTimer:
+    def __init__(self):
+        self.time_counter = 0
+
+    def time(self):
+        return self.time_counter
+
+    def increase_timer(self):
+        self.time_counter += 1
+
+    def step(self):
+        self.time_counter += 1
 
 class TxTimer:
     def __init__(self, rate, name = None):

@@ -2,10 +2,10 @@
 export HOMEFOLDER="$HOME/software"
 export MAINFOLDER="$HOMEFOLDER/chatgpt-swarm"
 export ARGOSFOLDER="$MAINFOLDER/argos-python"
-export EXPERIMENTFOLDER="$MAINFOLDER/LLM-Swarm"
+export EXPERIMENTFOLDER="$MAINFOLDER/LLM2Swarm"
 
 # [FILES]
-export ARGOSNAME="market-foraging"
+export ARGOSNAME="llm2swarm"
 export ARGOSFILE="${EXPERIMENTFOLDER}/experiments/${ARGOSNAME}.argos"
 export ARGOSTEMPLATE="${EXPERIMENTFOLDER}/experiments/${ARGOSNAME}.x.argos"
 

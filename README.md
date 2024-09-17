@@ -21,17 +21,26 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 
 1. Clone the repository.
 2. Install all prerequistes.
-3. Update the variables in the `[PATHS]` section of the `LLM-Swarm/experimentconfig.sh` file to reflect the installation directories on your system.
+3. Update the variables in the `[PATHS]` section of the `LLM2Swarm/experimentconfig.sh` file to reflect the installation directories on your system.
 
 ## Showcase Execution
  
 For all showcases:
-1. First, modify the necessary variables in the `LLM-Swarm/experimentconfig.sh` file .
+1. First, modify the necessary variables in the `LLM2Swarm/experimentconfig.sh` file. The configurations that we used are in the folder `LLM2Swarm/example_configurations/`.
 2. Then, run `./starter.sh -s` to start the simulation.
 
 In the following, we detail the configurations for each showcase.
 
 ### Controller Generation
+
+```
+# [ARGOS]
+export FLOOR="3.png" # 3x3 floor with black and white tiles (floor images are stored in the folder experiments/floors/)
+
+# [LLM]
+export DISCUSSIONPERIOD='inf' # Disable robot-robot interaction
+export HUMANINTERACTIONPERIOD='inf' # Disable human-swarm interaction
+```
 
 ### Robot-Robot Interaction
 
@@ -139,9 +148,9 @@ export USERHUMAN='human_concrete_instruct.txt'
 
 ## Code Structure
 
-- `LLM-Swarm/experimentconfig.sh` contains the experiment parameter
-- `LLM-Swarm/controllers/main.py` contains the robot controllers
-- `LLM-Swarm/controllers/movement_generated.py` is the default file for storing generated controllers 
+- `LLM2Swarm/experimentconfig.sh` contains the experiment parameter
+- `LLM2Swarm/controllers/main.py` contains the robot controllers
+- `LLM2Swarm/controllers/movement_generated.py` is the default file for storing generated controllers 
 
 
 ## Citation

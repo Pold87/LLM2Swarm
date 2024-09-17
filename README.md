@@ -4,27 +4,6 @@
 [Volker Strobel](https://iridia.ulb.ac.be/~vstrobel/), [Marco Dorigo](https://iridia.ulb.ac.be/~mdorigo/), [Mario Fritz](https://cispa.saarland/group/fritz/)<br>
 [NeurIPS 2024 - Workshop on Open-World Agents (OWA-2024)](https://sites.google.com/view/open-world-agents/home)
 
-<<<<<<< HEAD
-
-## Description of the repository
-
-The main conroller file is specified in `LLM-Swarm/controllers/main.py`. The file `LLM-Swarm/experimentconfig.sh` specifies the experiment configuration; in particular, it specifies which prompt templates (stored in the folder `LLM-Swarm/controllers/prompt_templates`) should be used. The following variables in this file are related to the LLM interactions:
-
-For robot-to-robot interaction:
-- `DISCUSSIONPERIOD`: Time period between robot-to-robot interactions. For example, a value of 100 specifies that the robots interact with each after every 100 timesteps. Setting this variable to `'inf'` disables robot-robot interaction.
-- `SYSTEMMESSAGETEMPLATE`: Template for the system prompt for robot-to-robot interaction.
-- `USERMESSAGETEMPLATE`: Template for the user prompt for robot-to-robot interaction.
-
-
-For human-to-robot interaction:
-- `HUMANINTERACTIONPERIOD`: Time period between human-to-robot interaction. For example, a value of 500 specifies that the robots interact with each after every 500 timesteps. Setting this variable to `'inf'` disables human-robot interaction. 
-- `SYSTEMHUMAN': Template for the system prompt for human-to-robot interaction.
-- `USERHUMAN`: Template for the user prompt for human-to-robot interaction.
-
-
-=======
-This repository contains the code for integrating Large Language Models (LLMs) into robot swarms.
->>>>>>> 6b2eaae0cc528bb84801b248fb5f1e663dea876b
 
 ## Abstract
 
@@ -42,6 +21,23 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 1. Clone the repository.
 2. Install all prerequistes.
 3. Update the variables in the `[PATHS]` section of the `LLM2Swarm/experimentconfig.sh` file to reflect the installation directories on your system.
+
+
+## Description of the repository
+
+The main conroller file is specified in `LLM2Swarm/controllers/main.py`. `LLM2Swarm/controllers/movement_generated.py` is the default file for storing generated controllers. The file `LLM2Swarm/experimentconfig.sh` specifies the experiment configuration; in particular, it specifies which prompt templates (stored in the folder `LLM2Swarm/controllers/prompt_templates/`) should be used. The following variables in this file are related to the LLM interactions:
+
+For robot-to-robot interaction:
+- `DISCUSSIONPERIOD`: Time period between robot-to-robot interactions. For example, a value of 100 specifies that the robots interact with each after every 100 timesteps. Setting this variable to `'inf'` disables robot-robot interaction.
+- `SYSTEMMESSAGETEMPLATE`: Template for the system prompt for robot-to-robot interaction.
+- `USERMESSAGETEMPLATE`: Template for the user prompt for robot-to-robot interaction.
+
+
+For human-to-robot interaction:
+- `HUMANINTERACTIONPERIOD`: Time period between human-to-robot interaction. For example, a value of 500 specifies that the robots interact with each after every 500 timesteps. Setting this variable to `'inf'` disables human-robot interaction. 
+- `SYSTEMHUMAN': Template for the system prompt for human-to-robot interaction.
+- `USERHUMAN`: Template for the user prompt for human-to-robot interaction.
+
 
 ## Showcase Execution
  
@@ -166,11 +162,6 @@ export SYSTEMHUMAN='system_human_instruct.txt'
 export USERHUMAN='human_concrete_instruct.txt'
 ```
 
-## Code Structure
-
-- `LLM2Swarm/experimentconfig.sh` contains the experiment parameter
-- `LLM2Swarm/controllers/main.py` contains the robot controllers
-- `LLM2Swarm/controllers/movement_generated.py` is the default file for storing generated controllers 
 
 
 ## Citation

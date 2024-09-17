@@ -216,6 +216,8 @@ def controlstep():
 
     byzantine_style = int(robot.variables.get_attribute("byzantine_style"))
 
+    if byzantine_style == 1:
+        fsm.setState(States.BROKENWHEELS)
 
     for module in [erb, rs, gs]:
         module.step()
@@ -226,6 +228,9 @@ def controlstep():
 
     elif fsm.query(States.RANDOMWALK):
         rw.step()
+
+    elif fsm.query(States.BROKENWHEELS):
+        rw.stop()
 
     elif fsm.query(States.NAVIGATE):
         # Navigate to the target
@@ -287,7 +292,7 @@ def controlstep():
             converted_estimate = [
                 ("crops" if entry[0] == 1.0 else "weeds" if entry[0] == 0.0 else "injured person", entry[1], entry[2])
                 for entry in estimate]
-        else: 
+        elif byzantine_style == 2: 
             converted_estimate = [
                 ("weeds", entry[1], entry[2])
                 for entry in estimate]

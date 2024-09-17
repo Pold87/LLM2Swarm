@@ -22,6 +22,7 @@ class States(Enum):
     IDLE = 1
     RANDOMWALK = 2
     NAVIGATE = 3
+    BROKENWHEELS = 4
     
 
 stateList = list(Idle)+list(Scout)+list(Recruit)

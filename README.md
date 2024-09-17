@@ -25,7 +25,11 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 
 ## Description of the repository
 
-The main conroller file is specified in `LLM2Swarm/controllers/main.py`. `LLM2Swarm/controllers/movement_generated.py` is the default file for storing generated controllers. The file `LLM2Swarm/experimentconfig.sh` specifies the experiment configuration; in particular, it specifies which prompt templates (stored in the folder `LLM2Swarm/controllers/prompt_templates/`) should be used. The following variables in this file are related to the LLM interactions:
+- `LLM2Swarm/controllers/main.py` is the main robot controller file
+- `LLM2Swarm/controllers/movement_generated.py` is the default file for storing generated controllers
+- `LLM2Swarm/experimentconfig.sh` specifies the experiment configuration; in also, it specifies which LLM prompt templates (stored in the folder `LLM2Swarm/controllers/prompt_templates/`) should be used.
+
+The following variables in the `LLM2Swarm/experimentconfig.sh` file are related to the LLM interactions:
 
 For robot-to-robot interaction:
 - `DISCUSSIONPERIOD`: Time period between robot-to-robot interactions. For example, a value of 100 specifies that the robots interact with each after every 100 timesteps. Setting this variable to `'inf'` disables robot-robot interaction.

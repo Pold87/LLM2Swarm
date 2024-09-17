@@ -6,3 +6,4 @@
 LLM-Swarm/errors.txt
 LLM-Swarm/controllers/prompts/
 .env/
+chatgptenv/

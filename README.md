@@ -1,7 +1,6 @@
 # LLM2Swarm
 ## Robot Swarms that Responsively Communicate, Plan, and Collaborate Through LLMs
 
-[Volker Strobel](https://iridia.ulb.ac.be/~vstrobel/), [Marco Dorigo](https://iridia.ulb.ac.be/~mdorigo/), [Mario Fritz](https://cispa.saarland/group/fritz/)<br>
 [NeurIPS 2024 - Workshop on Open-World Agents (OWA-2024)](https://sites.google.com/view/open-world-agents/home)
 
 
@@ -165,20 +164,3 @@ export HUMANINTERACTIONPERIOD='500' # Set the time period for human-robot intera
 export SYSTEMHUMAN='system_human_instruct.txt'
 export USERHUMAN='human_concrete_instruct.txt'
 ```
-
-
-
-## Citation
-  ```
-TODO
-  ```
-
-## Acknowledgements
-- Volker Strobel and Marco Dorigo acknowledge support from the Belgian F.R.S.-FNRS.
-- Volker Strobel acknowledges the Helmholtz Information & Data Science Academy (HIDA) for providing financial support enabling a short-term research stay at CISPA Helmholtz Center for Information Security.
-- This work was also partially funded by ELSA - European Lighthouse on Secure and Safe AI funded by the European Union under grant agreement number 101070617, as well as the German Federal Ministry of Education and Research (BMBF) under the grant AIgenCY (16KIS2012).
-
-
-
-
-

@@ -2,7 +2,7 @@
 export HOMEFOLDER="$HOME/software"
 export MAINFOLDER="$HOMEFOLDER/chatgpt-swarm"
 export ARGOSFOLDER="$MAINFOLDER/argos-python"
-export EXPERIMENTFOLDER="$MAINFOLDER/LLM2Swarm"
+export EXPERIMENTFOLDER="$MAINFOLDER/DirectIntegration"
 
 # [FILES]
 export ARGOSNAME="llm2swarm"

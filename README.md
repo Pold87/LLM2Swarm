@@ -6,7 +6,8 @@
 
 ## Abstract
 
-	
+Robot swarms are composed of many simple robots that communicate and collaborate to fulfill complex tasks. Robot controllers usually need to be specified by experts on a case-by-case basis via programming code. This process can be time-consuming, prone to errors, and unable to take into account all situations that may be encountered during deployment. On the other hand, recent Large Language Models (LLMs) have been shown to provide reasoning and planning capabilities, new ways to interact and program machines, and represent domain and commonsense knowledge. Hence, we propose to address the aforementioned challenges by integrating LLMs with robot swarms and show the potential in proofs-of-concept (showcases). For this integration, we explore two approaches. The first approach is 'indirect integration,' where LLMs are used to synthesize and validate the robot controllers. This approach may reduce development time and human error before deployment. Moreover, during deployment, it could be used for the on-the-fly creation of new robot behaviors. The second approach is 'direct use,' where each robot locally executes a separate LLM instance during deployment for robot-robot collaboration and human-swarm interaction. These local LLM instances enable each robot to reason, plan, and collaborate using natural language. Both approaches have the potential to enhance the capabilities of robot swarms, but they also pose challenges, such as executing LLMs on limited robot hardware and ensuring safe and reliable robot behavior during deployment. To enable further research on our mainly conceptual contribution, we release the software and videos for our LLM2Swarm system: [https://anonymous.4open.science/r/LLM2Swarm](https://anonymous.4open.science/r/LLM2Swarm).
+
 
 ## Prerequisites
 

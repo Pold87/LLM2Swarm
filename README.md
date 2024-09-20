@@ -63,17 +63,9 @@ In the following, we detail the configurations for each showcase.
 
 1. Change directory to `LLM2Swarm/IndirectUse/`.
 2. Modify the `ARGOSPATH` variable in `syntax-generator.py` to reflect your installation directory.
-3. Execute `python3 syntax-generator.py`
+3. Set export `USEGENERATEDMOVEMENT="1"` in `DirectUse/experimentconfig.sh` 
+4. Execute `python3 syntax-generator.py`
 
-
-```
-# [ARGOS]
-export FLOOR="3.png" # 3x3 floor with black and white tiles (floor images are stored in the folder experiments/floors/)
-
-# [LLM]
-export DISCUSSIONPERIOD='inf' # Disable robot-robot interaction
-export HUMANINTERACTIONPERIOD='inf' # Disable human-swarm interaction
-```
 
 ### Direct Use: Robot-Robot Interaction
 

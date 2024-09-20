@@ -54,7 +54,7 @@ For human-to-robot interaction:
 ## Showcase Execution
  
 For all showcases:
-1. First, modify the necessary variables in the `DirectUse/experimentconfig.sh` file. The configurations that we used are in the folder `DirectUse/example_configurations/`.
+1. First, modify the necessary variables in the `DirectUse/experimentconfig.sh` file. The configurations that were used for the showcases are stored in the folder `DirectUse/example_configurations/`.
 2. Then, run `./starter.sh -s` to start the simulation.
 
 In the following, we detail the configurations for each showcase.

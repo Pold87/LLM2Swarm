@@ -1,0 +1,11 @@
+Robot ID 1 reporting:
+
+Current observations indicate:
+- Weeds: 12 instances
+- Crops: 18 instances
+
+Observations suggest that there are more crops than weeds in the surveyed area so far. 
+
+No unusual sensor readings or environmental anomalies detected.
+
+Requesting data from other robots to confirm this trend and to gather more comprehensive information for a better collective estimate.

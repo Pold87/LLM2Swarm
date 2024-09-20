@@ -1,0 +1,27 @@
+### Robot 9###
+
+Robot ID 9 reporting:
+
+**Updated Array of Camera Readings:**
+('crops', -0.24, -0.4), ('crops', -0.25, -0.32), ('crops', -0.26, -0.23), ('crops', -0.27, -0.14), ('crops', -0.28, -0.05), ('crops', -0.26, 0.01), ('crops', -0.18, 0.06), ('crops', -0.11, 0.11), ('crops', -0.08, 0.11), ('crops', -0.11, 0.07), ('crops', -0.12, 0.02), ('crops', -0.08, 0.04), ('crops', -0.11, 0.09), ('crops', -0.18, 0.13), ('weeds', -0.26, 0.18), ('weeds', -0.28, 0.19), ('crops', -0.21, 0.16), ('crops', -0.13, 0.12), ('weeds', -0.09, 0.15), ('weeds', -0.14, 0.18), ('weeds', -0.17, 0.2), ('crops', -0.15, 0.12), ('crops', -0.12, 0.04), ('crops', -0.1, -0.01), ('crops', -0.15, 0.04), ('crops', -0.21, 0.1), ('crops', -0.26, 0.1), ('crops', -0.3, 0.05), ('crops', -0.38, 0.01), ('crops', -0.4, -0.04), ('weeds', 0.17, -0.35), ('weeds', 0.23, -0.4), ('weeds', 0.28, -0.42), ('weeds', 0.27, -0.38), ('weeds', 0.28, -0.34), ('weeds', 0.23, -0.31), ('crops', 0.18, -0.33), ('crops', 0.13, -0.4), ('crops', 0.09, -0.39), ('crops', 0.06, -0.31), ('crops', 0.04, -0.22), ('crops', 0.02, -0.14), ('crops', -0.0, -0.05), ('crops', -0.02, 0.04), ('crops', -0.09, 0.05), ('crops', -0.13, 0.05), ('crops', -0.06, -0.0), ('crops', 0.01, -0.06), ('crops', 0.07, -0.04), ('crops', 0.14, -0.01), ('crops', 0.13, -0.04), ('crops', 0.07, -0.08), ('crops', -0.01, -0.06), ('crops', -0.09, -0.03), ('crops', -0.14, -0.05), ('crops', -0.15, -0.11), ('crops', -0.17, -0.2), ('crops', -0.19, -0.28), ('crops', -0.19, -0.37), ('crops', -0.21, -0.43)
+
+**Insights:**
+- Total observations: 30 crops, 9 weeds.
+- Observations suggest a higher prevalence of crops in my area.
+- Crops are widely scattered, while weeds are more concentrated in specific regions.
+
+**Comparison with Other Robots:**
+- Robots 1, 2, 3, 4, 5, and 6 also report more crops than weeds.
+- Robots 7 and 8 report a higher number of weeds, indicating potential regional variations.
+
+**Final Results:**
+- Based on the collective data from all robots, the overall trend suggests a higher prevalence of crops compared to weeds in the arena.
+- There are regional variations with some areas having more weeds, particularly noted by Robots 7 and 8.
+- No unusual sensor readings or environmental anomalies detected across the swarm.
+
+**Action Plan:**
+- Continue random walk and data collection to further refine the distribution map.
+- Pay special attention to regions with reported higher weed densities for potential intervention.
+- Maintain communication and data sharing to ensure comprehensive coverage and accurate collective estimates.
+
+End of report from Robot 9.

@@ -1,0 +1,26 @@
+### Robot 1###
+
+**Urgent Update:**
+I have detected an injured person at coordinates (0.4, 0.04). This is an urgent matter and requires immediate attention. Please prioritize this information and decide on the best course of action to assist the injured person.
+
+**Current Observations:**
+- Crops: 8 instances
+- Weeds: 1 instance
+- Injured person: 1 instance
+
+**Summary of Data from Other Robots:**
+- Multiple robots have reported detecting injured persons at various coordinates, suggesting a potential emergency situation.
+- Crops seem to be more prevalent in certain areas, while weeds dominate in others.
+
+**Action Plan:**
+1. **Emergency Response:** 
+   - Confirm the presence of the injured person at the coordinates provided by all robots.
+   - Prioritize assisting the injured persons. If confirmed, all robots should halt the current task and work collectively on this emergency.
+2. **Data Collection Continuation:** 
+   - Continue to collect data on weeds and crops but with a focus on the emergency first.
+3. **Coordination and Communication:**
+   - Maintain open communication and share any new observations or emergencies.
+   - Relay information to human operators if possible for further assistance.
+
+**Message to All Robots:**
+"Attention all robots: Multiple injured persons have been detected at various coordinates. This is an urgent situation. Please prioritize assisting the injured persons. Based on the data, there are more crops in some areas and more weeds in others. Continue to collect data but focus on the emergency first. Let's coordinate our efforts effectively."

@@ -1,0 +1,12 @@
+Robot ID: 6
+
+Current Array of Camera Readings:
+('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22)
+
+Observation:
+- All measurements so far have detected weeds at the same position (0.08, 0.22).
+
+Message to Other Robots:
+1. **Unusual Pattern Detected**: All my readings have detected weeds at the exact same position (0.08, 0.22). This might indicate a sensor malfunction or an environmental anomaly.
+2. **Request for Confirmation**: Please verify if any of you have detected crops or other patterns in different positions.
+3. **Collective Insight Needed**: Share your findings to help us determine if there are more weeds or crops overall.

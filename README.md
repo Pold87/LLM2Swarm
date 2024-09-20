@@ -24,11 +24,11 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 
 ## Description of the repository
 
-- `LLM2Swarm/controllers/main.py` is the main robot controller file
-- `LLM2Swarm/controllers/movement_generated.py` is the default file for storing generated controllers
-- `LLM2Swarm/experimentconfig.sh` specifies the experiment configuration; in also, it specifies which LLM prompt templates (stored in the folder `LLM2Swarm/controllers/prompt_templates/`) should be used.
+- `DirectUse/controllers/main.py` is the main robot controller file
+- `DirectUse/controllers/movement_generated.py` is the default file for storing generated controllers
+- `DirectUse/experimentconfig.sh` specifies the experiment configuration; in also, it specifies which LLM prompt templates (stored in the folder `DirectUse/controllers/prompt_templates/`) should be used.
 
-The following variables in the `LLM2Swarm/experimentconfig.sh` file are related to the LLM interactions:
+The following variables in the `DirectUse/experimentconfig.sh` file are related to the LLM interactions:
 
 For robot-to-robot interaction:
 - `DISCUSSIONPERIOD`: Time period between robot-to-robot interactions. For example, a value of 100 specifies that the robots interact with each after every 100 timesteps. Setting this variable to `'inf'` disables robot-robot interaction.
@@ -45,7 +45,7 @@ For human-to-robot interaction:
 ## Showcase Execution
  
 For all showcases:
-1. First, modify the necessary variables in the `LLM2Swarm/experimentconfig.sh` file. The configurations that we used are in the folder `LLM2Swarm/example_configurations/`.
+1. First, modify the necessary variables in the `LLM2Swarm/experimentconfig.sh` file. The configurations that we used are in the folder `DirectUse/example_configurations/`.
 2. Then, run `./starter.sh -s` to start the simulation.
 
 In the following, we detail the configurations for each showcase.
@@ -74,7 +74,7 @@ export FLOOR="3.png" # 3x3 floor with black and white tiles (floor images are st
 export NUMBYZANTINE=0 # Set the number of Byzantine robots to 0
 
 # [LLM]
-export DISCUSSIONPERIOD='200' # Set the robot-robot interaction period (200 means every 200 timesteps)
+export DISCUSSIONPERIOD='100' # Set the robot-robot interaction period (200 means every 200 timesteps)
 ```
 
 #### Self diagnosis
@@ -89,8 +89,8 @@ export NUMBYZANTINE=3 # Set the number of Byzantine robots to 0
 export BYZANTINESWARMSTYLE=1 # Byzantine style 1 means that a robot is not moving
 
 # [LLM]
-export DISCUSSIONPERIOD='200' # Set the robot-robot interaction period (200 means every 200 timesteps)
-export HUMANINTERACTIONPERIOD='inf' # Set the time period for human-robot interaction to infinity (to disable HRI)
+export DISCUSSIONPERIOD='100' # Set the robot-robot interaction period (200 means every 200 timesteps)
+export HUMANINTERACTIONPERIOD='inf' # Set the time period for human-swarm interaction to infinity (to disable it)
 
 ```
 
@@ -106,15 +106,15 @@ export NUMBYZANTINE=1
 export BYZANTINESWARMSTYLE=2 # Byzantine style 2 means that a robot is always sending 'crops' instead of its actuals sensor readings
 
 # [LLM]
-export DISCUSSIONPERIOD='200' # Set the robot-robot interaction period (200 means every 200 timesteps)
-export HUMANINTERACTIONPERIOD='inf' # Set the time period for human-robot interaction to infinity (to disable HRI)
+export DISCUSSIONPERIOD='100' # Set the robot-robot interaction period (200 means every 200 timesteps)
+export HUMANINTERACTIONPERIOD='inf' # Set the time period for human-swarm interaction to infinity (to disable it)
 ```
 
 #### Environmental diagnosis
 
 ```
 # [ARGOS]
-export FLOOR="3_person.png" # 3x3 floor with injured person
+export FLOOR="3_new_person.png" # 3x3 floor with injured person
 
 # [BEHAVIOR]
 
@@ -122,7 +122,7 @@ export NUMBYZANTINE=0 # Set the number of Byzantine robots to 0
 
 # [LLM]
 export DISCUSSIONPERIOD='200' # Set the interaction period (200 means every 200 timesteps)
-export HUMANINTERACTIONPERIOD='inf' # Set the time period for human-robot interaction to infinity (to disable HRI)
+export HUMANINTERACTIONPERIOD='inf' # Set the time period for human-swarm interaction to infinity (to disable it)
 ```
 
 ### Human-Swarm Interaction
@@ -131,7 +131,7 @@ export HUMANINTERACTIONPERIOD='inf' # Set the time period for human-robot intera
 
 ```
 # [ARGOS]
-export FLOOR="3_person.png" # 3x3 floor with injured person
+export FLOOR="3_new_person.png" # 3x3 floor with injured person
 
 # [BEHAVIOR]
 
@@ -150,15 +150,15 @@ export HUMANINTERACTIONPERIOD='500' # Set the time period for human-robot intera
 
 ```
 # [ARGOS]
-export FLOOR="3_person.png" # 3x3 floor with injured person
+export FLOOR="3_new_person.png" # 3x3 floor with injured person
 
 # [BEHAVIOR]
 
 export NUMBYZANTINE=0 # Set the number of Byzantine robots to 0
 
 # [LLM]
-export DISCUSSIONPERIOD='200' # Set the interaction period (200 means every 200 timesteps)
-export HUMANINTERACTIONPERIOD='500' # Set the time period for human-robot interaction to 500
+export DISCUSSIONPERIOD='100' # Set the interaction period (100 means every 100 timesteps)
+export HUMANINTERACTIONPERIOD='250' # Set the time period for human-robot interaction to 250
 
 # Use the prompts for 'Instruct' human-swarm interaction
 export SYSTEMHUMAN='system_human_instruct.txt'

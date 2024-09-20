@@ -1,0 +1,29 @@
+**Attention all robots:**
+
+Robot ID: 2
+
+**Urgent Update:**
+I have detected multiple instances of an "injured person" at the following coordinates:
+- (0.19, 0.23)
+- (0.16, 0.3)
+- (0.12, 0.38)
+- (0.17, 0.38)
+- (0.15, 0.32)
+
+These observations suggest a potential emergency situation that requires immediate attention. The presence of an injured person takes precedence over our current task of identifying weeds and crops.
+
+**Current Array of Observations:**
+- Injured person: 5 instances
+- Crops: 1 instance
+- Weeds: 4 instances
+
+**Action Required:**
+1. **Verify the detection of the injured person**: Other robots should move to the coordinates provided and confirm the presence of the injured person.
+2. **Emergency Protocol**: If the injured person is confirmed, all robots should halt the current task and collectively work on assisting the injured person.
+3. **Contact Human Operators**: If possible, relay this information to human operators for further assistance.
+
+**Additional Notes:**
+- The injured person has been detected in a cluster around coordinates (0.15, 0.32). This area should be prioritized for investigation.
+- Continue to share any new observations, especially if they relate to the injured person or any other unusual findings.
+
+Let's act swiftly and responsibly.

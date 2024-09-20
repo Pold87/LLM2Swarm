@@ -1,0 +1,18 @@
+Robot ID 1 reporting:
+
+Current array of weeds and crops:
+('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1)
+
+Observations:
+- All readings so far have indicated crops.
+- All readings are from the same location (-0.12, -0.1).
+
+Insights:
+- There might be an issue with my camera or movement system, as I am not capturing data from different locations.
+- Further investigation is needed to determine if this is an anomaly or if it is accurate.
+
+Request:
+- Please share your arrays of weeds and crops to help collectively estimate the distribution.
+- Notify if any of you have encountered similar issues or anomalies.
+
+Awaiting your responses.

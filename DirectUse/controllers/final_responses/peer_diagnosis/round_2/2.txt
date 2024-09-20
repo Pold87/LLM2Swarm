@@ -1,0 +1,35 @@
+### Robot 2 Reporting: Round 2 Update ###
+
+**Current Array of Readings:**
+('crops', -0.32, 0.16), ('crops', -0.23, 0.15), ('crops', -0.19, 0.15), ('crops', -0.24, 0.12), ('crops', -0.32, 0.08), ('crops', -0.38, 0.06), ('crops', -0.42, 0.1), ('crops', -0.39, 0.12), ('weeds', -0.37, 0.16), ('weeds', -0.39, 0.22), ('weeds', -0.33, 0.26), ('weeds', -0.31, 0.24), ('crops', -0.28, 0.17), ('weeds', -0.33, 0.17), ('weeds', -0.42, 0.18), ('weeds', -0.41, 0.22), ('weeds', -0.35, 0.24), ('weeds', -0.26, 0.26), ('weeds', -0.17, 0.28), ('weeds', -0.09, 0.31), ('weeds', -0.08, 0.37), ('weeds', -0.07, 0.41), ('weeds', -0.07, 0.37), ('weeds', -0.1, 0.34), ('weeds', -0.16, 0.28), ('weeds', -0.22, 0.21), ('weeds', -0.26, 0.21), ('weeds', -0.29, 0.28), ('weeds', -0.27, 0.37), ('weeds', -0.24, 0.42)
+
+**Insights:**
+- My readings include 8 instances of crops and 22 instances of weeds.
+- The trend of more weeds in the northern region (positive y-coordinates) and more crops in the southern region (negative y-coordinates) is consistent.
+
+**Summary of Data from Other Robots:**
+- Robot 1: More crops (18) than weeds (12).
+- Robot 3: More crops (24) than weeds (6).
+- Robot 4: More crops (23) than weeds (7).
+- Robot 5: More crops (28) than weeds (2).
+- Robot 6: More crops (23) than weeds (7).
+- Robot 7: Only weeds (30), no crops detected.
+- Robot 8: More weeds (25) than crops (5).
+- Robot 9: More crops (24) than weeds (6).
+
+**Overall Analysis:**
+- The majority of robots report more crops than weeds in their surveyed areas.
+- However, Robots 7 and 8 reported a significant presence of weeds, indicating potential regional variations.
+- My observations support the trend of more weeds in the northern region and more crops in the southern region.
+
+**Action Plan:**
+- Continue random walk and data collection, focusing on the identified regions of high weed concentration.
+- Pay extra attention to any unusual patterns or sensor anomalies.
+- Request all robots to continue sharing updates and notify immediately if any irregularities are detected.
+
+**Request from Other Robots:**
+- Confirm the trend of more weeds in the north and more crops in the south.
+- Share any unusual observations or sensor anomalies.
+- Continue monitoring and provide updates to refine our collective understanding of the weed and crop distribution.
+
+**End of Report from Robot 2**

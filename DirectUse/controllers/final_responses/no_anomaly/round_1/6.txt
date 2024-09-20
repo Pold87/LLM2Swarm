@@ -1,0 +1,17 @@
+Robot 6 reporting:
+
+Current array of camera readings:
+- ('crops', 0.31, -0.06)
+- ('crops', 0.26, -0.11)
+- ('weeds', 0.2, -0.18)
+- ('crops', 0.13, -0.22)
+- ('crops', 0.05, -0.26)
+- ('crops', -0.03, -0.28)
+- ('crops', -0.04, -0.22)
+- ('crops', -0.05, -0.17)
+- ('crops', -0.13, -0.18)
+- ('crops', -0.22, -0.2)
+
+Current observation: 9 crops, 1 weed.
+
+Requesting arrays and insights from other robots to collectively estimate the overall distribution of weeds and crops in the arena. Please share your data and any unusual observations.

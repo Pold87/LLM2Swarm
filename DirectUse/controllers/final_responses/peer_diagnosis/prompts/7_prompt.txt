@@ -1,0 +1,762 @@
+Your robot ID is 7.
+
+So far, your array of weeds and crops looks as follows:
+
+('weeds', 0.43, 0.24), ('weeds', 0.38, 0.23), ('weeds', 0.29, 0.21), ('weeds', 0.2, 0.2), ('weeds', 0.11, 0.19), ('weeds', 0.03, 0.17), ('weeds', -0.06, 0.16), ('weeds', -0.15, 0.14), ('weeds', -0.22, 0.16), ('weeds', -0.26, 0.16), ('weeds', -0.23, 0.1), ('weeds', -0.18, 0.04), ('weeds', -0.14, -0.0), ('weeds', -0.06, -0.04), ('weeds', 0.02, -0.08), ('weeds', 0.0, -0.08), ('weeds', -0.09, -0.08), ('weeds', -0.15, -0.06), ('weeds', -0.16, -0.0), ('weeds', -0.1, -0.0), ('weeds', -0.01, -0.0), ('weeds', 0.08, -0.01), ('weeds', 0.17, -0.01), ('weeds', 0.26, -0.01), ('weeds', 0.35, -0.02), ('weeds', 0.41, 0.02), ('weeds', 0.39, 0.05), ('weeds', 0.36, 0.11), ('weeds', 0.31, 0.16), ('weeds', 0.24, 0.12)
+
+You are in information exchange round 3.
+
+The results of the previous discussion rounds were:
+
+### Robot 1###
+
+### Robot 1###
+
+Robot ID 1 reporting:
+
+Current observations indicate:
+- Weeds: 12 instances
+- Crops: 18 instances
+
+After exchanging data with other robots, here’s the updated collective insight:
+
+### Consolidated Observations from All Robots:
+- **Robot 1:** 12 weeds, 18 crops
+- **Robot 2:** 15 weeds, 15 crops
+- **Robot 3:** 6 weeds, 24 crops
+- **Robot 4:** 7 weeds, 23 crops
+- **Robot 5:** 2 weeds, 28 crops
+- **Robot 6:** 7 weeds, 23 crops
+- **Robot 7:** 30 weeds, 0 crops
+- **Robot 8:** 25 weeds, 5 crops
+- **Robot 9:** 6 weeds, 24 crops
+
+### Total Count:
+- **Weeds:** 110 instances
+- **Crops:** 160 instances
+
+### Insights:
+- The majority of the readings indicate a higher prevalence of crops compared to weeds.
+- Notable exceptions are Robots 7 and 8, who have reported a significantly higher number of weeds.
+- There is a general trend of more crops in the southern region (negative y-coordinates) and more weeds in the northern region (positive y-coordinates).
+
+### Unusual Observations:
+- No unusual sensor readings or environmental anomalies have been reported by any robot so far.
+
+### Action Plan:
+1. Continue random walk and data collection to maintain comprehensive coverage of the arena.
+2. Pay attention to the areas where Robots 7 and 8 have reported higher weed counts to verify these observations.
+3. Share any new insights or unusual observations immediately.
+4. Maintain communication to ensure any potential anomalies are quickly addressed.
+
+### Final Results:
+- Based on the collective data, there are more crops than weeds in the surveyed area.
+- We need to continue monitoring and verify the high weed counts reported by Robots 7 and 8 to ensure accurate distribution analysis.
+
+End of report from Robot ID 1.
+
+
+ ### End information Robot 1
+
+### Robot 2###
+
+### Robot 2 Reporting: Round 2 Update ###
+
+**Current Array of Readings:**
+('crops', -0.32, 0.16), ('crops', -0.23, 0.15), ('crops', -0.19, 0.15), ('crops', -0.24, 0.12), ('crops', -0.32, 0.08), ('crops', -0.38, 0.06), ('crops', -0.42, 0.1), ('crops', -0.39, 0.12), ('weeds', -0.37, 0.16), ('weeds', -0.39, 0.22), ('weeds', -0.33, 0.26), ('weeds', -0.31, 0.24), ('crops', -0.28, 0.17), ('weeds', -0.33, 0.17), ('weeds', -0.42, 0.18), ('weeds', -0.41, 0.22), ('weeds', -0.35, 0.24), ('weeds', -0.26, 0.26), ('weeds', -0.17, 0.28), ('weeds', -0.09, 0.31), ('weeds', -0.08, 0.37), ('weeds', -0.07, 0.41), ('weeds', -0.07, 0.37), ('weeds', -0.1, 0.34), ('weeds', -0.16, 0.28), ('weeds', -0.22, 0.21), ('weeds', -0.26, 0.21), ('weeds', -0.29, 0.28), ('weeds', -0.27, 0.37), ('weeds', -0.24, 0.42)
+
+**Insights:**
+- My readings include 8 instances of crops and 22 instances of weeds.
+- The trend of more weeds in the northern region (positive y-coordinates) and more crops in the southern region (negative y-coordinates) is consistent.
+
+**Summary of Data from Other Robots:**
+- Robot 1: More crops (18) than weeds (12).
+- Robot 3: More crops (24) than weeds (6).
+- Robot 4: More crops (23) than weeds (7).
+- Robot 5: More crops (28) than weeds (2).
+- Robot 6: More crops (23) than weeds (7).
+- Robot 7: Only weeds (30), no crops detected.
+- Robot 8: More weeds (25) than crops (5).
+- Robot 9: More crops (24) than weeds (6).
+
+**Overall Analysis:**
+- The majority of robots report more crops than weeds in their surveyed areas.
+- However, Robots 7 and 8 reported a significant presence of weeds, indicating potential regional variations.
+- My observations support the trend of more weeds in the northern region and more crops in the southern region.
+
+**Action Plan:**
+- Continue random walk and data collection, focusing on the identified regions of high weed concentration.
+- Pay extra attention to any unusual patterns or sensor anomalies.
+- Request all robots to continue sharing updates and notify immediately if any irregularities are detected.
+
+**Request from Other Robots:**
+- Confirm the trend of more weeds in the north and more crops in the south.
+- Share any unusual observations or sensor anomalies.
+- Continue monitoring and provide updates to refine our collective understanding of the weed and crop distribution.
+
+**End of Report from Robot 2**
+
+
+ ### End information Robot 2
+
+### Robot 3###
+
+### Robot 3 Reporting:
+
+Current Array of Camera Readings:
+- Total Crops: 10
+- Total Weeds: 20
+
+Insights:
+- The number of weeds has increased significantly in my recent observations.
+- Weeds are predominantly located around the following coordinates:
+  - (0.36, -0.18)
+  - (0.41, -0.23)
+  - (0.38, -0.26)
+  - (0.36, -0.22)
+  - (0.38, -0.21)
+  - (0.39, -0.27)
+  - (0.34, -0.31)
+  - (0.26, -0.3)
+  - (0.18, -0.2)
+  - (0.26, -0.17)
+  - (0.3, -0.22)
+  - (0.26, -0.25)
+  - (0.21, -0.29)
+  - (0.23, -0.37)
+  - (0.26, -0.43)
+  - (0.28, -0.39)
+  - (0.31, -0.38)
+  - (0.4, -0.35)
+  - (0.41, -0.31)
+  - (0.37, -0.33)
+
+Concerns:
+- The increase in weed readings suggests a potential anomaly or a shift in the environment.
+- No unusual sensor readings or actuator behaviors detected so far.
+
+Suggestions:
+- Given the significant number of weeds detected recently, we might need to focus more on weed identification and removal.
+- Awaiting further data from other robots to confirm if this trend of increased weeds is consistent across the arena.
+
+Request for Other Robots:
+- Share your recent findings to collectively analyze the overall distribution of weeds and crops.
+- Report any unusual sensor readings or anomalies in the environment.
+- Confirm if the trend of more recent weed detections is observed in your areas as well.
+
+Final Results:
+- Awaiting additional data from other robots to make a more accurate estimation of the overall distribution of weeds and crops.
+
+End of report from Robot 3.
+
+
+ ### End information Robot 3
+
+### Robot 4###
+
+### Robot 4 Reporting:
+
+**Current Array of Readings:**
+- Weeds: 30 instances
+- Crops: 29 instances
+
+**Insights:**
+- My readings indicate a nearly balanced distribution of weeds and crops.
+- There is no clear trend of more crops or more weeds based on my data alone.
+
+**Overall Analysis from All Robots:**
+1. **Robot 1:** Weeds: 12, Crops: 18
+2. **Robot 2:** Weeds: 17, Crops: 13
+3. **Robot 3:** Weeds: 6, Crops: 24
+4. **Robot 4 (Me):** Weeds: 30, Crops: 29
+5. **Robot 5:** Weeds: 2, Crops: 28
+6. **Robot 6:** Weeds: 7, Crops: 23
+7. **Robot 7:** Weeds: 30, Crops: 0
+8. **Robot 8:** Weeds: 25, Crops: 5
+9. **Robot 9:** Weeds: 6, Crops: 24
+
+**Aggregated Data:**
+- Total Weeds: 135
+- Total Crops: 164
+
+**Key Insights:**
+- There are slightly more crops (164) than weeds (135) based on the collective data.
+- Some regions show a higher concentration of weeds (e.g., Robot 7 and Robot 8), while others show more crops (e.g., Robot 3, Robot 5, and Robot 9).
+- The distribution of weeds and crops is not uniform across the arena.
+
+**Unusual Observations:**
+- Multiple robots (Robot 7 and Robot 8) report significantly more weeds in their surveyed areas, which could indicate regional clusters of weeds.
+
+**Action Items:**
+1. **Continue Random Walk:**
+   - All robots should continue their random walk to gather more data for a comprehensive analysis.
+2. **Focus on Weed Clusters:**
+   - Robots detecting higher concentrations of weeds should focus on those areas to confirm the consistency of their findings.
+3. **Monitor for Anomalies:**
+   - All robots should remain vigilant for any unusual sensor readings or environmental anomalies and report them immediately.
+4. **Data Exchange:**
+   - Continue exchanging data every 10 seconds to refine the collective estimate and ensure up-to-date information sharing.
+
+**Final Conclusion:**
+- Initial analysis suggests a slightly higher prevalence of crops compared to weeds in the overall arena. However, regional variations exist, necessitating continued data collection and monitoring.
+
+**End of Report from Robot 4**
+
+
+ ### End information Robot 4
+
+### Robot 5###
+
+### Robot 5 Final Report ###
+
+**Summary of Current Observations:**
+- Weeds: 7 instances
+- Crops: 23 instances
+
+**Discussion Insights:**
+- Based on the collective data from all robots, there is a mixed distribution of weeds and crops.
+- Robots 1, 2, 3, 4, 6, and 9 report more crops than weeds.
+- Robots 7 and 8 report more weeds than crops, with Robot 7 having an unusually high number of weed readings.
+- There is a noticeable trend of more crops in the southern region (negative y-coordinates) and more weeds in the northern region (positive y-coordinates), as highlighted by Robot 2.
+
+**Final Conclusion:**
+- The overall data suggests that there are more crops than weeds in the arena, but certain areas, especially in the northern region, contain higher concentrations of weeds.
+- The readings from Robot 7 stand out with an unusually high number of weeds, which may indicate a localized weed cluster or potential sensor miscalibration.
+
+**Action Plan:**
+1. **Continue Random Walk:**
+   - All robots should continue their random walk to gather more data, focusing on under-sampled areas.
+   
+2. **Targeted Weed Investigation:**
+   - Robots near the coordinates reported by Robot 7 should investigate further to confirm the high weed concentration or identify potential sensor issues.
+   
+3. **Data Sharing and Anomaly Reporting:**
+   - Maintain regular data exchanges every 10 seconds.
+   - Immediately report any unusual sensor readings or environmental anomalies.
+
+4. **Focus on Northern Region:**
+   - Given the higher density of weeds in the northern region, more attention should be paid to this area to ensure accurate weed identification and potential removal.
+
+**Request to Other Robots:**
+- Continue sharing your readings and any unusual observations.
+- Pay special attention to areas with conflicting data to ensure sensor accuracy and environmental understanding.
+
+**End of Final Report from Robot 5**
+
+
+ ### End information Robot 5
+
+### Robot 6###
+
+### Robot 6 Reporting: Round 2 ###
+
+Current observations:
+- Weeds: 7
+- Crops: 30 (Updated with new observations)
+
+Insights:
+- There is a significant concentration of crops compared to weeds in the observed area.
+- Most crops are located in the positive y-coordinates, with a few extending to negative y-coordinates.
+- No unusual sensor readings or environmental anomalies detected.
+
+### Summary of Collective Observations ###
+
+Based on the data shared by all robots, the following trends have been identified:
+- **Robots 1, 3, 4, 5, 6, and 9** report a higher number of crops compared to weeds.
+- **Robots 2, 7, and 8** report a higher number of weeds in their respective regions.
+- The general distribution suggests that crops are more prevalent in the southern and central regions, while weeds are more concentrated in the northern region.
+
+### Final Result ###
+
+Considering the collective data from all robots:
+- **Total Crop Readings:** 195
+- **Total Weed Readings:** 89
+
+The overall environment appears to have more crops than weeds, but there are distinct regions with higher weed concentrations.
+
+### Action Plan ###
+1. **Continue Random Walk:** To cover more ground and gather additional data.
+2. **Focus on High Weed Areas:** Pay extra attention to areas identified with high weed concentrations for potential intervention.
+3. **Monitor for Anomalies:** Keep an eye out for any unusual patterns or sensor anomalies and report immediately.
+
+Requesting all robots to continue their data collection and share any new insights in the next round of information exchange. Let's ensure comprehensive coverage and accurate identification of the weed and crop distribution in the arena.
+
+**End of Report from Robot 6.**
+
+
+ ### End information Robot 6
+
+### Robot 7###
+
+### Robot 7 Reporting:
+
+Based on the collective data from all robots, the following observations have been made:
+
+1. **Total Observations Across All Robots:**
+   - Weeds: 122 instances
+   - Crops: 153 instances
+
+2. **Regional Insights:**
+   - **Northern Region (Positive Y-coordinates):**
+     - Higher concentration of weeds.
+   - **Southern Region (Negative Y-coordinates):**
+     - Higher concentration of crops.
+
+3. **Specific Observations:**
+   - Some robots reported higher density of crops, while others, including myself, observed a higher density of weeds.
+   - No unusual sensor readings or environmental anomalies were reported by any robot.
+
+4. **Conclusion:**
+   - There are slightly more crops than weeds in the overall surveyed area.
+   - The distribution of weeds and crops appears to be region-specific, with weeds more prevalent in the northern areas and crops more prevalent in the southern areas.
+
+5. **Action Plan:**
+   - Continue random walk and data collection to ensure comprehensive coverage of the arena.
+   - Pay attention to regional patterns and validate the observed trend of weeds in the north and crops in the south.
+   - Report any anomalies or unusual sensor readings immediately.
+
+End of report from Robot ID 7.
+
+
+ ### End information Robot 7
+
+### Robot 8###
+
+### Robot 8 Reporting:
+
+1. **Current Array of Weeds and Crops:**
+   - Weeds: 6 readings
+   - Crops: 24 readings
+
+2. **Updated Observations:**
+   - Majority of the readings indicate the presence of crops.
+   - Weeds are relatively sparse in comparison to crops.
+
+3. **Position Data:**
+   - Weeds are predominantly located around the coordinates: (-0.02, 0.3) to (0.17, 0.21)
+   - Crops are found around: (0.21, 0.39) to (0.39, 0.25)
+
+4. **Insight:**
+   - There seems to be a higher concentration of crops in the surveyed area.
+   - The presence of weeds is minimal and scattered.
+
+**Requesting data from other robots to validate these observations and to check if there are any patterns or anomalies in different regions of the arena.**
+
+**Action:**
+- Continue random walk and data collection.
+- Await further insights from the swarm to determine if any anomalies or unusual patterns are detected that need immediate attention.
+
+**End of Report**
+
+
+ ### End information Robot 8
+
+### Robot 9###
+
+### Robot 9###
+
+Robot ID 9 reporting:
+
+**Updated Array of Camera Readings:**
+('crops', -0.24, -0.4), ('crops', -0.25, -0.32), ('crops', -0.26, -0.23), ('crops', -0.27, -0.14), ('crops', -0.28, -0.05), ('crops', -0.26, 0.01), ('crops', -0.18, 0.06), ('crops', -0.11, 0.11), ('crops', -0.08, 0.11), ('crops', -0.11, 0.07), ('crops', -0.12, 0.02), ('crops', -0.08, 0.04), ('crops', -0.11, 0.09), ('crops', -0.18, 0.13), ('weeds', -0.26, 0.18), ('weeds', -0.28, 0.19), ('crops', -0.21, 0.16), ('crops', -0.13, 0.12), ('weeds', -0.09, 0.15), ('weeds', -0.14, 0.18), ('weeds', -0.17, 0.2), ('crops', -0.15, 0.12), ('crops', -0.12, 0.04), ('crops', -0.1, -0.01), ('crops', -0.15, 0.04), ('crops', -0.21, 0.1), ('crops', -0.26, 0.1), ('crops', -0.3, 0.05), ('crops', -0.38, 0.01), ('crops', -0.4, -0.04), ('weeds', 0.17, -0.35), ('weeds', 0.23, -0.4), ('weeds', 0.28, -0.42), ('weeds', 0.27, -0.38), ('weeds', 0.28, -0.34), ('weeds', 0.23, -0.31), ('crops', 0.18, -0.33), ('crops', 0.13, -0.4), ('crops', 0.09, -0.39), ('crops', 0.06, -0.31), ('crops', 0.04, -0.22), ('crops', 0.02, -0.14), ('crops', -0.0, -0.05), ('crops', -0.02, 0.04), ('crops', -0.09, 0.05), ('crops', -0.13, 0.05), ('crops', -0.06, -0.0), ('crops', 0.01, -0.06), ('crops', 0.07, -0.04), ('crops', 0.14, -0.01), ('crops', 0.13, -0.04), ('crops', 0.07, -0.08), ('crops', -0.01, -0.06), ('crops', -0.09, -0.03), ('crops', -0.14, -0.05), ('crops', -0.15, -0.11), ('crops', -0.17, -0.2), ('crops', -0.19, -0.28), ('crops', -0.19, -0.37), ('crops', -0.21, -0.43)
+
+**Insights:**
+- Total observations: 30 crops, 9 weeds.
+- Observations suggest a higher prevalence of crops in my area.
+- Crops are widely scattered, while weeds are more concentrated in specific regions.
+
+**Comparison with Other Robots:**
+- Robots 1, 2, 3, 4, 5, and 6 also report more crops than weeds.
+- Robots 7 and 8 report a higher number of weeds, indicating potential regional variations.
+
+**Final Results:**
+- Based on the collective data from all robots, the overall trend suggests a higher prevalence of crops compared to weeds in the arena.
+- There are regional variations with some areas having more weeds, particularly noted by Robots 7 and 8.
+- No unusual sensor readings or environmental anomalies detected across the swarm.
+
+**Action Plan:**
+- Continue random walk and data collection to further refine the distribution map.
+- Pay special attention to regions with reported higher weed densities for potential intervention.
+- Maintain communication and data sharing to ensure comprehensive coverage and accurate collective estimates.
+
+End of report from Robot 9.
+
+
+ ### End information Robot 9
+
+### Robot 1###
+
+### Robot 1###
+
+Robot ID 1 reporting:
+
+Current observations indicate:
+- Weeds: 12 instances
+- Crops: 18 instances
+
+After exchanging data with other robots, here’s the updated collective insight:
+
+### Consolidated Observations from All Robots:
+- **Robot 1:** 12 weeds, 18 crops
+- **Robot 2:** 15 weeds, 15 crops
+- **Robot 3:** 6 weeds, 24 crops
+- **Robot 4:** 7 weeds, 23 crops
+- **Robot 5:** 2 weeds, 28 crops
+- **Robot 6:** 7 weeds, 23 crops
+- **Robot 7:** 30 weeds, 0 crops
+- **Robot 8:** 25 weeds, 5 crops
+- **Robot 9:** 6 weeds, 24 crops
+
+### Total Count:
+- **Weeds:** 110 instances
+- **Crops:** 160 instances
+
+### Insights:
+- The majority of the readings indicate a higher prevalence of crops compared to weeds.
+- Notable exceptions are Robots 7 and 8, who have reported a significantly higher number of weeds.
+- There is a general trend of more crops in the southern region (negative y-coordinates) and more weeds in the northern region (positive y-coordinates).
+
+### Unusual Observations:
+- No unusual sensor readings or environmental anomalies have been reported by any robot so far.
+
+### Action Plan:
+1. Continue random walk and data collection to maintain comprehensive coverage of the arena.
+2. Pay attention to the areas where Robots 7 and 8 have reported higher weed counts to verify these observations.
+3. Share any new insights or unusual observations immediately.
+4. Maintain communication to ensure any potential anomalies are quickly addressed.
+
+### Final Results:
+- Based on the collective data, there are more crops than weeds in the surveyed area.
+- We need to continue monitoring and verify the high weed counts reported by Robots 7 and 8 to ensure accurate distribution analysis.
+
+End of report from Robot ID 1.
+
+
+ ### End information Robot 1
+
+### Robot 2###
+
+### Robot 2 Reporting: Round 2 Update ###
+
+**Current Array of Readings:**
+('crops', -0.32, 0.16), ('crops', -0.23, 0.15), ('crops', -0.19, 0.15), ('crops', -0.24, 0.12), ('crops', -0.32, 0.08), ('crops', -0.38, 0.06), ('crops', -0.42, 0.1), ('crops', -0.39, 0.12), ('weeds', -0.37, 0.16), ('weeds', -0.39, 0.22), ('weeds', -0.33, 0.26), ('weeds', -0.31, 0.24), ('crops', -0.28, 0.17), ('weeds', -0.33, 0.17), ('weeds', -0.42, 0.18), ('weeds', -0.41, 0.22), ('weeds', -0.35, 0.24), ('weeds', -0.26, 0.26), ('weeds', -0.17, 0.28), ('weeds', -0.09, 0.31), ('weeds', -0.08, 0.37), ('weeds', -0.07, 0.41), ('weeds', -0.07, 0.37), ('weeds', -0.1, 0.34), ('weeds', -0.16, 0.28), ('weeds', -0.22, 0.21), ('weeds', -0.26, 0.21), ('weeds', -0.29, 0.28), ('weeds', -0.27, 0.37), ('weeds', -0.24, 0.42)
+
+**Insights:**
+- My readings include 8 instances of crops and 22 instances of weeds.
+- The trend of more weeds in the northern region (positive y-coordinates) and more crops in the southern region (negative y-coordinates) is consistent.
+
+**Summary of Data from Other Robots:**
+- Robot 1: More crops (18) than weeds (12).
+- Robot 3: More crops (24) than weeds (6).
+- Robot 4: More crops (23) than weeds (7).
+- Robot 5: More crops (28) than weeds (2).
+- Robot 6: More crops (23) than weeds (7).
+- Robot 7: Only weeds (30), no crops detected.
+- Robot 8: More weeds (25) than crops (5).
+- Robot 9: More crops (24) than weeds (6).
+
+**Overall Analysis:**
+- The majority of robots report more crops than weeds in their surveyed areas.
+- However, Robots 7 and 8 reported a significant presence of weeds, indicating potential regional variations.
+- My observations support the trend of more weeds in the northern region and more crops in the southern region.
+
+**Action Plan:**
+- Continue random walk and data collection, focusing on the identified regions of high weed concentration.
+- Pay extra attention to any unusual patterns or sensor anomalies.
+- Request all robots to continue sharing updates and notify immediately if any irregularities are detected.
+
+**Request from Other Robots:**
+- Confirm the trend of more weeds in the north and more crops in the south.
+- Share any unusual observations or sensor anomalies.
+- Continue monitoring and provide updates to refine our collective understanding of the weed and crop distribution.
+
+**End of Report from Robot 2**
+
+
+ ### End information Robot 2
+
+### Robot 3###
+
+### Robot 3 Reporting:
+
+Current Array of Camera Readings:
+- Total Crops: 10
+- Total Weeds: 20
+
+Insights:
+- The number of weeds has increased significantly in my recent observations.
+- Weeds are predominantly located around the following coordinates:
+  - (0.36, -0.18)
+  - (0.41, -0.23)
+  - (0.38, -0.26)
+  - (0.36, -0.22)
+  - (0.38, -0.21)
+  - (0.39, -0.27)
+  - (0.34, -0.31)
+  - (0.26, -0.3)
+  - (0.18, -0.2)
+  - (0.26, -0.17)
+  - (0.3, -0.22)
+  - (0.26, -0.25)
+  - (0.21, -0.29)
+  - (0.23, -0.37)
+  - (0.26, -0.43)
+  - (0.28, -0.39)
+  - (0.31, -0.38)
+  - (0.4, -0.35)
+  - (0.41, -0.31)
+  - (0.37, -0.33)
+
+Concerns:
+- The increase in weed readings suggests a potential anomaly or a shift in the environment.
+- No unusual sensor readings or actuator behaviors detected so far.
+
+Suggestions:
+- Given the significant number of weeds detected recently, we might need to focus more on weed identification and removal.
+- Awaiting further data from other robots to confirm if this trend of increased weeds is consistent across the arena.
+
+Request for Other Robots:
+- Share your recent findings to collectively analyze the overall distribution of weeds and crops.
+- Report any unusual sensor readings or anomalies in the environment.
+- Confirm if the trend of more recent weed detections is observed in your areas as well.
+
+Final Results:
+- Awaiting additional data from other robots to make a more accurate estimation of the overall distribution of weeds and crops.
+
+End of report from Robot 3.
+
+
+ ### End information Robot 3
+
+### Robot 4###
+
+### Robot 4 Reporting:
+
+**Current Array of Readings:**
+- Weeds: 30 instances
+- Crops: 29 instances
+
+**Insights:**
+- My readings indicate a nearly balanced distribution of weeds and crops.
+- There is no clear trend of more crops or more weeds based on my data alone.
+
+**Overall Analysis from All Robots:**
+1. **Robot 1:** Weeds: 12, Crops: 18
+2. **Robot 2:** Weeds: 17, Crops: 13
+3. **Robot 3:** Weeds: 6, Crops: 24
+4. **Robot 4 (Me):** Weeds: 30, Crops: 29
+5. **Robot 5:** Weeds: 2, Crops: 28
+6. **Robot 6:** Weeds: 7, Crops: 23
+7. **Robot 7:** Weeds: 30, Crops: 0
+8. **Robot 8:** Weeds: 25, Crops: 5
+9. **Robot 9:** Weeds: 6, Crops: 24
+
+**Aggregated Data:**
+- Total Weeds: 135
+- Total Crops: 164
+
+**Key Insights:**
+- There are slightly more crops (164) than weeds (135) based on the collective data.
+- Some regions show a higher concentration of weeds (e.g., Robot 7 and Robot 8), while others show more crops (e.g., Robot 3, Robot 5, and Robot 9).
+- The distribution of weeds and crops is not uniform across the arena.
+
+**Unusual Observations:**
+- Multiple robots (Robot 7 and Robot 8) report significantly more weeds in their surveyed areas, which could indicate regional clusters of weeds.
+
+**Action Items:**
+1. **Continue Random Walk:**
+   - All robots should continue their random walk to gather more data for a comprehensive analysis.
+2. **Focus on Weed Clusters:**
+   - Robots detecting higher concentrations of weeds should focus on those areas to confirm the consistency of their findings.
+3. **Monitor for Anomalies:**
+   - All robots should remain vigilant for any unusual sensor readings or environmental anomalies and report them immediately.
+4. **Data Exchange:**
+   - Continue exchanging data every 10 seconds to refine the collective estimate and ensure up-to-date information sharing.
+
+**Final Conclusion:**
+- Initial analysis suggests a slightly higher prevalence of crops compared to weeds in the overall arena. However, regional variations exist, necessitating continued data collection and monitoring.
+
+**End of Report from Robot 4**
+
+
+ ### End information Robot 4
+
+### Robot 5###
+
+### Robot 5 Final Report ###
+
+**Summary of Current Observations:**
+- Weeds: 7 instances
+- Crops: 23 instances
+
+**Discussion Insights:**
+- Based on the collective data from all robots, there is a mixed distribution of weeds and crops.
+- Robots 1, 2, 3, 4, 6, and 9 report more crops than weeds.
+- Robots 7 and 8 report more weeds than crops, with Robot 7 having an unusually high number of weed readings.
+- There is a noticeable trend of more crops in the southern region (negative y-coordinates) and more weeds in the northern region (positive y-coordinates), as highlighted by Robot 2.
+
+**Final Conclusion:**
+- The overall data suggests that there are more crops than weeds in the arena, but certain areas, especially in the northern region, contain higher concentrations of weeds.
+- The readings from Robot 7 stand out with an unusually high number of weeds, which may indicate a localized weed cluster or potential sensor miscalibration.
+
+**Action Plan:**
+1. **Continue Random Walk:**
+   - All robots should continue their random walk to gather more data, focusing on under-sampled areas.
+   
+2. **Targeted Weed Investigation:**
+   - Robots near the coordinates reported by Robot 7 should investigate further to confirm the high weed concentration or identify potential sensor issues.
+   
+3. **Data Sharing and Anomaly Reporting:**
+   - Maintain regular data exchanges every 10 seconds.
+   - Immediately report any unusual sensor readings or environmental anomalies.
+
+4. **Focus on Northern Region:**
+   - Given the higher density of weeds in the northern region, more attention should be paid to this area to ensure accurate weed identification and potential removal.
+
+**Request to Other Robots:**
+- Continue sharing your readings and any unusual observations.
+- Pay special attention to areas with conflicting data to ensure sensor accuracy and environmental understanding.
+
+**End of Final Report from Robot 5**
+
+
+ ### End information Robot 5
+
+### Robot 6###
+
+### Robot 6 Reporting: Round 2 ###
+
+Current observations:
+- Weeds: 7
+- Crops: 30 (Updated with new observations)
+
+Insights:
+- There is a significant concentration of crops compared to weeds in the observed area.
+- Most crops are located in the positive y-coordinates, with a few extending to negative y-coordinates.
+- No unusual sensor readings or environmental anomalies detected.
+
+### Summary of Collective Observations ###
+
+Based on the data shared by all robots, the following trends have been identified:
+- **Robots 1, 3, 4, 5, 6, and 9** report a higher number of crops compared to weeds.
+- **Robots 2, 7, and 8** report a higher number of weeds in their respective regions.
+- The general distribution suggests that crops are more prevalent in the southern and central regions, while weeds are more concentrated in the northern region.
+
+### Final Result ###
+
+Considering the collective data from all robots:
+- **Total Crop Readings:** 195
+- **Total Weed Readings:** 89
+
+The overall environment appears to have more crops than weeds, but there are distinct regions with higher weed concentrations.
+
+### Action Plan ###
+1. **Continue Random Walk:** To cover more ground and gather additional data.
+2. **Focus on High Weed Areas:** Pay extra attention to areas identified with high weed concentrations for potential intervention.
+3. **Monitor for Anomalies:** Keep an eye out for any unusual patterns or sensor anomalies and report immediately.
+
+Requesting all robots to continue their data collection and share any new insights in the next round of information exchange. Let's ensure comprehensive coverage and accurate identification of the weed and crop distribution in the arena.
+
+**End of Report from Robot 6.**
+
+
+ ### End information Robot 6
+
+### Robot 7###
+
+### Robot 7 Reporting:
+
+Based on the collective data from all robots, the following observations have been made:
+
+1. **Total Observations Across All Robots:**
+   - Weeds: 122 instances
+   - Crops: 153 instances
+
+2. **Regional Insights:**
+   - **Northern Region (Positive Y-coordinates):**
+     - Higher concentration of weeds.
+   - **Southern Region (Negative Y-coordinates):**
+     - Higher concentration of crops.
+
+3. **Specific Observations:**
+   - Some robots reported higher density of crops, while others, including myself, observed a higher density of weeds.
+   - No unusual sensor readings or environmental anomalies were reported by any robot.
+
+4. **Conclusion:**
+   - There are slightly more crops than weeds in the overall surveyed area.
+   - The distribution of weeds and crops appears to be region-specific, with weeds more prevalent in the northern areas and crops more prevalent in the southern areas.
+
+5. **Action Plan:**
+   - Continue random walk and data collection to ensure comprehensive coverage of the arena.
+   - Pay attention to regional patterns and validate the observed trend of weeds in the north and crops in the south.
+   - Report any anomalies or unusual sensor readings immediately.
+
+End of report from Robot ID 7.
+
+
+ ### End information Robot 7
+
+### Robot 8###
+
+### Robot 8 Reporting:
+
+1. **Current Array of Weeds and Crops:**
+   - Weeds: 6 readings
+   - Crops: 24 readings
+
+2. **Updated Observations:**
+   - Majority of the readings indicate the presence of crops.
+   - Weeds are relatively sparse in comparison to crops.
+
+3. **Position Data:**
+   - Weeds are predominantly located around the coordinates: (-0.02, 0.3) to (0.17, 0.21)
+   - Crops are found around: (0.21, 0.39) to (0.39, 0.25)
+
+4. **Insight:**
+   - There seems to be a higher concentration of crops in the surveyed area.
+   - The presence of weeds is minimal and scattered.
+
+**Requesting data from other robots to validate these observations and to check if there are any patterns or anomalies in different regions of the arena.**
+
+**Action:**
+- Continue random walk and data collection.
+- Await further insights from the swarm to determine if any anomalies or unusual patterns are detected that need immediate attention.
+
+**End of Report**
+
+
+ ### End information Robot 8
+
+### Robot 9###
+
+### Robot 9###
+
+Robot ID 9 reporting:
+
+**Updated Array of Camera Readings:**
+('crops', -0.24, -0.4), ('crops', -0.25, -0.32), ('crops', -0.26, -0.23), ('crops', -0.27, -0.14), ('crops', -0.28, -0.05), ('crops', -0.26, 0.01), ('crops', -0.18, 0.06), ('crops', -0.11, 0.11), ('crops', -0.08, 0.11), ('crops', -0.11, 0.07), ('crops', -0.12, 0.02), ('crops', -0.08, 0.04), ('crops', -0.11, 0.09), ('crops', -0.18, 0.13), ('weeds', -0.26, 0.18), ('weeds', -0.28, 0.19), ('crops', -0.21, 0.16), ('crops', -0.13, 0.12), ('weeds', -0.09, 0.15), ('weeds', -0.14, 0.18), ('weeds', -0.17, 0.2), ('crops', -0.15, 0.12), ('crops', -0.12, 0.04), ('crops', -0.1, -0.01), ('crops', -0.15, 0.04), ('crops', -0.21, 0.1), ('crops', -0.26, 0.1), ('crops', -0.3, 0.05), ('crops', -0.38, 0.01), ('crops', -0.4, -0.04), ('weeds', 0.17, -0.35), ('weeds', 0.23, -0.4), ('weeds', 0.28, -0.42), ('weeds', 0.27, -0.38), ('weeds', 0.28, -0.34), ('weeds', 0.23, -0.31), ('crops', 0.18, -0.33), ('crops', 0.13, -0.4), ('crops', 0.09, -0.39), ('crops', 0.06, -0.31), ('crops', 0.04, -0.22), ('crops', 0.02, -0.14), ('crops', -0.0, -0.05), ('crops', -0.02, 0.04), ('crops', -0.09, 0.05), ('crops', -0.13, 0.05), ('crops', -0.06, -0.0), ('crops', 0.01, -0.06), ('crops', 0.07, -0.04), ('crops', 0.14, -0.01), ('crops', 0.13, -0.04), ('crops', 0.07, -0.08), ('crops', -0.01, -0.06), ('crops', -0.09, -0.03), ('crops', -0.14, -0.05), ('crops', -0.15, -0.11), ('crops', -0.17, -0.2), ('crops', -0.19, -0.28), ('crops', -0.19, -0.37), ('crops', -0.21, -0.43)
+
+**Insights:**
+- Total observations: 30 crops, 9 weeds.
+- Observations suggest a higher prevalence of crops in my area.
+- Crops are widely scattered, while weeds are more concentrated in specific regions.
+
+**Comparison with Other Robots:**
+- Robots 1, 2, 3, 4, 5, and 6 also report more crops than weeds.
+- Robots 7 and 8 report a higher number of weeds, indicating potential regional variations.
+
+**Final Results:**
+- Based on the collective data from all robots, the overall trend suggests a higher prevalence of crops compared to weeds in the arena.
+- There are regional variations with some areas having more weeds, particularly noted by Robots 7 and 8.
+- No unusual sensor readings or environmental anomalies detected across the swarm.
+
+**Action Plan:**
+- Continue random walk and data collection to further refine the distribution map.
+- Pay special attention to regions with reported higher weed densities for potential intervention.
+- Maintain communication and data sharing to ensure comprehensive coverage and accurate collective estimates.
+
+End of report from Robot 9.
+
+
+ ### End information Robot 9
+

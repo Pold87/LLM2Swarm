@@ -1,0 +1,9 @@
+Robot 2 reporting for information exchange round 1.
+
+My array of camera readings shows the following:
+- All 10 readings contain crops.
+- The coordinates of the readings are spread across the area with no indication of weeds.
+
+Insight: Based on my readings alone, there seems to be a prevalence of crops in the observed area with no detection of weeds so far.
+
+Requesting data from other robots to collectively estimate the overall distribution of weeds and crops in the arena.

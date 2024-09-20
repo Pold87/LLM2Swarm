@@ -1,0 +1,20 @@
+Robot ID 7 reporting for information exchange round 1.
+
+Current camera readings:
+1. ('crops', 0.07, -0.03)
+2. ('crops', 0.11, -0.0)
+3. ('crops', 0.13, -0.05)
+4. ('crops', 0.16, -0.05)
+5. ('crops', 0.25, -0.04)
+6. ('crops', 0.31, -0.01)
+7. ('crops', 0.39, -0.03)
+8. ('crops', 0.41, -0.07)
+9. ('crops', 0.39, -0.1)
+10. ('weeds', 0.38, -0.15)
+
+Insights:
+- Majority of the observed area contains crops.
+- Weeds detected at coordinates (0.38, -0.15).
+
+Requesting data from other robots for collective estimation of the weeds-to-crops ratio.
+End of report.

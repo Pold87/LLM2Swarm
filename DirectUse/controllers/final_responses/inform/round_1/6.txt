@@ -1,0 +1,16 @@
+Robot 6 reporting:
+
+Current observations:
+- Crops detected: 9
+- Weeds detected: 1
+
+Positions of observations:
+- Crops: (0.19, 0.12), (0.16, 0.03), (0.14, -0.05), (0.12, -0.13), (0.15, -0.21), (0.15, -0.34), (0.09, -0.4), (0.05, -0.39), (0.05, -0.33)
+- Weeds: (0.18, -0.27)
+
+Insight:
+- Higher concentration of crops compared to weeds in the observed area.
+
+Requesting data from other robots to confirm the overall distribution of weeds and crops in the arena.
+
+Robot 6 out.

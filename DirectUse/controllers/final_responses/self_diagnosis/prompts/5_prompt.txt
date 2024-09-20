@@ -1,0 +1,228 @@
+Your robot ID is 5.
+
+So far, your array of weeds and crops looks as follows:
+
+('crops', -0.18, 0.07), ('crops', -0.18, 0.07), ('crops', -0.18, 0.07), ('crops', -0.18, 0.07), ('crops', -0.18, 0.07), ('crops', -0.18, 0.07), ('crops', -0.18, 0.07), ('crops', -0.18, 0.07), ('crops', -0.18, 0.07), ('crops', -0.18, 0.07)
+
+You are in information exchange round 2.
+
+The results of the previous discussion rounds were:
+
+### Robot 1###
+
+Robot ID 1 reporting:
+
+Current array of weeds and crops:
+('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1), ('crops', -0.12, -0.1)
+
+Observations:
+- All readings so far have indicated crops.
+- All readings are from the same location (-0.12, -0.1).
+
+Insights:
+- There might be an issue with my camera or movement system, as I am not capturing data from different locations.
+- Further investigation is needed to determine if this is an anomaly or if it is accurate.
+
+Request:
+- Please share your arrays of weeds and crops to help collectively estimate the distribution.
+- Notify if any of you have encountered similar issues or anomalies.
+
+Awaiting your responses.
+
+
+ ### End information Robot 1
+
+### Robot 2###
+
+**Robot ID: 2**
+
+**Current Observations:**
+- ('crops', -0.16, -0.3)
+- ('crops', -0.16, -0.3)
+- ('crops', -0.16, -0.3)
+- ('crops', -0.16, -0.3)
+- ('crops', -0.16, -0.3)
+- ('crops', -0.16, -0.3)
+- ('crops', -0.16, -0.3)
+- ('crops', -0.16, -0.3)
+- ('crops', -0.16, -0.3)
+- ('crops', -0.16, -0.3)
+
+**Insights:**
+- All my readings so far have detected only crops in the same location (-0.16, -0.3).
+- This could indicate a high density of crops in this specific area or a potential sensor issue.
+
+**Questions/Concerns:**
+- Are other robots detecting a similar pattern, or is this specific to my observations?
+- Has anyone detected any weeds, or are crops predominantly observed across the arena?
+- Is there any indication of sensor malfunction from other robots?
+
+**Action Plan:**
+1. Continue with random walk and take more measurements to diversify the sampling area.
+2. Exchange this information with other robots to compare and validate the data.
+3. If the same pattern persists, consider a potential sensor check.
+
+**Request for Feedback:**
+- Please share your current observations and any patterns you have noticed.
+- Report any unusual sensor behavior or environmental changes you have encountered.
+
+
+ ### End information Robot 2
+
+### Robot 3###
+
+Robot 3 reporting:
+
+Current observations:
+- All recorded data points indicate the presence of crops at coordinates (0.22, -0.06).
+
+Request for input:
+- Have any other robots observed weeds in the vicinity of coordinates (0.22, -0.06)?
+- Are there any unusual patterns or sensor anomalies detected by other robots?
+
+Please share your observations and insights to collectively determine the prevalence of weeds versus crops in the arena.
+
+
+ ### End information Robot 3
+
+### Robot 4###
+
+Robot 4 reporting:
+
+Current data:
+- ('crops', 0.32, 0.22), ('crops', 0.32, 0.22), ('crops', 0.32, 0.22), ('crops', 0.32, 0.22), ('crops', 0.32, 0.22), ('crops', 0.32, 0.22), ('crops', 0.32, 0.22), ('crops', 0.32, 0.22), ('crops', 0.32, 0.22), ('crops', 0.32, 0.22)
+
+Observations:
+- All readings so far indicate crops at position (0.32, 0.22).
+- No weeds detected in my current dataset.
+
+Actions:
+- Continue random walk and data collection.
+- Await data from other robots to compare and analyze collective findings.
+- If any robot detects a significant anomaly or unusual pattern, notify the swarm for further investigation.
+
+Request:
+- Please share your current datasets and any insights or anomalies observed.
+
+End of report.
+
+
+ ### End information Robot 4
+
+### Robot 5###
+
+Robot 5 reporting:
+
+Current camera readings:
+- Crops: 10
+- Weeds: 0
+
+Position of readings: (-0.18, 0.07)
+
+Observation: All readings so far indicate the presence of crops only. 
+
+Requesting input from other robots to determine if this is an anomaly or if the environment is predominantly crops. Please share your camera readings and any unusual observations.
+
+End of report.
+
+
+ ### End information Robot 5
+
+### Robot 6###
+
+Robot ID: 6
+
+Current Array of Camera Readings:
+('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22), ('weeds', 0.08, 0.22)
+
+Observation:
+- All measurements so far have detected weeds at the same position (0.08, 0.22).
+
+Message to Other Robots:
+1. **Unusual Pattern Detected**: All my readings have detected weeds at the exact same position (0.08, 0.22). This might indicate a sensor malfunction or an environmental anomaly.
+2. **Request for Confirmation**: Please verify if any of you have detected crops or other patterns in different positions.
+3. **Collective Insight Needed**: Share your findings to help us determine if there are more weeds or crops overall.
+
+
+ ### End information Robot 6
+
+### Robot 7###
+
+Robot ID: 7 - Information Exchange Round 1
+
+Array of Weeds and Crops:
+1. ('crops', -0.25, -0.32)
+2. ('crops', -0.25, -0.32)
+3. ('crops', -0.25, -0.32)
+4. ('crops', -0.25, -0.32)
+5. ('crops', -0.25, -0.32)
+6. ('crops', -0.25, -0.32)
+7. ('crops', -0.25, -0.32)
+8. ('crops', -0.25, -0.32)
+9. ('crops', -0.25, -0.32)
+10. ('crops', -0.25, -0.32)
+
+Insights to share:
+- All my readings so far indicate crops at position (-0.25, -0.32).
+- No weeds detected in my current array.
+
+Questions/Concerns:
+- Does anyone have readings indicating the presence of weeds?
+- Are there any unusual sensor readings or anomalies detected by other robots?
+
+Objective:
+- Collaborate to determine the overall ratio of weeds to crops in the arena.
+- Assess if any action is required based on the collective data.
+
+
+ ### End information Robot 7
+
+### Robot 8###
+
+Robot ID: 8
+
+Array of camera readings: [('crops', -0.09, -0.19), ('crops', -0.09, -0.19), ('crops', -0.09, -0.19), ('crops', -0.09, -0.19), ('crops', -0.09, -0.19), ('crops', -0.09, -0.19), ('crops', -0.09, -0.19), ('crops', -0.09, -0.19), ('crops', -0.09, -0.19), ('crops', -0.09, -0.19)]
+
+Insights: 
+- All of my readings so far have detected crops.
+- The position of my readings has been consistent at (-0.09, -0.19).
+
+Questions/Concerns:
+- Is there a malfunction in my camera or movement system since all readings are identical?
+- Have other robots detected any weeds?
+- Has anyone else experienced similar consistent readings or potential malfunctions?
+
+Recommendation:
+- Based on my readings, it appears that crops are predominant, but further data from other robots is needed to confirm this.
+- Please share your readings and any anomalies you've detected.
+
+
+ ### End information Robot 8
+
+### Robot 9###
+
+Robot ID: 9
+
+Current Array of Camera Readings:
+1. ('weeds', -0.22, 0.15)
+2. ('weeds', -0.22, 0.15)
+3. ('weeds', -0.22, 0.15)
+4. ('weeds', -0.22, 0.15)
+5. ('weeds', -0.22, 0.15)
+6. ('weeds', -0.22, 0.15)
+7. ('weeds', -0.22, 0.15)
+8. ('weeds', -0.22, 0.15)
+9. ('weeds', -0.22, 0.15)
+10. ('weeds', -0.22, 0.15)
+
+Insight:
+- All my readings are indicating the presence of weeds at the same location (-0.22, 0.15). This could suggest a potential sensor error or an area heavily infested with weeds.
+
+Action:
+- I will notify other robots about the consistency of my readings at the same location and inquire if they have encountered similar patterns or have any data from the same coordinates.
+- Request other robots to share their readings from different locations to collectively determine if there are more weeds or crops in the arena.
+- Suggest verifying our sensors' accuracy to ensure that the data we are collecting is reliable.
+
+
+ ### End information Robot 9
+

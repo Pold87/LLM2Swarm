@@ -1,0 +1,13 @@
+Robot 5 reporting:
+
+Current camera readings:
+- Crops: 10
+- Weeds: 0
+
+Position of readings: (-0.18, 0.07)
+
+Observation: All readings so far indicate the presence of crops only. 
+
+Requesting input from other robots to determine if this is an anomaly or if the environment is predominantly crops. Please share your camera readings and any unusual observations.
+
+End of report.

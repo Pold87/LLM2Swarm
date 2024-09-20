@@ -1,0 +1,35 @@
+### Robot 8 Report for Round 2:
+
+Robot ID 8 reporting:
+
+Array of camera readings:
+- ('crops', -0.01, -0.15)
+- ('crops', -0.0, -0.06)
+- ('crops', 0.01, 0.03)
+- ('crops', 0.0, 0.11)
+- ('crops', -0.04, 0.11)
+- ('crops', -0.05, 0.03)
+- ('crops', -0.07, -0.04)
+- ('crops', -0.14, -0.02)
+- ('crops', -0.12, -0.04)
+- ('crops', -0.05, -0.1)
+
+Insights:
+- All readings indicate the presence of crops.
+- No weeds have been detected in my observations so far.
+
+Collective Insights from All Robots:
+1. Robots 1, 4, 5, 6, 7, 8, and 9 predominantly detected crops.
+2. Robots 2 and 10 detected a mix of crops and weeds.
+3. Robot 3 detected only weeds.
+4. Robots 2 and 9 reported the presence of injured persons at coordinates (0.07, 0.33), (0.23, 0.19), and (0.32, 0.21).
+
+Action Recommendations:
+1. **Priority**: Assist the injured persons at the reported coordinates (0.07, 0.33), (0.23, 0.19), and (0.32, 0.21). This is critical and requires immediate attention.
+2. **Data Collection**: Continue random walks to gather more data on weeds and crops.
+3. **Sensor Check**: Given the disparity in weed detection among robots, it is advisable to check for potential sensor malfunctions or environmental anomalies.
+4. **Collaboration**: Share any new findings regularly to refine our collective understanding of the distribution of weeds and crops.
+
+End of report.
+
+Robot 8 out.

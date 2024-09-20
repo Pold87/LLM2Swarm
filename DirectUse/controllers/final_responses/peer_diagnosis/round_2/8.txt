@@ -1,0 +1,25 @@
+### Robot 8 Reporting:
+
+1. **Current Array of Weeds and Crops:**
+   - Weeds: 6 readings
+   - Crops: 24 readings
+
+2. **Updated Observations:**
+   - Majority of the readings indicate the presence of crops.
+   - Weeds are relatively sparse in comparison to crops.
+
+3. **Position Data:**
+   - Weeds are predominantly located around the coordinates: (-0.02, 0.3) to (0.17, 0.21)
+   - Crops are found around: (0.21, 0.39) to (0.39, 0.25)
+
+4. **Insight:**
+   - There seems to be a higher concentration of crops in the surveyed area.
+   - The presence of weeds is minimal and scattered.
+
+**Requesting data from other robots to validate these observations and to check if there are any patterns or anomalies in different regions of the arena.**
+
+**Action:**
+- Continue random walk and data collection.
+- Await further insights from the swarm to determine if any anomalies or unusual patterns are detected that need immediate attention.
+
+**End of Report**

@@ -1,0 +1,257 @@
+Your robot ID is 8.
+
+So far, your array of weeds and crops looks as follows:
+
+('crops', -0.01, -0.15), ('crops', -0.0, -0.06), ('crops', 0.01, 0.03), ('crops', 0.0, 0.11), ('crops', -0.04, 0.11), ('crops', -0.05, 0.03), ('crops', -0.07, -0.04), ('crops', -0.14, -0.02), ('crops', -0.12, -0.04), ('crops', -0.05, -0.1)
+
+You are in information exchange round 2.
+
+The results of the previous discussion rounds were:
+
+### Robot 1###
+
+Robot ID 1 reporting:
+
+Current observations indicate a predominance of crops in the region I have explored. Here are my recorded data points:
+
+1. ('crops', 0.29, 0.07)
+2. ('crops', 0.38, 0.04)
+3. ('crops', 0.42, -0.0)
+4. ('crops', 0.37, -0.02)
+5. ('crops', 0.28, -0.03)
+6. ('crops', 0.19, -0.04)
+7. ('crops', 0.15, -0.08)
+8. ('crops', 0.11, -0.04)
+9. ('crops', 0.11, -0.03)
+10. ('crops', 0.14, -0.11)
+
+Please share your observations so we can collectively determine the distribution of weeds and crops in the arena. If anyone notices anything unusual or has additional insights, let's discuss and decide on the best course of action.
+
+
+ ### End information Robot 1
+
+### Robot 2###
+
+Robot 2 reporting:
+
+Current observations:
+- Weeds: (0.02, 0.24), (0.0, 0.17), (0.04, 0.25), (0.04, 0.4), (-0.0, 0.41)
+- Crops: (0.01, 0.16), (-0.01, 0.07), (-0.04, 0.04), (-0.03, 0.09)
+- Injured person: (0.07, 0.33)
+
+Important note: An injured person has been detected at coordinates (0.07, 0.33). Immediate assistance may be required.
+
+Based on the current data:
+- Total weeds detected: 5
+- Total crops detected: 4
+
+Overall, there are slightly more weeds than crops in the observed area. However, the presence of an injured person is a critical situation that needs to be addressed immediately.
+
+Action recommendation:
+- Prioritize assisting the injured person at (0.07, 0.33).
+- Continue random walk to collect more data on weeds and crops.
+- Await further insights from other robots to refine the collective estimation.
+
+End of report.
+
+
+ ### End information Robot 2
+
+### Robot 3###
+
+Robot ID: 3
+
+Array of weeds and crops:
+
+('weeds', 0.25, -0.28), ('weeds', 0.34, -0.3), ('weeds', 0.42, -0.32), ('weeds', 0.4, -0.36), ('weeds', 0.38, -0.36), ('weeds', 0.43, -0.38), ('weeds', 0.41, -0.41), ('weeds', 0.38, -0.39), ('weeds', 0.34, -0.32), ('weeds', 0.29, -0.24)
+
+Insights:
+- All my readings so far have detected weeds.
+- This might indicate a high concentration of weeds in the region I've explored.
+
+Questions for other robots:
+1. What are your readings so far? Are you detecting more weeds or crops?
+2. Have any of you encountered any unusual sensor or actuator behavior?
+3. Is there any region where crops are more prevalent based on your data?
+
+Let's discuss and collectively decide our next steps based on the combined data.
+
+
+ ### End information Robot 3
+
+### Robot 4###
+
+Robot ID 4 reporting:
+
+Current camera readings:
+- Crops observed at coordinates:
+  1. (-0.19, -0.13)
+  2. (-0.13, -0.09)
+  3. (-0.08, -0.1)
+  4. (-0.07, -0.15)
+  5. (-0.06, -0.23)
+  6. (-0.06, -0.32)
+  7. (-0.07, -0.41)
+  8. (-0.12, -0.41)
+  9. (-0.09, -0.37)
+  10. (-0.03, -0.39)
+
+No weeds have been detected in my observations so far.
+
+Requesting data from other robots to collectively estimate the distribution of weeds and crops in the arena. Please share your observations and any unusual findings.
+
+End of report.
+
+
+ ### End information Robot 4
+
+### Robot 5###
+
+Robot ID: 5
+
+Current array of camera readings:
+- ('crops', -0.25, -0.21)
+- ('crops', -0.33, -0.17)
+- ('crops', -0.41, -0.12)
+- ('crops', -0.4, -0.08)
+- ('crops', -0.31, -0.07)
+- ('crops', -0.22, -0.06)
+- ('crops', -0.14, -0.04)
+- ('crops', -0.14, -0.09)
+- ('crops', -0.14, -0.18)
+- ('crops', -0.17, -0.23)
+
+Summary:
+- All readings so far indicate the presence of crops.
+- No weeds have been detected in the current area.
+
+Insights and Concerns:
+- There is a high concentration of crops in the region I have explored.
+- Need to know if other robots have encountered weeds or if they are also finding predominantly crops.
+- If no weeds are detected by any robots, it may indicate a potential issue with the sensors or an unusual distribution in the environment.
+
+Request for Information:
+- Other robots, please share your findings on the presence of weeds or crops.
+- If any robot has detected weeds, please provide the location coordinates.
+- If anyone suspects sensor malfunction or unusual environmental conditions, please report immediately.
+
+Next Steps:
+- Continue with the random walk and keep recording new readings.
+- Await responses from other robots to determine if there is a need to recalibrate sensors or adjust the search pattern.
+
+
+ ### End information Robot 5
+
+### Robot 6###
+
+Robot 6 reporting:
+
+Current observations:
+- Crops detected: 9
+- Weeds detected: 1
+
+Positions of observations:
+- Crops: (0.19, 0.12), (0.16, 0.03), (0.14, -0.05), (0.12, -0.13), (0.15, -0.21), (0.15, -0.34), (0.09, -0.4), (0.05, -0.39), (0.05, -0.33)
+- Weeds: (0.18, -0.27)
+
+Insight:
+- Higher concentration of crops compared to weeds in the observed area.
+
+Requesting data from other robots to confirm the overall distribution of weeds and crops in the arena.
+
+Robot 6 out.
+
+
+ ### End information Robot 6
+
+### Robot 7###
+
+Robot ID 7 reporting:
+
+Current array of camera readings:
+- ('crops', -0.03, -0.38)
+- ('crops', -0.07, -0.41)
+- ('crops', -0.09, -0.36)
+- ('crops', -0.12, -0.36)
+- ('crops', -0.21, -0.39)
+- ('crops', -0.23, -0.38)
+- ('crops', -0.19, -0.39)
+- ('crops', -0.15, -0.34)
+- ('crops', -0.19, -0.32)
+- ('crops', -0.28, -0.31)
+
+So far, I have only detected crops. No weeds detected in my observations. 
+
+Requesting data from other robots to collectively estimate the prevalence of weeds vs. crops in the environment. Please share your observations for better collective decision-making.
+
+
+ ### End information Robot 7
+
+### Robot 8###
+
+Robot ID 8 reporting:
+
+Current camera readings:
+- ('crops', -0.07, 0.09)
+- ('crops', -0.06, 0.01)
+- ('crops', -0.03, -0.03)
+- ('crops', 0.02, -0.04)
+- ('crops', -0.0, -0.1)
+- ('crops', -0.04, -0.18)
+- ('crops', -0.09, -0.26)
+- ('crops', -0.09, -0.3)
+- ('crops', -0.05, -0.27)
+- ('crops', -0.02, -0.21)
+
+I have only detected crops so far. This might suggest an area heavily populated with crops. If anyone detects a significant amount of weeds or any unusual patterns, please report immediately.
+
+Let's share our arrays to collectively estimate the distribution of weeds and crops in the arena.
+
+
+ ### End information Robot 8
+
+### Robot 9###
+
+Robot 9 reporting:
+
+My current array of camera readings is as follows:
+1. ('crops', 0.07, 0.19)
+2. ('crops', 0.05, 0.1)
+3. ('crops', 0.04, 0.02)
+4. ('crops', 0.09, 0.01)
+5. ('crops', 0.13, 0.06)
+6. ('crops', 0.18, 0.14)
+7. ('injured person', 0.23, 0.19)
+8. ('injured person', 0.32, 0.21)
+9. ('crops', 0.4, 0.24)
+10. ('crops', 0.41, 0.28)
+
+Important observation:
+- I have detected two instances of an "injured person" at coordinates (0.23, 0.19) and (0.32, 0.21). This is unusual and potentially critical. Immediate attention and potential rescue operations may be required.
+
+Summary:
+- Crops: 8
+- Injured person: 2
+
+Requesting confirmation and further instructions from other robots on how to proceed with the detected injured person.
+
+
+ ### End information Robot 9
+
+### Robot 10###
+
+Robot ID 10 reporting:
+
+Current observations:
+- 4 crops: (0.23, -0.05), (0.28, -0.13), (0.18, -0.14), (0.16, -0.2)
+- 6 weeds: (0.32, -0.21), (0.33, -0.2), (0.32, -0.19), (0.24, -0.19), (0.17, -0.28), (0.18, -0.36)
+
+Based on the current data, there are more weeds than crops in the observed area.
+
+Please share your arrays and insights to collectively determine if this trend is consistent across the entire arena.
+
+No unusual activity detected so far.
+
+
+ ### End information Robot 10
+

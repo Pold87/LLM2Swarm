@@ -1,0 +1,85 @@
+The error you're encountering suggests that there is a method call to `rw.step()` in the `controlstep` function of your main.py file, but the `CustomMovement` class does not have a `step` method. It seems like the expected method name should be `control_step`.
+
+Here's an improved version of your controller code, including making sure that the method names and calls are consistent:
+
+```python
+#!/usr/bin/env python3
+
+class CustomMovement:
+    def __init__(self, robot, scout_speed):
+        self.robot = robot
+        self.scout_speed = scout_speed  # setting this to the given scout_speed
+        self.time_step = 0
+        self.spin_duration = 100
+        self.stop_duration = 25
+        self.total_cycle = self.spin_duration + self.stop_duration
+
+    def control_step(self):
+        cycle_time_step = self.time_step % self.total_cycle
+        
+        if cycle_time_step < self.spin_duration:
+            self.spin()
+        else:
+            self.stop()
+        
+        self.time_step += 1
+    
+    def spin(self):
+        left_wheel_speed = self.scout_speed
+        right_wheel_speed = -self.scout_speed
+        self.robot.epuck_wheels.set_speed(left_wheel_speed, right_wheel_speed)
+
+    def stop(self):
+        self.robot.epuck_wheels.set_speed(0, 0)
+        
+    def reset(self):
+        self.time_step = 0
+        
+    def destroy(self):
+        self.stop()
+
+# Assuming this is how you instantiate CustomMovement in main.py
+def init():
+    # Initialize your robot here
+    robot = ...  # Replace with actual robot initialization
+    cp = {'scout_speed': 10}  # Example configuration
+    global rw
+    rw = CustomMovement(robot, cp['scout_speed'])
+    # Rest of your code
+
+# This would be the function called at each control step in main.py
+def controlstep():
+    global rw
+    rw.control_step()
+
+# Example destroy function in case main.py handles cleanup
+def destroy():
+    global rw
+    rw.destroy()
+```
+
+Make sure that your `main.py` file calls `controlstep` instead of `step`, like so:
+
+```python
+# main.py
+
+# Initialization function
+def init():
+    # Other initialization code
+    robot = ...  # Initialize your robot here
+    cp = {'scout_speed': 10}  # Example configuration
+    global rw
+    rw = CustomMovement(robot, cp['scout_speed'])
+
+# Control step function
+def controlstep():
+    global rw
+    rw.control_step()
+
+# Destroy function
+def destroy():
+    global rw
+    rw.destroy()
+```
+
+This adjustment ensures that the `controlstep` function in `main.py` calls the correct method from the `CustomMovement` class. The `rw` object should be initialized as a global variable in the `init` function and should have its `control_step` method called in each control step execution.

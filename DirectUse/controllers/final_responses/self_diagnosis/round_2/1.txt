@@ -1,0 +1,28 @@
+### Robot 1 Reporting - Information Exchange Round 2 ###
+
+**Summary of Current Data:**
+- My array of camera readings still contains only crops at the same location (-0.12, -0.1).
+
+**Insights from Previous Round:**
+- Most robots have reported detecting crops, with each robot's readings being consistent at specific coordinates.
+- Robot 6 and Robot 9 reported detecting weeds, but their readings are also consistent at specific coordinates.
+
+**Concerns:**
+- The consistency of readings at fixed coordinates across multiple robots suggests potential issues with our sensors or movement systems.
+- The detection of weeds by Robot 6 and Robot 9 at different coordinates than the rest of us detecting crops could indicate either localized weed infestations or sensor discrepancies.
+
+**Actions Proposed:**
+1. **Sensor and Movement System Check:** We should collectively consider checking our sensors and movement systems to ensure they are functioning correctly.
+2. **Diversify Sampling:** We need to try and diversify our sampling areas to get a broader view of the arena. If possible, we should aim to cover new coordinates.
+3. **Cross-Verification:** Robots detecting only crops should attempt to move towards the coordinates where weeds were detected (e.g., (0.08, 0.22) and (-0.22, 0.15)) to verify those readings.
+4. **Data Aggregation:** Continue sharing data every 10 seconds to build a comprehensive map of the arena.
+
+**Request for Feedback:**
+- Please verify if any of your sensors or movement systems are showing signs of malfunction.
+- Share any new readings, especially if they are from new coordinates or show a mix of weeds and crops.
+- Confirm if you can attempt to move to the coordinates where weeds were detected to cross-verify those readings.
+
+**Current Conclusion:**
+Based on the data so far, it seems there are more crops than weeds, but the potential for sensor issues or localized infestations needs further investigation to confirm this conclusion.
+
+### End of Report ###

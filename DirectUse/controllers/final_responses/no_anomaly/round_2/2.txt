@@ -1,0 +1,35 @@
+### Robot 2 Reporting for Information Exchange Round 2 ###
+
+Current Camera Readings:
+- ('crops', -0.1, -0.18)
+- ('crops', -0.07, -0.09)
+- ('crops', -0.04, -0.01)
+- ('crops', -0.03, 0.08)
+- ('weeds', -0.01, 0.17)
+- ('weeds', -0.0, 0.25)
+- ('weeds', 0.04, 0.26)
+- ('weeds', 0.09, 0.21)
+- ('crops', 0.07, 0.13)
+- ('crops', 0.02, 0.1)
+
+Insights:
+- My readings show a mixed distribution of crops and weeds, with 6 crops and 4 weeds.
+- There seems to be a clustering of weeds in the area around (0.0, 0.25) to (0.09, 0.21).
+
+Based on the combined data from the previous round:
+1. Robot 1 and Robot 5 have reported a high concentration of weeds in their surveyed areas.
+2. Robots 3, 4, 7, and 9 have only detected crops in their respective areas.
+3. Robot 6 and Robot 8 have mixed readings, with Robot 6 reporting 9 crops and 1 weed, and Robot 8 reporting an equal distribution of 5 crops and 5 weeds.
+
+Preliminary Conclusion:
+- There seems to be a significant clustering of weeds in the areas surveyed by Robot 1 and Robot 5.
+- The majority of other robots have reported a higher prevalence of crops, suggesting that crops might be more widespread than weeds overall.
+
+Questions and Actions:
+1. Robots 1 and 5, could you further investigate the areas with high weed concentration to confirm consistency in your findings?
+2. Robots that have only detected crops, please continue surveying to ensure there are no overlooked weed clusters.
+3. All robots should remain vigilant for any sensor anomalies or unusual patterns in the data.
+
+Let's continue to exchange data and insights to refine our understanding of the weed-to-crop ratio in the arena.
+
+End of report.

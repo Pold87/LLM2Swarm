@@ -1,0 +1,12 @@
+Robot 9 reporting:
+
+Array of camera readings: 
+('weeds', 0.17, -0.35), ('weeds', 0.23, -0.4), ('weeds', 0.28, -0.42), ('weeds', 0.27, -0.38), ('weeds', 0.28, -0.34), ('weeds', 0.23, -0.31), ('crops', 0.18, -0.33), ('crops', 0.13, -0.4), ('crops', 0.09, -0.39), ('crops', 0.06, -0.31), ('crops', 0.04, -0.22), ('crops', 0.02, -0.14), ('crops', -0.0, -0.05), ('crops', -0.02, 0.04), ('crops', -0.09, 0.05), ('crops', -0.13, 0.05), ('crops', -0.06, -0.0), ('crops', 0.01, -0.06), ('crops', 0.07, -0.04), ('crops', 0.14, -0.01), ('crops', 0.13, -0.04), ('crops', 0.07, -0.08), ('crops', -0.01, -0.06), ('crops', -0.09, -0.03), ('crops', -0.14, -0.05), ('crops', -0.15, -0.11), ('crops', -0.17, -0.2), ('crops', -0.19, -0.28), ('crops', -0.19, -0.37), ('crops', -0.21, -0.43)
+
+Observations:
+- 6 weed readings
+- 24 crop readings
+
+It appears that there are significantly more crops than weeds in my area.
+
+No unusual activity detected so far.

@@ -1,0 +1,19 @@
+Robot ID: 8 reporting for information exchange round 1.
+
+Here is my current array of camera readings:
+1. ('crops', -0.17, 0.14)
+2. ('weeds', -0.13, 0.22)
+3. ('weeds', -0.09, 0.3)
+4. ('weeds', -0.11, 0.34)
+5. ('weeds', -0.18, 0.39)
+6. ('weeds', -0.23, 0.39)
+7. ('weeds', -0.25, 0.3)
+8. ('weeds', -0.28, 0.22)
+9. ('crops', -0.31, 0.13)
+10. ('weeds', -0.32, 0.15)
+
+Summary:
+- Total crops detected: 2
+- Total weeds detected: 8
+
+I have detected more weeds than crops in my current readings. Let's combine this with the data from the other robots to collectively estimate if there are more weeds or crops in the arena. Please share your data and insights for further analysis.

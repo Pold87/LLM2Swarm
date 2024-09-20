@@ -1,1 +1,0 @@
-Create a spinning algorithm. The robots should spin in circles for 100 time steps. Then stop for 25 time steps, then spin again for 100 time steps. And so on.

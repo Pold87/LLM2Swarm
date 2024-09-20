@@ -2,7 +2,7 @@
 export HOMEFOLDER="$HOME/software"
 export MAINFOLDER="$HOMEFOLDER/LLM2Swarm"
 export ARGOSFOLDER="$MAINFOLDER/argos-python"
-export EXPERIMENTFOLDER="$MAINFOLDER/DirectUse"
+export EXPERIMENTFOLDER="$MAINFOLDER/DirectIntegration"
 
 # [FILES]
 export ARGOSNAME="llm2swarm"
@@ -14,7 +14,7 @@ export SWARMNAME=ethereum
 export CONTAINERBASE=${SWARMNAME}_eth
 
 # [ARGOS]
-export FLOOR="3_new_person.png"
+export FLOOR="3.png"
 export NUMROBOTS=10
 export CON1="${EXPERIMENTFOLDER}/controllers/main.py"
 

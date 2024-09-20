@@ -2,7 +2,7 @@
 export HOMEFOLDER="$HOME/software"
 export MAINFOLDER="$HOMEFOLDER/LLM2Swarm"
 export ARGOSFOLDER="$MAINFOLDER/argos-python"
-export EXPERIMENTFOLDER="$MAINFOLDER/DirectUse"
+export EXPERIMENTFOLDER="$MAINFOLDER/DirectIntegration"
 
 # [FILES]
 export ARGOSNAME="llm2swarm"
@@ -27,7 +27,6 @@ export ARENADIMH="0.5"
 export STARTDIM="0.35"
 
 
-
 # [BEHAVIOR]
 
 export NUMBYZANTINE=0
@@ -37,12 +36,16 @@ export BYZANTINESWARMSTYLE=0
 export SYSTEMMESSAGETEMPLATE='system_content.txt'
 export USERMESSAGETEMPLATE='oodmsg.txt'
 export DISCUSSIONPERIOD='100'
-export HUMANINTERACTIONPERIOD='250'
+export HUMANINTERACTIONPERIOD='inf'
 export USEGENERATEDMOVEMENT="0"
 
-# Use the prompts for 'Inform' human-swarm interaction
-export SYSTEMHUMAN='system_human_inform.txt'
-export USERHUMAN='human_inform_template.txt'
+# For 'Instruct' human-swarm interaction
+export SYSTEMHUMAN='system_human_instruct.txt'
+export USERHUMAN='human_concrete_instruct.txt'
+
+# For 'Inform' human-swarm interaction
+#export SYSTEMHUMAN='system_human_inform.txt'
+#export USERHUMAN='human_inform_template.txt'
 
 
 # [OTHER]

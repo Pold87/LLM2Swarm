@@ -19,7 +19,7 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 
 1. Clone the repository.
 2. Install all prerequistes.
-3. Update the variables in the `[PATHS]` section of the `DirectUse/experimentconfig.sh` file to reflect the installation directories on your system.
+3. Update the variables in the `[PATHS]` section of the `DirectIntegration/experimentconfig.sh` file to reflect the installation directories on your system.
 
 
 ## Description of the repository
@@ -27,17 +27,17 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 
 ### Indirect integration
 
-- `IndirectUse/syntax-generation.py` contains the controller synthesis script.
-- `IndirectUse/semantic-iterator.py` contains the preliminary logic validation.
-- `IndirectUse/security-checking.py` contains the preliminary security checking
+- `IndirectIntegration/syntax-generation.py` contains the controller synthesis script.
+- `IndirectIntegration/semantic-iterator.py` contains the preliminary logic validation.
+- `IndirectIntegration/security-checking.py` contains the preliminary security checking
 
 
 ### Direct integration
-- `DirectUse/controllers/main.py` is the main robot controller file
-- `DirectUse/controllers/movement_generated.py` is the default file for storing generated controllers
-- `DirectUse/experimentconfig.sh` specifies the experiment configuration; in also, it specifies which LLM prompt templates (stored in the folder `DirectUse/controllers/prompt_templates/`) should be used.
+- `DirectIntegration/controllers/main.py` is the main robot controller file
+- `DirectIntegration/controllers/movement_generated.py` is the default file for storing generated controllers
+- `DirectIntegration/experimentconfig.sh` specifies the experiment configuration; in also, it specifies which LLM prompt templates (stored in the folder `DirectUse/controllers/prompt_templates/`) should be used.
 
-The following variables in the `DirectUse/experimentconfig.sh` file are related to the LLM interactions:
+The following variables in the `DirectIntegration/experimentconfig.sh` file are related to the LLM interactions:
 
 For robot-to-robot interaction:
 - `DISCUSSIONPERIOD`: Time period between robot-to-robot interactions. For example, a value of 100 specifies that the robots interact with each after every 100 timesteps. Setting this variable to `'inf'` disables robot-robot interaction.
@@ -54,16 +54,16 @@ For human-to-robot interaction:
 ## Showcase Execution
  
 For all showcases:
-1. First, modify the necessary variables in the `DirectUse/experimentconfig.sh` file. The configurations that were used for the showcases are stored in the folder `DirectUse/example_configurations/`.
+1. First, modify the necessary variables in the `DirectIntegration/experimentconfig.sh` file. The configurations that were used for the showcases are stored in the folder `DirectIntegration/example_configurations/`.
 2. Then, run `./starter.sh -s` to start the simulation.
 
 In the following, we detail the configurations for each showcase.
 
 ### Indirect Use: Controller Generation
 
-1. Change directory to `LLM2Swarm/IndirectUse/`.
+1. Change directory to `LLM2Swarm/IndirectIntegration/`.
 2. Modify the `ARGOSPATH` variable in `syntax-generator.py` to reflect your installation directory.
-3. Set export `USEGENERATEDMOVEMENT="1"` in `DirectUse/experimentconfig.sh` 
+3. Set export `USEGENERATEDMOVEMENT="1"` in `DirectIntegration/experimentconfig.sh` 
 4. Execute `python3 syntax-generator.py`
 
 

@@ -2,8 +2,7 @@
 export HOMEFOLDER="$HOME/software"
 export MAINFOLDER="$HOMEFOLDER/LLM2Swarm"
 export ARGOSFOLDER="$MAINFOLDER/argos-python"
-export EXPERIMENTFOLDER="$MAINFOLDER/DirectUse"
-
+export EXPERIMENTFOLDER="$MAINFOLDER/DirectIntegration"
 
 # [FILES]
 export ARGOSNAME="llm2swarm"
@@ -15,8 +14,8 @@ export SWARMNAME=ethereum
 export CONTAINERBASE=${SWARMNAME}_eth
 
 # [ARGOS]
-export FLOOR="3.png"
-export NUMROBOTS=10
+export FLOOR="3_new_person.png"
+export NUMROBOTS=6
 export CON1="${EXPERIMENTFOLDER}/controllers/main.py"
 
 export RABRANGE="0.3"
@@ -27,26 +26,21 @@ export ARENADIM="1.0"
 export ARENADIMH="0.5"
 export STARTDIM="0.35"
 
-
 # [BEHAVIOR]
 
-export NUMBYZANTINE=10
-export BYZANTINESWARMSTYLE=1
+export NUMBYZANTINE=0
+export BYZANTINESWARMSTYLE=0
 
 # [LLM]
 export SYSTEMMESSAGETEMPLATE='system_content.txt'
 export USERMESSAGETEMPLATE='oodmsg.txt'
-export DISCUSSIONPERIOD='100'
-export HUMANINTERACTIONPERIOD='inf'
+export DISCUSSIONPERIOD='inf'
+export HUMANINTERACTIONPERIOD='100'
 export USEGENERATEDMOVEMENT="0"
 
-# For 'Instruct' human-swarm interaction
+# Use the prompts for 'Instruct' human-swarm interaction
 export SYSTEMHUMAN='system_human_instruct.txt'
 export USERHUMAN='human_concrete_instruct.txt'
-
-# For 'Inform' human-swarm interaction
-#export SYSTEMHUMAN='system_human_inform.txt'
-#export USERHUMAN='human_inform_template.txt'
 
 
 # [OTHER]

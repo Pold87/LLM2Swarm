@@ -10,7 +10,7 @@ from langchain_openai import ChatOpenAI
 from os.path import expanduser
 
 home = expanduser("~")
-ARGOSPATH=os.path.join(home, "software/LLM2Swarm/DirectUse/")
+ARGOSPATH=os.path.join(home, "software/LLM2Swarm/DirectIntegration/")
 default_filepath = os.path.join(ARGOSPATH, "controllers/movement_generated.py")
 
 

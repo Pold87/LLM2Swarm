@@ -30,12 +30,12 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 
 - `IndirectIntegration/syntax-generation.py` contains the controller synthesis script.
 - `IndirectIntegration/semantic-iterator.py` contains the preliminary logic validation.
-- `IndirectIntegration/security-checking.py` contains the preliminary security checking
+- `IndirectIntegration/security-checking.py` contains the preliminary security checking.
 
 
 ### Direct integration
-- `DirectIntegration/controllers/main.py` is the main robot controller file
-- `DirectIntegration/controllers/movement_generated.py` is the default file for storing generated controllers
+- `DirectIntegration/controllers/main.py` is the main robot controller file.
+- `DirectIntegration/controllers/movement_generated.py` is the default file for storing generated controllers.
 - `DirectIntegration/experimentconfig.sh` specifies the experiment configuration; in also, it specifies which LLM prompt templates (stored in the folder `DirectUse/controllers/prompt_templates/`) should be used.
 
 The following variables in the `DirectIntegration/experimentconfig.sh` file are related to the LLM interactions:
@@ -55,7 +55,7 @@ For human-to-robot interaction:
 ## Showcase Execution
  
 For all showcases:
-1. First, modify the necessary variables in the `DirectIntegration/experimentconfig.sh` file. The configurations that were used for the showcases are stored in the folder `DirectIntegration/example_configurations/`.
+1. First, modify the necessary variables in the `DirectIntegration/experimentconfig.sh` file. The configurations that were used for the showcases are stored in the folder `DirectIntegration/example_configurations/`. To use one of these examples, modify the script `starter`, to source the desired configuration (e.g. `source example_configurations/experimentconfig_noanomaly.sh`). 
 2. Then, run `./starter.sh -s` to start the simulation.
 
 In the following, we detail the configurations for each showcase.
@@ -64,7 +64,7 @@ In the following, we detail the configurations for each showcase.
 
 1. Change directory to `LLM2Swarm/IndirectIntegration/`.
 2. Modify the `ARGOSPATH` variable in `syntax-generator.py` to reflect your installation directory.
-3. Set export `USEGENERATEDMOVEMENT="1"` in `DirectIntegration/experimentconfig.sh` 
+3. Set export `USEGENERATEDMOVEMENT="1"` in `DirectIntegration/experimentconfig.sh`   
 4. Execute `python3 syntax-generator.py`
 
 

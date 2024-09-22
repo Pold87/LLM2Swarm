@@ -5,7 +5,8 @@ from openai import OpenAI
 from os.path import expanduser
 
 home = expanduser("~")
-ARGOSPATH=os.path.join(home, "software/LLM2Swarm/DirectUse/")
+ARGOSPATH=os.path.join(home, "software/LLM2Swarm/DirectIntegration/")
+INDIRECTPATH=os.path.join(home, "software/LLM2Swarm/IndirectIntegration/")
 default_filepath = os.path.join(ARGOSPATH, "controllers/movement_generated.py")
 
 
@@ -19,12 +20,12 @@ def load_latest_controller(filepath):
     with open(filepath, 'r') as file:
         return file.read()
 
-def generate_refinement_prompt(controller_code, current_behavior, desired_behavior):
+def generate_refinement_prompt(controller_code, current_behavior, desired_behavior, errors):
     """
     Generate a prompt for refining the controller based on its current behavior and the desired behavior.
     """
     
-    with open("Vector2D.py", 'r') as file:
+    with open(os.path.join(INDIRECTPATH, "Vector2D.py"), 'r') as file:
         vector2d = file.read()    
     return f"""
 You are improving a controller in Python for the ARGoS robot swarm simulator. 
@@ -33,9 +34,20 @@ The current robot swarm controller exhibits the following behavior:
 
 {current_behavior}
 
+If errors occurred during execution, they are stated in the following:
+%%% BEGIN ERRORS
+{''.join(errors)}
+%%% END ERRORS
+
 However, the desired behavior is:
 
 {desired_behavior}
+
+Please modify the following controller code to achieve the desired behavior:
+
+%%% Begin controller code
+{controller_code}
+%%% End controller code
 
 
 Here is some more information:
@@ -50,15 +62,10 @@ Rules:
     rw.step()
 - Do not execute or generate the commands in the two previous bullet points. Your generate script will be executed from main.py, which is static.
 
-Use this information to generate the new controller code.
-
 
 For your information, the Vector2D class is implemented as follows:
 {vector2d}
 
-Please modify the following controller code to achieve the desired behavior:
-
-{controller_code}
 
 """
 
@@ -132,7 +139,7 @@ def check_for_errors():
     if os.path.exists(error_file_path):
         with open(error_file_path, 'r') as file:
             errors = file.readlines()
-            if len(errors) > 0:
+            if len(errors) > 1:
                 return True, errors
     return False, []
 
@@ -159,39 +166,42 @@ def iterative_refinement():
     desired_behavior = input("Describe the desired behavior of the robots: ")
 
     while True:
+
         # Load the latest controller
         latest_code = load_latest_controller(default_filepath)
         
         # Run ARGoS
         process = run_argos()
+
+        # Continue refinement?
+        response = input("Would you like to refine the controller further? Press Ctrl + c for exit: ")
         
         # Wait for the user to describe the current behavior
         current_behavior = input("Describe the current behavior of the robots: ")
         
         # Check for errors in the errors.txt file
         has_errors, errors = check_for_errors()
-        if has_errors:
-            # Kill ARGoS if there are errors
-            process.kill()
-            subprocess.call(['killall', 'argos3'])
-            print("ARGoS encountered errors and was terminated.")
-            print("Errors: ", "\n".join(errors))
+        #if has_errors:
+        # Kill ARGoS if there are errors
+        process.kill()
+        subprocess.call(['killall', 'argos3'])
+        print("ARGoS terminated.")
+        print("Errors: ", "\n".join(errors))
             
-            # Generate error prompt for ChatGPT
-            error_prompt = generate_error_prompt(latest_code, errors)
-            refined_code = generate_refined_code(error_prompt)
-        else:
-            # Generate refinement prompt if there are no errors
-            prompt = generate_refinement_prompt(latest_code, current_behavior, desired_behavior)
-            refined_code = generate_refined_code(prompt)
+        # Generate error prompt for ChatGPT
+        #error_prompt = generate_error_prompt(latest_code, errors)
+        #refined_code = generate_refined_code(error_prompt)
+        
+        # Generate refinement prompt
+        prompt = generate_refinement_prompt(latest_code, current_behavior, desired_behavior, errors)
+
+        print(prompt)
+        
+        refined_code = generate_refined_code(prompt)
         
         # Save the refined code back to the file
         save_code_to_file(default_filepath, refined_code)
         
-        # Ask if the user wants to run the controller again or stop
-        response = input("Would you like to refine the controller further? (y/n): ")
-        if response.lower() != 'y':
-            break
 
 if __name__ == "__main__":
     iterative_refinement()

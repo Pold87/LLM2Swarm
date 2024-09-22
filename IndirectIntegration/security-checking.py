@@ -6,7 +6,7 @@ from os.path import expanduser
 client = OpenAI()
 
 home = expanduser("~")
-ARGOSPATH=os.path.join(home, "software/LLM2Swarm/DirectUse/")
+ARGOSPATH=os.path.join(home, "software/LLM2Swarm/DirectIntegration/")
 default_filepath = os.path.join(ARGOSPATH, "controllers/movement_generated.py")
 
 

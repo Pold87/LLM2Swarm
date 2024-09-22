@@ -29,7 +29,7 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 ### Indirect integration
 
 - `IndirectIntegration/syntax-generation.py` contains the controller synthesis script.
-- `IndirectIntegration/semantic-iterator.py` contains the preliminary logic validation.
+- `IndirectIntegration/logic-validation.py` contains the preliminary logic validation.
 - `IndirectIntegration/security-checking.py` contains the preliminary security checking.
 
 

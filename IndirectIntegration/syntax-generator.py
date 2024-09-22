@@ -14,11 +14,11 @@ ARGOSPATH=os.path.join(home, "software/LLM2Swarm/DirectIntegration/")
 default_filepath = os.path.join(ARGOSPATH, "controllers/movement_generated.py")
 
 
-def get_llm_client(model_name="gpt-4", provider="openai"):
+def get_llm_client(model_name="gpt-4o", provider="openai"):
     """
     Initialize the language model client based on the provider. 
     
-    :param model_name: The model to use, e.g., "gpt-4" for OpenAI, "llama2" for Ollama.
+    :param model_name: The model to use, e.g., "gpt-4o" for OpenAI, "llama2" for Ollama.
     :param provider: The provider, either "openai" or "ollama".
     :return: Initialized LLM client.
     """
@@ -134,7 +134,7 @@ def run_argos_and_monitor_errors():
             errors = error_file.readlines()
             lines_written = len(errors)
         
-        if lines_written > 0:
+        if lines_written > 1:
             subprocess.call(['killall', 'argos3'])
             process.terminate()
             return errors
@@ -166,7 +166,7 @@ def iterative_development():
     
     # Choose LLM provider and model
     provider = input("Enter the LLM provider (openai/ollama) - default is ollama: ").strip().lower() or "ollama"
-    model_name = input("Enter the model name (e.g., gpt-4 for OpenAI or llama2 for Ollama) - default is tinyllama: ").strip() or "qwen2.5-coder:1.5b"
+    model_name = input("Enter the model name (e.g., gpt-4o for OpenAI or llama2 for Ollama) - default is tinyllama: ").strip() or "tinyllama"
     
     llm_client = get_llm_client(model_name, provider)
     
@@ -181,16 +181,22 @@ def iterative_development():
             with open(default_filepath, 'r') as code_file:
                 latest_code = code_file.read()
             
-            additional_comments = input("Enter any additional comments for refining the controller (or press Enter to skip): ")
+            additional_comments = input("Procide any additional comments for refining the controller (or press Enter to skip): ")
             custom_prompt = f"""
-Errors encountered during ARGoS run:
+You previsouly generated an ARGoS-Python controller. 
+If errors occurred during the ARGoS run, they are stated below
 
+%%% Begin ARGoS errors
 {''.join(errors)}
+%%% End ARGoS errors
 
-Here is the latest controller code:
+This is the code you previously generated:
 
+%%% Begin previous code 
 {latest_code}
+%%% End previous code 
 
+Addition comments:
 {additional_comments}
 
 Please improve the controller.

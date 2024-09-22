@@ -22,11 +22,11 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 2. Set up and install a all prerequistes.
 4. Build `argos-python`:
 	```
-	 $ cd argos3-python
-	 $ mkdir build
-	 $ cd build
-	 $ cmake ..
-	 $ make -j4
+	 cd argos3-python
+	 mkdir build
+	 cd build
+	 cmake ..
+	 make -j4
  	```
 3. Update the variables in the `[PATHS]` section of the `DirectIntegration/experimentconfig.sh` file to reflect the installation directories on your system.
 

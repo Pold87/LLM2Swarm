@@ -27,7 +27,7 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 	 $ cd build
 	 $ cmake ..
 	 $ make -j4
- ```
+ 	```
 3. Update the variables in the `[PATHS]` section of the `DirectIntegration/experimentconfig.sh` file to reflect the installation directories on your system.
 
 

@@ -10,13 +10,14 @@
 # Example: 
 # . starter -r -s -l -p
 
+source experimentconfig.sh
 #source example_configurations/experimentconfig_noanomaly.sh
 #source example_configurations/experimentconfig_selfdiagnosis.sh
 #source example_configurations/experimentconfig_peerdiagnosis.sh
 #source example_configurations/experimentconfig_environmentdiagnosis.sh
 #source example_configurations/experimentconfig_inform.sh
-#source example_configurations/experimentconfig_instruct.sh
-source example_configurations/experimentconfig_generated.sh
+##source example_configurations/experimentconfig_instruct.sh
+#source example_configurations/experimentconfig_generated.sh
 
 echo "+-----------------------------------------------------------+"
 echo "MAINFOLDER IS $MAINFOLDER"

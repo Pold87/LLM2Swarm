@@ -33,6 +33,7 @@ export USERMESSAGETEMPLATE='oodmsg.txt'
 export DISCUSSIONPERIOD='inf'
 export HUMANINTERACTIONPERIOD='100'
 export USEGENERATEDMOVEMENT="0"
+export PRINTLLMRESPONSE="0"
 
 # Use the prompts for 'Instruct' human-swarm interaction
 export SYSTEMHUMAN='system_human_instruct.txt'

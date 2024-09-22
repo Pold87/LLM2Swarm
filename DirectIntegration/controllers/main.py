@@ -336,8 +336,9 @@ def controlstep():
         response = os.popen(my_command).read()
         robot.variables.set_attribute("response", response)
 
-        print_respoonse = False
-        if print_respoonse:
+        
+        print_response =  int(lp['environ']['PRINTLLMRESPONSE'])
+        if print_response == 1:
             print("LLM RESPONSE OF ROBOT " + str(robotID))
             print(response)
             print("END LLM RESPONSE OF ROBOT " + str(robotID) + "\n\n")

@@ -20,7 +20,7 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 
 1. Clone the repository.
 2. Set up and install a all prerequistes.
-4. Build `argos-python`:
+4. Build `argos-python` as follows:
 	```
 	 cd argos3-python
 	 mkdir build

@@ -27,6 +27,8 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 	python3 -m venv venv
 	source venv/bin/activate
 	
+	pip install -r requirements.txt
+
 	cd argos3-python
 	mkdir build
 	cd build

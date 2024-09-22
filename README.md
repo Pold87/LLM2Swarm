@@ -11,15 +11,23 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 
 ## Prerequisites
 
-- [OpenAI API key](https://platform.openai.com/docs/overview)
+- [OpenAI API key](https://platform.openai.com/docs/overview) as environment variable.
 - [ARGoS robot swarm simulator](https://github.com/ilpincy/argos3)
-- [ARGoS-Python wrapper](https://zenodo.org/records/13765570)
+- [ARGoS-Epuck](https://github.com/demiurge-project/argos3-epuck)
 - Python 3.9 (later versions are not compatible with the ARGoS-Python wrapper)
 
 ## Setup
 
 1. Clone the repository.
-2. Install all prerequistes.
+2. Set up and install a all prerequistes.
+4. Build `argos-python`:
+	```
+	 $ cd argos3-python
+	 $ mkdir build
+	 $ cd build
+	 $ cmake ..
+	 $ make -j4
+ ```
 3. Update the variables in the `[PATHS]` section of the `DirectIntegration/experimentconfig.sh` file to reflect the installation directories on your system.
 
 
@@ -55,7 +63,7 @@ For human-to-robot interaction:
 ## Showcase Execution
  
 For all showcases:
-1. First, modify the necessary variables in the `DirectIntegration/experimentconfig.sh` file. The configurations that were used for the showcases are stored in the folder `DirectIntegration/example_configurations/`. To use one of these examples, modify the script `starter`, to source the desired configuration (e.g. `source example_configurations/experimentconfig_noanomaly.sh`). 
+1. First, modify the necessary variables in the `DirectIntegration/experimentconfig.sh` file. The configurations that were used for the showcases are stored in the folder `DirectIntegration/example_configurations/`. To use one of these examples, modify the script `starter`, to source the desired configuration (e.g. `source example_configurations/experimentconfig_noanomaly.sh`) and modify the section `[PATH]` to reflect your installation directories.
 2. Then, run `./starter.sh -s` to start the simulation.
 
 In the following, we detail the configurations for each showcase.

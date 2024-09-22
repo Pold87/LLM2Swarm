@@ -9,10 +9,6 @@ export ARGOSNAME="llm2swarm"
 export ARGOSFILE="${EXPERIMENTFOLDER}/experiments/${ARGOSNAME}.argos"
 export ARGOSTEMPLATE="${EXPERIMENTFOLDER}/experiments/${ARGOSNAME}.x.argos"
 
-# [DOCKER]
-export SWARMNAME=ethereum
-export CONTAINERBASE=${SWARMNAME}_eth
-
 # [ARGOS]
 export FLOOR="3_new_person.png"
 export NUMROBOTS=6
@@ -41,7 +37,6 @@ export USEGENERATEDMOVEMENT="0"
 # Use the prompts for 'Instruct' human-swarm interaction
 export SYSTEMHUMAN='system_human_instruct.txt'
 export USERHUMAN='human_concrete_instruct.txt'
-
 
 # [OTHER]
 export SEED=122

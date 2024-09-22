@@ -1,6 +1,6 @@
 # [PATHS]
 export HOMEFOLDER="$HOME/software"
-export MAINFOLDER="$HOMEFOLDER/chatgpt-swarm"
+export MAINFOLDER="$HOMEFOLDER/LLM2Swarm"
 export ARGOSFOLDER="$MAINFOLDER/argos-python"
 export EXPERIMENTFOLDER="$MAINFOLDER/DirectIntegration"
 
@@ -8,10 +8,6 @@ export EXPERIMENTFOLDER="$MAINFOLDER/DirectIntegration"
 export ARGOSNAME="llm2swarm"
 export ARGOSFILE="${EXPERIMENTFOLDER}/experiments/${ARGOSNAME}.argos"
 export ARGOSTEMPLATE="${EXPERIMENTFOLDER}/experiments/${ARGOSNAME}.x.argos"
-
-# [DOCKER]
-export SWARMNAME=ethereum
-export CONTAINERBASE=${SWARMNAME}_eth
 
 # [ARGOS]
 export FLOOR="3_person.png"

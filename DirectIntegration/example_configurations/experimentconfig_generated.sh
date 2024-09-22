@@ -9,10 +9,6 @@ export ARGOSNAME="llm2swarm"
 export ARGOSFILE="${EXPERIMENTFOLDER}/experiments/${ARGOSNAME}.argos"
 export ARGOSTEMPLATE="${EXPERIMENTFOLDER}/experiments/${ARGOSNAME}.x.argos"
 
-# [DOCKER]
-export SWARMNAME=ethereum
-export CONTAINERBASE=${SWARMNAME}_eth
-
 # [ARGOS]
 export FLOOR="3.png"
 export NUMROBOTS=10

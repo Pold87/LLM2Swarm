@@ -1,0 +1,1 @@
+Design an "aggregate-then-disperse" algorithm. Initially, the robots should move toward the center of the arena. At timestamp 150, each robot should turn and move away.

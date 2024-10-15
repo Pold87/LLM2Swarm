@@ -1,74 +1,48 @@
 #!/usr/bin/env python3
 import math
-import random
 from aux import Vector2D
 
 class CustomMovement:
-    def __init__(self, robot, max_speed):
+    def __init__(self, robot, MAX_SPEED):
         self.robot = robot
-        self.max_speed = max_speed
-        self.aggregation_range = 0.2  # Range within which robots will aggregate
-        self.attraction_gain = 10.0  # Gain for attraction force
-        self.repulsion_gain = 5.0  # Gain for repulsion force
-        self.robot_id = int(robot.variables.get_id()[2:]) + 1
+        self.MAX_SPEED = MAX_SPEED
+        self.timestep = 0
+        self.L = 0.053  # Distance between wheels
+        self.Kp = 50  # Proportional gain for angular velocity
+        self.thresh = math.radians(70)  # Threshold angle for moving
+        self.arena_center = Vector2D(0, 0)  # Assuming the center of the arena is at (0, 0)
 
     def step(self):
-        # Get the proximity readings
-        readings = self.robot.epuck_proximity.get_readings()
-
-        # Initialize the aggregation force
-        aggregation_force = Vector2D(0, 0)
-        repulsion_force = Vector2D(0, 0)
-        neighbor_count = 0
-
-        for reading in readings:
-            distance = reading.value
-            angle = reading.angle.value()
-
-            # Only consider neighbors within the aggregation range
-            if distance < self.aggregation_range:
-                neighbor_count += 1
-                vec = Vector2D(math.cos(angle) * distance, math.sin(angle) * distance)
-                aggregation_force += vec
-
-                if distance < 0.05:  # Repulsion distance threshold
-                    repulsion_force -= vec / (distance + 1e-5)
-
-        # Compute the resultant force
-        if neighbor_count > 0:
-            aggregation_force /= neighbor_count
-            resultant_force = self.attraction_gain * aggregation_force + self.repulsion_gain * repulsion_force
-
-            # Convert the resultant force to wheel speeds
-            velocity = resultant_force.length
-            angle = resultant_force.angle
-            left_wheel = velocity + self.max_speed * math.sin(angle)
-            right_wheel = velocity - self.max_speed * math.sin(angle)
-
-            # Saturate wheel speeds
-            left_wheel, right_wheel = self.saturate(left_wheel, right_wheel)
-
-            # Set wheel speeds
-            self.robot.epuck_wheels.set_speed(left_wheel, right_wheel)
+        self.timestep += 1
+        if self.timestep < 150:
+            self.aggregate()
         else:
-            # If no neighbors, move randomly
-            left_wheel = self.max_speed * (0.5 + random.uniform(-0.1, 0.1))
-            right_wheel = self.max_speed * (0.5 + random.uniform(-0.1, 0.1))
-            self.robot.epuck_wheels.set_speed(left_wheel, right_wheel)
+            self.disperse()
 
-        # No rays for plotting
-        self.robot.variables.set_attribute("rays", "")
+    def aggregate(self):
+        self.move_towards(self.arena_center)
 
-    def saturate(self, left, right):
-        # Saturate Speeds greater than MAX_SPEED
-        if left > self.max_speed:
-            left = self.max_speed
-        elif left < -self.max_speed:
-            left = -self.max_speed
+    def disperse(self):
+        current_position = Vector2D(self.robot.position.get_position()[0:2])
+        direction_away = (current_position - self.arena_center).normalize()
+        target_position = current_position + direction_away
+        self.move_towards(target_position)
 
-        if right > self.max_speed:
-            right = self.max_speed
-        elif right < -self.max_speed:
-            right = -self.max_speed
+    def move_towards(self, target):
+        position = Vector2D(self.robot.position.get_position()[0:2])
+        orientation = self.robot.position.get_orientation()
+        vec_target = (target - position).rotate(-orientation)
+        T = vec_target.normalize()
 
-        return left, right
+        dotProduct = 0
+        if T.angle > self.thresh or T.angle < -self.thresh:
+            dotProduct = 0
+        else:
+            dotProduct = Vector2D(1, 0).dot(T)
+
+        angularVelocity = self.Kp * T.angle
+
+        right = dotProduct * self.MAX_SPEED / 2 - angularVelocity * self.L
+        left = dotProduct * self.MAX_SPEED / 2 + angularVelocity * self.L
+
+        self.robot.epuck_wheels.set_speed(right, left)

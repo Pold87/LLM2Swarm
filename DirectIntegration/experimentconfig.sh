@@ -11,16 +11,17 @@ export ARGOSTEMPLATE="${EXPERIMENTFOLDER}/experiments/${ARGOSNAME}.x.argos"
 
 # [ARGOS]
 export FLOOR="3.png"
-export NUMROBOTS=3
+export NUMROBOTS=10
 export CON1="${EXPERIMENTFOLDER}/controllers/main.py"
 
 export RABRANGE="0.3"
 export WHEELNOISE="0"
 export TPS=10
 export DENSITY="1"
-export ARENADIM="1.2"
-export ARENADIMH="0.6"
+export ARENADIM="1.0"
+export ARENADIMH="0.5"
 export STARTDIM="0.35"
+
 
 # [BEHAVIOR]
 
@@ -30,18 +31,10 @@ export BYZANTINESWARMSTYLE=0
 # [LLM]
 export SYSTEMMESSAGETEMPLATE='system_content.txt'
 export USERMESSAGETEMPLATE='oodmsg.txt'
-export DISCUSSIONPERIOD='100'
+export DISCUSSIONPERIOD='inf'
 export HUMANINTERACTIONPERIOD='inf'
-export USEGENERATEDMOVEMENT="0"
+export USEGENERATEDMOVEMENT="1"
 export PRINTLLMRESPONSE="1"
-
-# For 'Instruct' human-swarm interaction
-export SYSTEMHUMAN='system_human_instruct.txt'
-export USERHUMAN='human_concrete_instruct.txt'
-
-# For 'Inform' human-swarm interaction
-#export SYSTEMHUMAN='system_human_inform.txt'
-#export USERHUMAN='human_inform_template.txt'
 
 
 # [OTHER]

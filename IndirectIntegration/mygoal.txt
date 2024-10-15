@@ -1,1 +1,1 @@
-Create a spinning algorithm. The robots should spin in circles for 100 time steps. Then stop for 25 time steps, then spin again for 100 time steps. And so on.
+Design an "aggregate-then-disperse" algorithm. Initially, the robots should move toward the center of the arena. At timestamp 150, each robot should turn and move away.

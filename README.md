@@ -3,7 +3,7 @@
 
 ## Videos
 
-For the showcase videos, please see folder `videos`.
+For the showcase videos, please see folder `videos/`.
 
 ## Abstract
 

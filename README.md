@@ -17,6 +17,19 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 - [ARGoS-Epuck](https://github.com/demiurge-project/argos3-epuck)
 - Python 3.9 (later versions are not compatible with the ARGoS-Python wrapper)
 
+## Citation
+
+The related paper was accepted at the NeurIPS 2024 Workshop on Open-World Agents. It is also available as a preprint on [arXiv](https://arxiv.org/abs/2410.11387). With BibTeX, it can be cited as follows:
+
+```
+@inproceedings{StrDorFri2024:neuripsworkshop,
+	title={LLM2Swarm: {R}obot Swarms that Responsively Reason, Plan, and Collaborate through LLMs},
+	author={Volker Strobel and Marco Dorigo and Mario Fritz},
+	year={2024},
+	booktitle={NeurIPS 2024 Workshop on Open-World Agents (OWA-2024)}
+}
+```
+
 ## Setup
 
 1. Clone the repository.

@@ -1,6 +1,8 @@
 # LLM2Swarm
 ## Robot Swarms that Responsively Communicate, Plan, and Collaborate Through LLMs
 
+[Volker Strobel](https://iridia.ulb.ac.be/~vstrobel/), [Marco Dorigo](https://iridia.ulb.ac.be/~mdorigo/HomePageDorigo/), [Mario Fritz](https://cispa.saarland/group/fritz/)
+
 ## Videos
 
 For the showcase videos, please see folder `videos/`.

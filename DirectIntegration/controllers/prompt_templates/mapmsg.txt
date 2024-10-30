@@ -6,6 +6,6 @@ Your current sensor readings are:
 
 You are in information exchange round {round}.
 
-The results of the previous negotiation rounds were:
+History of inter-robot messages (sent and received):
 
 {results}

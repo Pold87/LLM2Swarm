@@ -1,6 +1,8 @@
 # LLM2Swarm
 ## Robot Swarms that Responsively Communicate, Plan, and Collaborate Through LLMs
 
+[Volker Strobel](https://iridia.ulb.ac.be/~vstrobel/), [Marco Dorigo](https://iridia.ulb.ac.be/~mdorigo/HomePageDorigo/), [Mario Fritz](https://cispa.saarland/group/fritz/)
+
 ## Videos
 
 For the showcase videos, please see folder `videos/`.
@@ -17,25 +19,38 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 - [ARGoS-Epuck](https://github.com/demiurge-project/argos3-epuck)
 - Python 3.9 (later versions are not compatible with the ARGoS-Python wrapper)
 
+## Citation
+
+The related paper was accepted at the NeurIPS 2024 Workshop on Open-World Agents. It is also available as a preprint on [arXiv](https://arxiv.org/abs/2410.11387). With BibTeX, it can be cited as follows:
+
+```
+@inproceedings{StrDorFri2024:neuripsworkshop,
+title={LLM2Swarm: {R}obot Swarms that Responsively Reason, Plan, and Collaborate through LLMs},
+author={Volker Strobel and Marco Dorigo and Mario Fritz},
+year={2024},
+booktitle={NeurIPS 2024 Workshop on Open-World Agents (OWA-2024)}
+}
+```
+
 ## Setup
 
 1. Clone the repository.
 2. Set up and install all prerequistes.
 4. Build `argos-python` as follows:
-	```
-	sudo apt install libboost-python-dev
-	
-	python3 -m venv venv
-	source venv/bin/activate
-	
-	pip install -r requirements.txt
+```
+sudo apt install libboost-python-dev
 
-	cd argos3-python
-	mkdir build
-	cd build
-	cmake ..
-	make -j4
- 	```
+python3 -m venv venv
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+cd argos3-python
+mkdir build
+cd build
+cmake ..
+make -j4
+  ```
 3. Update the variables in the `[PATHS]` section of the `DirectIntegration/experimentconfig.sh` file to reflect the installation directories on your system.
 
 
@@ -63,7 +78,7 @@ For robot-to-robot interaction:
 
 
 For human-to-robot interaction:
-- `HUMANINTERACTIONPERIOD`: Time period between human-to-robot interaction. For example, a value of 500 specifies that the robots interact with each after every 500 timesteps. Setting this variable to `'inf'` disables human-robot interaction. 
+- `HUMANINTERACTIONPERIOD`: Time period between human-to-robot interaction. For example, a value of 500 specifies that the robots interact with each after every 500 timesteps. Setting this variable to `'inf'` disables human-robot interaction.
 - `SYSTEMHUMAN': Template for the system prompt for human-to-robot interaction.
 - `USERHUMAN`: Template for the user prompt for human-to-robot interaction.
 
@@ -80,7 +95,7 @@ In the following, we detail the configurations for each showcase.
 
 1. Change directory to `LLM2Swarm/IndirectIntegration/`.
 2. Modify the `ARGOSPATH` variable in `syntax-generator.py` to reflect your installation directory.
-3. Set export `USEGENERATEDMOVEMENT="1"` in `DirectIntegration/experimentconfig.sh`   
+3. Set export `USEGENERATEDMOVEMENT="1"` in `DirectIntegration/experimentconfig.sh`  
 4. Execute `python3 syntax-generator.py`
 
 

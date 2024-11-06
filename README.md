@@ -87,7 +87,7 @@ For human-to-robot interaction:
  
 For all showcases:
 1. First, modify the necessary variables in the `DirectIntegration/experimentconfig.sh` file. The configurations that were used for the showcases are stored in the folder `DirectIntegration/example_configurations/`. To use one of these examples, modify the script `starter`, to source the desired configuration (e.g. `source example_configurations/experimentconfig_noanomaly.sh`) and modify the section `[PATHS]` to reflect your installation directories.
-2. Then, run `./starter.sh -s` to start the simulation.
+2. Then, run `./starter -s` to start the simulation (from the folder `DirectIntegration`).
 
 In the following, we detail the configurations for each showcase.
 

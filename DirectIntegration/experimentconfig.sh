@@ -10,7 +10,7 @@ export ARGOSFILE="${EXPERIMENTFOLDER}/experiments/${ARGOSNAME}.argos"
 export ARGOSTEMPLATE="${EXPERIMENTFOLDER}/experiments/${ARGOSNAME}.x.argos"
 
 # [ARGOS]
-export FLOOR="aggregation.png"
+export FLOOR="3.png"
 export NUMROBOTS=10
 export CON1="${EXPERIMENTFOLDER}/controllers/main.py"
 

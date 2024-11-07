@@ -15,7 +15,7 @@ Robot swarms are composed of many simple robots that communicate and collaborate
 ## Prerequisites
 
 - [OpenAI API key](https://platform.openai.com/docs/overview) as environment variable
-- [ARGoS robot swarm simulator](https://github.com/ilpincy/argos3)
+- [ARGoS robot swarm simulator](https://github.com/ilpincy/argos3) (release 3.0.0-beta59)
 - [ARGoS-Epuck](https://github.com/demiurge-project/argos3-epuck)
 - Python 3.9 (later versions are not compatible with the ARGoS-Python wrapper)
 

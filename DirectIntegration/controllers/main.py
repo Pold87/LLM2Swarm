@@ -247,8 +247,8 @@ def controlstep():
     sensor_rate = 10
 
 
-    if ((counter + 1) % 1000) == 0: 
-        print(estimate)
+    #if ((counter + 1) % 1000) == 0: 
+    #    print(estimate)
 
     if ((counter + 1) % sensor_rate) == 0: 
         estimate.append((round(newValues[1],2), round(current_position[0], 2), round(current_position[1], 2)))
